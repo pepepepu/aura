@@ -28,7 +28,7 @@ A sua marca musical registrada. Descubra sua **aura pessoal** baseada na música
 
 ### 🤫 Em Breve: Synesthetic
 
-*Shhh...* vem aí algo mágico. Uma experiência **sinestésica em tempo real**, onde cada som se transforma em luz e movimento na sua tela. Mas ó segredo nosso por enquanto, tá?
+*Shhh...* vem aí algo mágico. Uma experiência **sinestésica em tempo real**, onde cada som se transforma em luz e movimento na sua tela. Mas ó 🤫 segredo nosso por enquanto, tá?
 
 ## 🚀 Por trás da mágica
 
@@ -74,7 +74,7 @@ Abra o navegador em `localhost` e... **deixe a energia fluir!** 🌠
 ## 💌 Bora trocar uma ideia?
 
 Esse projeto foi feito com doses cavalares de cafeína, muito código e um amor imenso por música.
-Feito por **Pedro Paulo (PP)** desenvolvedor, entusiasta musical e invocador de experiências audiovisuais.
+Feito por **Pedro Paulo (PP)**. Desenvolvedor, entusiasta musical e invocador de experiências audiovisuais.
 
 * 📧 **E-mail:** [spedrobreno.2012@hotmail.com](mailto:spedrobreno.2012@hotmail.com)
 * 💼 **LinkedIn:** [linkedin.com/in/pp-oliveira](https://www.linkedin.com/in/pp-oliveira/)
