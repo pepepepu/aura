@@ -1,10 +1,10 @@
 # ✨ Aura ✨
 
-> *"Sintonize sua alma com a melodia do seu eu. Qual é a cor da sua música?"*
+> _"Sintonize sua alma com a melodia do seu eu. Qual é a cor da sua música?"_
 
 ## 🔮 O que é o Aura?
 
-Você já *ouviu* música hoje... mas será que já **viu** o som?
+Você já _ouviu_ música hoje... mas será que já **viu** o som?
 
 **Aura** é um portal cósmico para quem ama música de verdade do tipo que sente cada batida no peito. Aqui, você transforma seus hábitos musicais em um espetáculo visual vibrante, colorido e dançante. Tudo isso a partir da sua conta no Spotify.
 
@@ -28,18 +28,18 @@ A sua marca musical registrada. Descubra sua **aura pessoal** baseada na música
 
 ### 🤫 Em Breve: Synesthetic
 
-*Shhh...* vem aí algo mágico. Uma experiência **sinestésica em tempo real**, onde cada som se transforma em luz e movimento na sua tela. Mas ó 🤫 segredo nosso por enquanto, tá?
+_Shhh..._ vem aí algo mágico. Uma experiência **sinestésica em tempo real**, onde cada som se transforma em luz e movimento na sua tela. Mas ó 🤫 segredo nosso por enquanto, tá?
 
 ## 🚀 Por trás da mágica
 
 As tecnologias que fazem tudo isso acontecer (sim, usamos feitiços também, mas esses são os técnicos):
 
-* **React**: Nosso caldeirão onde tudo é preparado.
-* **TypeScript**: A magia que garante que nada saia do tom.
-* **Framer Motion**: Porque aura que se preze tem que dançar.
-* **Styled-components & Sass**: O glamour visual que dá vida às cores.
-* **React Router DOM**: Nosso mapa para navegar entre os mundos do Aura.
-* **Spotify API**: A ponte cósmica que liga o Aura ao seu universo musical.
+- **React**: Nosso caldeirão onde tudo é preparado.
+- **TypeScript**: A magia que garante que nada saia do tom.
+- **Framer Motion**: Porque aura que se preze tem que dançar.
+- **Styled-components & Sass**: O glamour visual que dá vida às cores.
+- **React Router DOM**: Nosso mapa para navegar entre os mundos do Aura.
+- **Spotify API**: A ponte cósmica que liga o Aura ao seu universo musical.
 
 ## 🛠️ Quer ver a magia de perto?
 
@@ -47,7 +47,7 @@ Fácil, jovem feiticeiro(a)! Basta seguir os passos:
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/aura.git
+git clone https://github.com/pepepepu/aura.git
 
 # Entre na pasta
 cd aura
@@ -76,8 +76,8 @@ Abra o navegador em `localhost` e... **deixe a energia fluir!** 🌠
 Esse projeto foi feito com doses cavalares de cafeína, muito código e um amor imenso por música.
 Feito por **Pedro Paulo (PP)**. Desenvolvedor, entusiasta musical e invocador de experiências audiovisuais.
 
-* 📧 **E-mail:** [spedrobreno.2012@hotmail.com](mailto:spedrobreno.2012@hotmail.com)
-* 💼 **LinkedIn:** [linkedin.com/in/pp-oliveira](https://www.linkedin.com/in/pp-oliveira/)
+- 📧 **E-mail:** [spedrobreno.2012@hotmail.com](mailto:spedrobreno.2012@hotmail.com)
+- 💼 **LinkedIn:** [linkedin.com/in/pp-oliveira](https://www.linkedin.com/in/pp-oliveira/)
 
 ---
 
