@@ -1,7 +1,7 @@
 export const handleSpotifyLogin = () => {
   const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
   const REDIRECT_URI = import.meta.env.VITE_SPOTIFY_REDIRECT_URI;
-  const AUTH_ENDPOINT = import.meta.env.VITE_SPOTIFY_AUTH_ENDPOINT;
+  const AUTH_ENDPOINT = import.meta.env.VITE_SPOTIFY_AUTH_ENDPOINT || window.location.origin + "/callback";;
   const RESPONSE_TYPE = "token";
   const SCOPES = [
     "user-top-read",
