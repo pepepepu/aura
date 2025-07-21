@@ -1,0 +1,17 @@
+import { Route, Routes } from "react-router-dom";
+import { SplashScreen, Callback, Dashboard } from "../pages";
+import ProtectedRoute from "./ProtectedRoute";
+
+const AppRoutes = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<SplashScreen />} />
+      <Route path="/callback" element={<Callback />} />
+      <Route element={<ProtectedRoute />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Route>
+    </Routes>
+  );
+}
+
+export default AppRoutes;
