@@ -1,69 +1,79 @@
-# React + TypeScript + Vite
+# ✨ Aura ✨
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> *"Sintonize sua alma com a melodia do seu eu. Qual é a cor da sua música?"*
 
-Currently, two official plugins are available:
+## 🔮 Sobre o Projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Cansado de apenas *ouvir* música? Que tal... **senti-la**?
 
-## Expanding the ESLint configuration
+**Aura** é um portal místico criado para os apaixonados por música que desejam enxergar o que sentem. Acreditamos que cada canção, cada batida e cada melodia carrega uma energia única, uma cor, uma *aura*.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Através da sua conta do Spotify, nossa aplicação traduz seus hábitos musicais em um espetáculo visual de cores e movimentos fluidos, revelando a energia que embala seus dias. É uma nova forma de se conectar com as músicas que você ama e de se entender através delas.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🎶 Funcionalidades
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+Mergulhe nas experiências que o Aura oferece:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+#### 🌈 **Tocando Agora**
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Qual a cor da sua vibe atual? Esta função revela a aura da música que está tocando no seu Spotify em tempo real. Uma janela instantânea para a energia do seu momento.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+#### 🌀 **Energia Semanal**
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Um mosaico das suas emoções. Viaje por uma grade 3x3 que revela a aura das suas 8 canções mais queridas da semana. Cada bloco é uma porta para um universo de cores. No centro, a essência: uma descrição da energia predominante que guiou seus dias.
+
+#### 💖 **Minha Aura**
+
+Sua assinatura energética. Descubra a aura única e pessoal gerada a partir da sua música mais ouvida na semana. É o seu reflexo mais puro em forma de cor e luz.
+
+#### 🤫 **Em Breve: Synesthetic**
+
+*Pssst...* Algo mágico está para chegar. Uma experiência sinestésica que permitirá que você veja a aura de uma música se construir e dançar em tempo real enquanto ela toca. Mas não conte a ninguém ainda, é o nosso segredinho.
+
+## 🚀 Tecnologias Utilizadas
+
+Para dar vida a toda essa energia, utilizamos as seguintes tecnologias:
+
+  * **React:** A base para construir nossa interface mágica.
+  * **TypeScript:** Para garantir que nosso código seja tão sólido quanto sua conexão com a música.
+  * **Framer Motion:** A varinha de condão por trás de todas as animações fluidas e auras dançantes.
+  * **Styled-components & Sass:** Nossos feitiços de estilização para criar um visual único e responsivo.
+  * **React Router DOM:** Para navegar entre as diferentes dimensões do Aura.
+  * **Spotify API:** O portal que nos conecta ao seu universo musical.
+
+## 🛠️ Como Executar o Projeto
+
+Quer ver a mágica acontecer na sua própria máquina? Siga os passos:
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone https://github.com/seu-usuario/aura.git
+    ```
+2.  **Instale as dependências:**
+    ```bash
+    cd aura
+    npm install
+    ```
+3.  **Configure suas variáveis de ambiente:**
+      * Renomeie o arquivo `.env.example` (ou crie um novo) para `.env`.
+      * Adicione suas credenciais da API do Spotify:
+    <!-- end list -->
+    ```env
+    VITE_SPOTIFY_CLIENT_ID=SUA_CHAVE_CLIENT_ID
+    VITE_SPOTIFY_CLIENT_SECRET=SUA_CHAVE_SECRET
+    ```
+4.  **Inicie a aplicação:**
+    ```bash
+    npm run dev
+    ```
+
+Agora, é só abrir o `localhost` indicado no seu terminal e deixar a energia fluir\!
+
+## 💌 Contato
+
+Feito com muita cafeína, código e boas vibrações por **Pedro Paulo (PP)**.
+
+Vamos nos conectar e falar sobre música, código ou qualquer outra magia?
+
+  * **E-mail:** [spedrobreno.2012@hotmail.com](mailto:spedrobreno.2012@hotmail.com)
+  * **LinkedIn:** [https://www.linkedin.com/in/pp-oliveira/](https://www.linkedin.com/in/pp-oliveira/)
