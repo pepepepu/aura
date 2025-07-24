@@ -96,8 +96,12 @@ const AuraSemanal: React.FC = () => {
     <AuraBG
       width={"100dvw"}
       height={"100dvh"}
-      colors={vibrantColors.length > 1 ? vibrantColors.slice(1) : ["#f0f0f0"]}
-      backgroundColor={vibrantColors.length > 0 ? vibrantColors[0] : "#ffffff"}
+      colors={
+        vibrantColors.length > 1
+          ? vibrantColors.slice(1)
+          : ["#DFB065", "#9097CF", "#EDAB74", "#D991AF", "#e0b5c7"]
+      }
+      backgroundColor={vibrantColors.length > 0 ? vibrantColors[0] : "#A7AEC8"}
     >
       <AuraHeader
         title="Sua semana foi"
@@ -125,13 +129,13 @@ const AuraSemanal: React.FC = () => {
         $flexDirection="column"
       >
         {isLoading ? (
-          <Text color="#FFF">...</Text>
+          <Text color="#EFEFEF">Carregando aura</Text>
         ) : angelInfo ? (
           <>
             <Text
               fontFamily={"Instrument Serif"}
               fontSize={"4rem"}
-              color={"#FFF"}
+              color={"#EFEFEF"}
             >
               {angelInfo.angelNumber}
             </Text>
@@ -139,7 +143,7 @@ const AuraSemanal: React.FC = () => {
               fontFamily={"Instrument Serif"}
               fontStyle={"italic"}
               fontSize={"1.2rem"}
-              color={"#FFF"}
+              color={"#EFEFEF"}
             >
               {angelInfo.words}
             </Text>
