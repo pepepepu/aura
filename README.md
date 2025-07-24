@@ -1,93 +1,86 @@
-✨ Aura ✨
-"Sintonize sua alma com a melodia do seu eu. Qual é a cor da sua música?"
+# ✨ Aura ✨
 
-🔮 O que é o Aura?
-Você já ouviu música hoje... mas será que já viu o som?
+> _"Sintonize sua alma com a melodia do seu eu. Qual é a cor da sua música?"_
 
-Aura é um portal cósmico para quem ama música de verdade do tipo que sente cada batida no peito. Aqui, você transforma seus hábitos musicais em um espetáculo visual vibrante, colorido e dançante. Tudo isso a partir da sua conta no Spotify.
+## 🔮 O que é o Aura?
 
-Chega de só escutar vem sentir, ver e viver suas músicas favoritas.
+Você já _ouviu_ música hoje... mas será que já **viu** o som?
 
-🎶 O que você pode fazer?
+**Aura** é um portal cósmico para quem ama música de verdade do tipo que sente cada batida no peito. Aqui, você transforma seus hábitos musicais em um espetáculo visual vibrante, colorido e dançante. Tudo isso a partir da sua conta no Spotify.
+
+Chega de só escutar vem **sentir, ver e viver** suas músicas favoritas.
+
+## 🎶 O que você pode fazer?
+
 Explore os feitiços musicais que o Aura conjura pra você:
 
-🌈 Tocando Agora
-A música tocou, o Aura sentiu. Veja em tempo real qual é a aura da sua vibe atual cores e animações que traduzem sua trilha sonora do momento.
+### 🌈 Tocando Agora
 
-🌀 Energia Semanal
+A música tocou, o Aura sentiu. Veja **em tempo real** qual é a aura da sua vibe atual cores e animações que traduzem sua trilha sonora do momento.
+
+### 🌀 Energia Semanal
+
 Um painel emocional da sua semana em forma de um lindo mosaico 3x3 com suas músicas mais ouvidas. No meio? A essência da sua energia o resumo cósmico da sua vibe da semana.
 
-💖 Minha Aura
-A sua marca musical registrada. Descubra sua aura pessoal baseada na música que mais tocou seu coração nos últimos dias. É como um horóscopo, só que com BPM e batidas.
+### 💖 Minha Aura
 
-🤫 Em Breve: Synesthetic
-Shhh... vem aí algo mágico. Uma experiência sinestésica em tempo real, onde cada som se transforma em luz e movimento na sua tela. Mas ó 🤫 segredo nosso por enquanto, tá?
+A sua marca musical registrada. Descubra sua **aura pessoal** baseada na música que mais tocou seu coração nos últimos dias. É como um horóscopo, só que com BPM e batidas.
 
-🚀 Por trás da mágica
+### 🤫 Em Breve: Synesthetic
+
+_Shhh..._ vem aí algo mágico. Uma experiência **sinestésica em tempo real**, onde cada som se transforma em luz e movimento na sua tela. Mas ó 🤫 segredo nosso por enquanto, tá?
+
+## 🚀 Por trás da mágica
+
 As tecnologias que fazem tudo isso acontecer (sim, usamos feitiços também, mas esses são os técnicos):
 
-React: Nosso caldeirão onde tudo é preparado.
+- **React**: Nosso caldeirão onde tudo é preparado.
+- **TypeScript**: A magia que garante que nada saia do tom.
+- **Framer Motion**: Porque aura que se preze tem que dançar.
+- **Styled-components & Sass**: O glamour visual que dá vida às cores.
+- **React Router DOM**: Nosso mapa para navegar entre os mundos do Aura.
+- **Spotify API**: A ponte cósmica que liga o Aura ao seu universo musical.
 
-TypeScript: A magia que garante que nada saia do tom.
+## 🛠️ Quer ver a magia de perto?
 
-Framer Motion: Porque aura que se preze tem que dançar.
-
-Styled-components & Sass: O glamour visual que dá vida às cores.
-
-React Router DOM: Nosso mapa para navegar entre os mundos do Aura.
-
-Spotify API: A ponte cósmica que liga o Aura ao seu universo musical.
-
-🤝 Quer Fazer Parte da Magia? (Como Contribuir)
-Sentiu o chamado para adicionar seu próprio feitiço ao nosso livro? Incrível! Para manter a ordem no cosmos (e no nosso código), seguimos um ritual sagrado:
-
-Faça um Fork do Repositório: Crie sua própria cópia do universo Aura no seu perfil do GitHub.
-
-Crie sua Branch Mágica: A partir da main, crie uma nova branch para sua contribuição (git checkout -b minha-pocao-nova).
-
-Conjurare Suas Mudanças: Faça suas alterações, adicione seus feitiços e salve tudo com commits bem descritos.
-
-Envie para seu Universo: git push origin minha-pocao-nova
-
-Abra um Portal (Pull Request): De volta ao GitHub, abra um Pull Request da sua branch para a main do repositório original. Descreva sua magia, explique o que ela faz e por que ela tornará o Aura ainda mais incrível.
-
-Sua contribuição será analisada com carinho e, se aprovada, integrada ao nosso grimório principal!
-
-🛠️ Quer ver a magia de perto?
 Fácil, jovem feiticeiro(a)! Basta seguir os passos:
 
+```bash
 # Clone o repositório
-
 git clone https://github.com/pepepepu/aura.git
 
 # Entre na pasta
-
 cd aura
 
 # Instale os feitiços (dependências)
-
 npm install
 
 # Configure suas relíquias secretas (variáveis de ambiente)
-
 # Crie um arquivo .env e adicione suas chaves mágicas:
+```
 
-````env
+```env
 VITE_SPOTIFY_CLIENT_ID=sua_client_id_mística
 VITE_SPOTIFY_CLIENT_SECRET=sua_chave_ultra_secreta
+```
+
 ```bash
 # Invoque o Aura localmente
 npm run dev
+```
 
-Abra o navegador em localhost e... deixe a energia fluir! 🌠
+Abra o navegador em `localhost` e... **deixe a energia fluir!** 🌠
 
-💌 Bora trocar uma ideia?
+## 💌 Bora trocar uma ideia?
+
 Esse projeto foi feito com doses cavalares de cafeína, muito código e um amor imenso por música.
-Feito por Pedro Paulo (PP). Desenvolvedor, entusiasta musical e invocador de experiências audiovisuais.
+Feito por **Pedro Paulo (PP)**. Desenvolvedor, entusiasta musical e invocador de experiências audiovisuais.
 
-📧 E-mail: spedrobreno.2012@hotmail.com
+- 📧 **E-mail:** [spedrobreno.2012@hotmail.com](mailto:spedrobreno.2012@hotmail.com)
+- 💼 **LinkedIn:** [linkedin.com/in/pp-oliveira](https://www.linkedin.com/in/pp-oliveira/)
 
-💼 LinkedIn: linkedin.com/in/pp-oliveira
+---
 
 Se curtir o projeto, deixa uma estrela ⭐, compartilha com quem ama música e bora colorir o mundo com sons!
-````
+
+---
