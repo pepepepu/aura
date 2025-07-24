@@ -1,6 +1,7 @@
-import { AnimatePresence, motion } from 'framer-motion';
-import React from 'react';
-import { Box, Button, Text } from '../..';
+import { AnimatePresence, motion, type Variants } from "framer-motion";
+import React, { useMemo } from "react";
+import { Box, Button, Text } from "../.."; // Seus componentes de UI
+import { useNavigate } from "react-router-dom";
 
 interface MenuOption {
   label: string;
@@ -11,104 +12,160 @@ interface MenuOption {
 interface DropdownMenuProps {
   isOpen: boolean;
   onClose: () => void;
-  menuOptions: MenuOption[];
+  currentScreen: string;
 }
 
-const backdropVariants = {
-  visible: { opacity: 1 },
-  hidden: { opacity: 0 },
-};
+// --- Variantes de Animação Otimizadas ---
 
-const menuContainerVariants = {
+// NOVO: As variantes do backdrop agora também animam o 'backdropFilter'
+const backdropVariants: Variants = {
   visible: {
-    transition: { staggerChildren: 0.07, delayChildren: 0.2 }
-  },
-  hidden: {
-    transition: { staggerChildren: 0.05, staggerDirection: -1 }
-  }
-};
-
-const menuItemVariants = {
-  visible: {
-    y: 0,
     opacity: 1,
-    transition: {
-      y: { stiffness: 1000, velocity: -100 }
-    }
+    backdropFilter: "blur(10px)",
   },
   hidden: {
-    y: 50,
     opacity: 0,
-    transition: {
-      y: { stiffness: 1000 }
-    }
-  }
+    backdropFilter: "blur(0px)",
+  },
 };
 
-const DropdownMenu: React.FC<DropdownMenuProps> = ({ isOpen, onClose, menuOptions }) => {
+const menuContainerVariants: Variants = {
+  visible: {
+    transition: { staggerChildren: 0.06, delayChildren: 0.15 },
+  },
+  hidden: {
+    transition: { staggerChildren: 0.05, staggerDirection: -1 },
+  },
+};
+
+const menuItemVariants: Variants = {
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { ease: "easeOut", duration: 0.3 },
+  },
+  hidden: {
+    opacity: 0,
+    y: 20,
+    transition: { ease: "easeIn", duration: 0.2 },
+  },
+};
+
+const DropdownMenu: React.FC<DropdownMenuProps> = ({
+  isOpen,
+  onClose,
+  currentScreen,
+}) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    window.localStorage.removeItem("spotify_token");
+    navigate("/");
+  };
+
+  const allOptions = useMemo<MenuOption[]>(
+    () => [
+      { label: "Tocando agora", onClick: () => navigate("/dashboard") },
+      { label: "Minha aura", onClick: () => navigate("/minhaAura") },
+      { label: "Energia da semana", onClick: () => navigate("/auraSemanal") },
+      { label: "Synesthetic", onClick: () => {}, disabled: true },
+      { label: "Sair", onClick: handleLogout },
+    ],
+    [navigate]
+  );
+
+  const filteredOptions = allOptions.filter(
+    (option) => option.label !== currentScreen
+  );
+
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          // Backdrop
+          // O container principal agora controla a animação do fundo e do blur
+          key="menu-wrapper"
           initial="hidden"
           animate="visible"
           exit="hidden"
           variants={backdropVariants}
+          transition={{ ease: "easeInOut", duration: 0.3 }}
           onClick={onClose}
           style={{
-            position: 'absolute',
-            flexDirection: 'column',
+            position: "fixed",
             top: 0,
             left: 0,
-            width: '100vw',
-            height: '100vh',
-            background: '#00000030',
-            backdropFilter: 'blur(10px)',
+            width: "100vw",
+            height: "100vh",
             zIndex: 10,
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
+            background: "rgba(0, 0, 0, 0.2)",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            alignItems: "center",
+            willChange: "opacity, backdrop-filter", // Dica de otimização
           }}
         >
-          <Box $width={"90%"} $padding={"70px 0px 0px 38px"} $alignItems={"flex-start"}>
-            <Button onClick={onClose}>
-              <Text fontFamily={"Instrument Serif"} fontSize={"1.5rem"} color={"#dddcdc"}>X</Text>
-            </Button>
+          <Box
+            $width={"90%"}
+            $padding={"70px 0px 0px 38px"}
+            $alignItems={"flex-start"}
+          >
+            {/* O botão de fechar agora é parte do container de conteúdo animado */}
+            <motion.div variants={menuItemVariants}>
+              <Button onClick={onClose}>
+                <Text
+                  fontFamily={"Instrument Serif"}
+                  fontSize={"1.5rem"}
+                  color={"#dddcdc"}
+                >
+                  X
+                </Text>
+              </Button>
+            </motion.div>
           </Box>
+
           <motion.div
             variants={menuContainerVariants}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
             onClick={(e) => e.stopPropagation()}
             style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '10px',
-              alignItems: 'center',
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px",
+              alignItems: "center",
             }}
           >
-            {menuOptions.map((option) => (
-              <motion.div key={option.label} variants={menuItemVariants}>
+            {filteredOptions.map((option) => (
+              <motion.div
+                key={option.label}
+                variants={menuItemVariants}
+                style={{ willChange: "transform, opacity" }}
+              >
                 <Button
                   onClick={() => {
-                    if (option.onClick) {
+                    if (!option.disabled) {
                       option.onClick();
+                      onClose();
                     }
-                    onClose();
                   }}
                   $background="transparent"
                   $border="none"
                   disabled={option.disabled}
+                  style={{
+                    cursor: option.disabled ? "not-allowed" : "pointer",
+                  }}
                 >
-                  <Text fontFamily={"Instrument Serif"} fontSize={"2rem"} color={option.disabled ? "#dddcdc6e" : "#dddcdc"}>
+                  <Text
+                    fontFamily={"Instrument Serif"}
+                    fontSize={"2rem"}
+                    color={option.disabled ? "#dddcdc6e" : "#dddcdc"}
+                  >
                     {option.label}
                   </Text>
                 </Button>
               </motion.div>
             ))}
           </motion.div>
+
           <Box $width={"100%"} $padding={"150px 0px 0px 0px"} />
         </motion.div>
       )}

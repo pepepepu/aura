@@ -46,7 +46,7 @@ const Shape = styled(motion.div)`
   position: absolute;
   mix-blend-mode: hard-light;
   opacity: 1;
-  filter: blur(60px) contrast(2) saturate(2);
+  filter: blur(80px) contrast(2) saturate(2);
   transform: translateZ(0);
   will-change: transform, border-radius, filter;
 `;
@@ -60,7 +60,7 @@ const GrainOverlay = styled.div`
   z-index: 1;
   pointer-events: none;
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)"/></svg>');
-  opacity: 0.65;
+  opacity: 0.25;
 `;
 
 const ContentWrapper = styled(Box)`
@@ -90,8 +90,9 @@ const WanderingShape: React.FC<WanderingShapeProps> = ({
       const b = getRandomValue(20, 80);
       const c = getRandomValue(20, 80);
       const d = getRandomValue(20, 80);
-      return `${a}% ${100 - a}% ${b}% ${100 - b}% / ${c}% ${d}% ${100 - c}% ${100 - d
-        }%`;
+      return `${a}% ${100 - a}% ${b}% ${100 - b}% / ${c}% ${d}% ${100 - c}% ${
+        100 - d
+      }%`;
     };
     const wander = async () => {
       await controls.start({
@@ -221,8 +222,9 @@ const AuraBackground: React.FC<AuraBackgroundProps> = ({
       {interactive && !isTransitioning && (
         <Shape
           style={{
-            background: `radial-gradient(circle at center, ${colors[5 % colors.length]
-              } 0%, transparent 60%)`,
+            background: `radial-gradient(circle at center, ${
+              colors[5 % colors.length]
+            } 0%, transparent 60%)`,
             width: "80%",
             height: "80%",
             x: springX,

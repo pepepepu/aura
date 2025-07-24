@@ -1,6 +1,6 @@
 import styled, { css, keyframes } from "styled-components";
 
-// --- TIPOS --- (Sem alterações)
+// --- TIPOS ---
 
 type Size = string | number;
 type GradientType = "linear" | "radial";
@@ -44,14 +44,17 @@ interface BoxProps {
   $hideScrollbar?: boolean;
   $overflow?: string;
   $overflowY?: string;
-  $overflowX?: string; // Adicionada para consistência
+  $overflowX?: string;
   $flexWrap?: string;
   $opacity?: number | string;
   $gradientBackground?: GradientBackground;
   $animateGradient?: boolean;
+  // --- PROPRIEDADES DE GRID ADICIONADAS ---
+  $gridTemplateColumns?: string;
+  $aspectRatio?: string;
 }
 
-// --- FUNÇÕES AUXILIARES --- (Sem alterações)
+// --- FUNÇÕES AUXILIARES ---
 
 const formatSize = (value?: Size) => {
   if (typeof value === "number") return `${value}px`;
@@ -107,15 +110,12 @@ const Box = styled.div<BoxProps>`
   opacity: ${({ $opacity }) => ($opacity !== undefined ? $opacity : 1)};
   z-index: ${({ $zIndex }) => $zIndex || "auto"};
 
-  /* CORREÇÃO PRINCIPAL: Removidas as aspas de "border-box".
-    Esta é a causa do problema de layout no Safari.
-  */
+  /* --- REGRAS DE CSS PARA GRID ADICIONADAS --- */
+  grid-template-columns: ${({ $gridTemplateColumns }) => $gridTemplateColumns};
+  aspect-ratio: ${({ $aspectRatio }) => $aspectRatio};
+
   box-sizing: border-box;
 
-  /*
-    CORREÇÃO DA LÓGICA DE OVERFLOW: Agora o overflow geral só é aplicado
-    se as propriedades específicas (overflowX, overflowY) não forem usadas.
-  */
   ${({ $overflow, $overflowX, $overflowY }) =>
     $overflow
       ? `overflow: ${$overflow};`
@@ -124,7 +124,6 @@ const Box = styled.div<BoxProps>`
           overflow-y: ${$overflowY || "hidden"};
         `}
 
-  /* Lógica de Hover */
   ${({ $boxWithHover, $hoverBackground }) =>
     $boxWithHover &&
     css`
@@ -133,7 +132,6 @@ const Box = styled.div<BoxProps>`
       }
     `}
 
-  /* Lógica de Animação do Gradiente */
   ${({ $gradientBackground, $animateGradient }) =>
     $gradientBackground &&
     $animateGradient &&
@@ -142,7 +140,6 @@ const Box = styled.div<BoxProps>`
       animation: ${animateGradient} 8s ease infinite;
     `}
 
-  /* Lógica da Barra de Rolagem */
   ${({ $hideScrollbar }) =>
     $hideScrollbar
       ? css`
@@ -153,7 +150,6 @@ const Box = styled.div<BoxProps>`
           }
         `
       : css`
-          /* Scrollbar personalizada */
           &::-webkit-scrollbar {
             width: 8px;
           }
@@ -166,7 +162,6 @@ const Box = styled.div<BoxProps>`
             border: 2px solid transparent;
             background-clip: content-box;
           }
-          /* Firefox */
           scrollbar-width: thin;
           scrollbar-color: #bfbfbf transparent;
         `}
