@@ -1,51 +1,79 @@
 import React from "react";
-import styled from "styled-components";
-
-type Size = string | number;
-
+import styled, { css } from "styled-components";
+import {
+  handleResponsiveProp,
+  formatSize,
+  type Size,
+  type ResponsiveProp
+} from "../../../utils/styledHelpers";
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  $width?: Size;
-  $minWidth?: Size;
-  $height?: Size;
+  $width?: ResponsiveProp<Size>;
+  $minWidth?: ResponsiveProp<Size>;
+  $height?: ResponsiveProp<Size>;
+  $background?: string;
   $color?: string;
+  $padding?: ResponsiveProp<string>;
   $border?: string;
-  $borderRadius?: string;
+  $borderRadius?: ResponsiveProp<string>;
+  $fontSize?: ResponsiveProp<string>;
+  $fontWeight?: ResponsiveProp<string | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900">;
+  $cursor?: string;
+  $transition?: string;
+
+  // Props de lógica customizada
   $hoverBackground?: string;
   $hoverColor?: string;
-  $transition?: string;
-  $cursor?: string;
-  $children?: React.ReactNode;
-  $background?: string;
-  $padding?: string;
+  $underlineOnHover?: boolean;
+  $isUnderlineActive?: boolean;
+  $afterBackground?: string;
   $boxShadow?: string;
+  $gap?: string;
 }
 
-const formatSize = (value?: Size) => {
-  if (typeof value === "number") return `${value}px`;
-  return value || "auto";
-};
-
 const StyledButton = styled.button<ButtonProps>`
-  width: ${({ $width }) => formatSize($width)};
-  min-width: ${({ $minWidth }) => formatSize($minWidth || "auto")};
-  height: ${({ $height }) => formatSize($height)};
+  ${({ $width }) => handleResponsiveProp('width', $width, formatSize)}
+  ${({ $minWidth }) => handleResponsiveProp('min-width', $minWidth, formatSize)}
+  ${({ $height }) => handleResponsiveProp('height', $height, formatSize)}
+  ${({ $padding }) => handleResponsiveProp('padding', $padding)}
+  ${({ $borderRadius = "6px" }) => handleResponsiveProp('border-radius', $borderRadius)}
+  ${({ $fontSize }) => handleResponsiveProp('font-size', $fontSize)}
+  ${({ $fontWeight }) => handleResponsiveProp('font-weight', $fontWeight)}
+  ${({ $gap = "0" }) => handleResponsiveProp('gap', $gap)}
+
   background: ${({ $background }) => $background || "transparent"};
   color: ${({ $color }) => $color || "#fff"};
-  padding: ${({ $padding }) => $padding || "0px"};
   border: ${({ $border }) => $border || "none"};
-  border-radius: ${({ $borderRadius }) => $borderRadius || "6px"};
   cursor: ${({ $cursor }) => $cursor || "pointer"};
-  box-shadow: ${({ $boxShadow }) => $boxShadow};
-  transition: ${({ $transition }) => $transition || "all 0.15s ease-in-out"};
+  transition: ${({ $transition }) => $transition || "box-shadow 0.2s, background-color 0.5s, color 0.3s"};
+  box-shadow: ${({ $boxShadow }) => $boxShadow || "none"};
 
-  &:hover {
-    background: ${({ $hoverBackground }) => $hoverBackground};
-    color: ${({ $hoverColor }) => $hoverColor};
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 6px;
+    left: 15%;
+    height: 2px;
+    border-radius: 0;
+    width: ${({ $underlineOnHover, $isUnderlineActive }) =>
+    $isUnderlineActive ? "70%" : $underlineOnHover ? "0" : "0"};
+    background: ${({ $afterBackground }) => $afterBackground || "transparent"};
+    transition: ${({ $underlineOnHover }) =>
+    $underlineOnHover ? "width 0.3s ease-in-out" : "none"};
+  }
+  &:hover::after {
+    width: ${({ $underlineOnHover }) => ($underlineOnHover ? "70%" : "0")};
   }
 
-  &:active {
-    box-shadow: none;
-    scale: 0.98
+  &:hover {
+    ${({ $hoverBackground }) => $hoverBackground && css`background: ${$hoverBackground};`}
+    ${({ $hoverColor }) => $hoverColor && css`color: ${$hoverColor};`}
   }
 `;
 

@@ -131,8 +131,8 @@ const MinhaAura: React.FC = () => {
       />
 
       <Box
-        $width={"100dvw"}
-        $height={"100dvh"}
+        $width={"85%"}
+        $height={"100%"}
         $flexDirection={"column"}
         $justifyContent={"center"}
         $alignItems={"center"}
@@ -140,7 +140,7 @@ const MinhaAura: React.FC = () => {
       >
         {isLoading ? (
           <Box>
-            <Text color={textColor} fontFamily={"Instrument Serif"}>
+            <Text color={textColor} $fontFamily={"Instrument Serif"}>
               Analisando sua aura...
             </Text>
           </Box>
@@ -152,29 +152,30 @@ const MinhaAura: React.FC = () => {
             $gap="5px"
           >
             <Text
-              fontFamily={"Instrument Serif"}
-              fontSize={"3.5rem"}
-              fontWeight={"400"}
-              lineHeight="1.1"
-              color={textColor}
+              $fontFamily={"Instrument Serif"}
+              $fontSize={"3.5rem"}
+              $fontWeight={"400"}
+              $lineHeight="1.1"
+              $color={textColor}
             >
               {poeticWords ? poeticWords[0].toUpperCase() : "Misterioso"}
             </Text>
             <Text
-              fontFamily={"Instrument Serif"}
-              fontStyle={"italic"}
-              fontSize={"1.1rem"}
-              fontWeight={"400"}
-              color={textColor}
+              $fontFamily={"Instrument Serif"}
+              $fontStyle={"italic"}
+              $fontSize={"1.1rem"}
+              $fontWeight={"400"}
+              $color={textColor}
+              $textAlign={"center"}
             >
               {poeticWords ? poeticWords.slice(1, 5).join(" • ") : "Misterioso"}
             </Text>
             {poeticWords && (
               <Text
-                fontFamily={"Instrument Serif"}
-                fontSize={"1rem"}
-                fontWeight={"400"}
-                color={textColor}
+                $fontFamily={"Instrument Serif"}
+                $fontSize={"1rem"}
+                $fontWeight={"400"}
+                $color={textColor}
                 style={{ opacity: 0.8, marginTop: "10px" }}
               >
                 {topTrack.name} -{" "}
@@ -184,11 +185,11 @@ const MinhaAura: React.FC = () => {
           </Box>
         ) : (
           <Text
-            fontFamily={"Instrument Serif"}
-            fontSize={"1.3rem"}
-            fontWeight={"400"}
-            color={textColor}
-            textAlign="center"
+            $fontFamily={"Instrument Serif"}
+            $fontSize={"1.3rem"}
+            $fontWeight={"400"}
+            $color={textColor}
+            $textAlign="center"
           >
             Não encontramos dados suficientes para definir sua aura. Ouça mais
             músicas!

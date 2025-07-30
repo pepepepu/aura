@@ -1,44 +1,55 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import {
+  handleResponsiveProp,
+  type ResponsiveProp
+} from "../../../utils/styledHelpers";
 
-// CORREÇÃO: Adicionada a palavra-chave 'export' para que a interface possa ser importada em outros arquivos.
-export interface TextProps {
-  fontSize?: string;
-  fontWeight?: string | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
-  fontStyle?: string | "italic" | "normal" | "bold";
-  color?: string;
-  margin?: string;
-  padding?: string;
-  textAlign?: string | "center" | "left" | "right" | "justify";
-  lineHeight?: string;
-  letterSpacing?: string;
-  maxWidth?: string;
-  fontFamily?: string;
-  textDecoration?: "overline" | "line-through" | "underline" | "underline overline" | string
-  hoverColor?: string;
-  style?: React.CSSProperties; // Adicionando a prop 'style' para compatibilidade
+export interface TextProps extends React.HTMLAttributes<HTMLParagraphElement> {
+  $fontSize?: ResponsiveProp<string>;
+  $fontWeight?: ResponsiveProp<string | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900">;
+  $textAlign?: ResponsiveProp<"center" | "left" | "right" | "justify">;
+  $fontStyle?: ResponsiveProp<"normal" | "italic" | "bold">;
+  $color?: string;
+  $margin?: ResponsiveProp<string>;
+  $padding?: ResponsiveProp<string>;
+  $lineHeight?: ResponsiveProp<string>;
+  $letterSpacing?: ResponsiveProp<string>;
+  $maxWidth?: ResponsiveProp<string>;
+  $fontFamily?: string;
+  $textDecoration?: "overline" | "line-through" | "underline" | "underline overline" | string;
+  $hoverColor?: string;
+  $transition?: string;
 }
-
 const Text = styled.p<TextProps>`
-  font-size: ${({ fontSize }) => fontSize || "1rem"};
-  font-weight: ${({ fontWeight }) => fontWeight || "500"};
-  font-family: ${({ fontFamily }) => fontFamily || "League Spartan"};
-  color: ${({ color }) => color || "#141414"};
-  margin: ${({ margin }) => margin || "0"};
-  padding: ${({ padding }) => padding || "0"};
-  text-align: ${({ textAlign }) => textAlign || "left"};
-  line-height: ${({ lineHeight }) => lineHeight || "normal"};
-  letter-spacing: ${({ letterSpacing }) => letterSpacing || "normal"};
-  max-width: ${({ maxWidth }) => maxWidth || "none"};
+  ${({ $fontSize = "1rem" }) => handleResponsiveProp('font-size', $fontSize)}
+  ${({ $fontWeight = "normal" }) => handleResponsiveProp('font-weight', $fontWeight)}
+  ${({ $textAlign = "left" }) => handleResponsiveProp('text-align', $textAlign)}
+  ${({ $fontStyle = "normal" }) => handleResponsiveProp('font-style', $fontStyle)}
+  ${({ $margin = "0" }) => handleResponsiveProp('margin', $margin)}
+  ${({ $padding = "0" }) => handleResponsiveProp('padding', $padding)}
+  ${({ $lineHeight = "normal" }) => handleResponsiveProp('line-height', $lineHeight)}
+  ${({ $letterSpacing = "normal" }) => handleResponsiveProp('letter-spacing', $letterSpacing)}
+  ${({ $maxWidth = "none" }) => handleResponsiveProp('max-width', $maxWidth)}
+
+  font-family: ${({ $fontFamily }) => $fontFamily || "Inter"};
+  color: ${({ $color }) => $color || "#141414"};
+  transition: ${({ $transition }) => $transition};
+  text-decoration: ${({ $textDecoration }) => $textDecoration || "none"};
+  word-wrap: break-word;
+  
+  /* Valores estáticos */
   position: relative;
   display: inline-block;
-  text-decoration: ${({ textDecoration }) => textDecoration || "none"};
-  font-style: ${({ fontStyle }) => fontStyle || "normal"};
   transition: color 0.3s ease;
-  user-select: none;
 
-  &:hover {
-    color: ${({ hoverColor, color }) => hoverColor || color || "#141414"};
-  }
+  /* Lógica de hover atualizada */
+  ${({ $hoverColor }) =>
+    $hoverColor &&
+    css`
+      &:hover {
+        color: ${$hoverColor};
+      }
+    `}
 `;
 
 export default Text;

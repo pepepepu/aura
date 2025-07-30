@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { AuraBG, Box, Button, Image, Text } from "../../components";
+import { AuraBG, Box, Button, Image, Text, AuraPopUp } from "../../components";
 import spotifyIcon from "../../assets/icons/spotify.png";
 import { handleSpotifyLogin } from "../../services/spotifyAuth";
-// import appleMusicIcon from "../../assets/icons/apple-music.png";
+import { useNavigate } from "react-router-dom";
 
 const themes = [
   {
@@ -26,6 +26,8 @@ const themes = [
 const SplashScreen: React.FC = () => {
   const [currentThemeIndex, setCurrentThemeIndex] = useState(0);
   const [isConnecting, setIsConnecting] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isConnecting) return;
@@ -47,6 +49,14 @@ const SplashScreen: React.FC = () => {
     }, 300);
   };
 
+  const goToPrivacyPolicy = () => {
+    navigate("/privacy-policy");
+  };
+
+  const openPopUp = () => {
+    setIsPopupOpen(true);
+  };
+
   return (
     <AuraBG
       width={"100dvw"}
@@ -58,6 +68,9 @@ const SplashScreen: React.FC = () => {
       isTransitioning={isConnecting}
       onTransitionComplete={handleTransitionEnd}
     >
+      {isPopupOpen && (
+        <AuraPopUp onClose={() => setIsPopupOpen(false)} />
+      )}
       <Box
         $width={"100dvw"}
         $height={"100dvh"}
@@ -65,11 +78,11 @@ const SplashScreen: React.FC = () => {
         $padding={"30px 0px 20px 0px"}
       >
         <Box $width={"80%"} $justifyContent={"flex-end"} $flexDirection={"row"}>
-          <Button>
+          <Button onClick={openPopUp} >
             <Text
-              fontFamily={"EB Garamond"}
-              fontSize={"1.5rem"}
-              fontWeight={"800"}
+              $fontFamily={"EB Garamond"}
+              $fontSize={"1.5rem"}
+              $fontWeight={"800"}
             >
               ???
             </Text>
@@ -77,20 +90,20 @@ const SplashScreen: React.FC = () => {
         </Box>
         <Box $width={"100%"}>
           <Text
-            fontFamily={"EB Garamond"}
-            fontSize={"4rem"}
-            fontWeight={"500"}
-            fontStyle={"italic"}
-            letterSpacing={"-3px"}
-            lineHeight={"45px"}
+            $fontFamily={"EB Garamond"}
+            $fontSize={"4rem"}
+            $fontWeight={"500"}
+            $fontStyle={"italic"}
+            $letterSpacing={"-3px"}
+            $lineHeight={"45px"}
           >
             Aura
           </Text>
           <Text
-            fontFamily={"EB Garamond"}
-            fontSize={"1.3rem"}
-            fontWeight={"400"}
-            fontStyle={"italic"}
+            $fontFamily={"EB Garamond"}
+            $fontSize={"1.3rem"}
+            $fontWeight={"400"}
+            $fontStyle={"italic"}
           >
             sua música, sua energia
           </Text>
@@ -102,7 +115,7 @@ const SplashScreen: React.FC = () => {
           $gap={"15px"}
         >
           <Button
-            $width={"65%"}
+            $width={{ base: "65%", lg: "20%" }}
             $padding={"15px 0px"}
             $border={"1px solid #141414"}
             $borderRadius={"100px"}
@@ -111,21 +124,25 @@ const SplashScreen: React.FC = () => {
             <Box $width={"100%"} $flexDirection={"row"} $gap={"10px"}>
               <Image src={spotifyIcon} width={"25px"} />
               <Text
-                fontFamily={"EB Garamond"}
-                fontSize={"1.1rem"}
-                fontWeight={"400"}
+                $fontFamily={"EB Garamond"}
+                $fontSize={"1.1rem"}
+                $fontWeight={"400"}
               >
                 Conectar com o Spotify
               </Text>
             </Box>
           </Button>
-          {/* <Button width={"65%"} $padding={"15px 0px"} border={"1px solid #141414"} borderRadius={"100px"}>
-            <Box $width={"100%"} $flexDirection={"row"} $gap={"10px"}>
-              <Image src={appleMusicIcon} width={"22px"} />
-              <Text fontFamily={"EB Garamond"} fontSize={"1.1rem"} fontWeight={"400"}>Conectar com Apple Music</Text>
-            </Box>
-          </Button> 
-          */}
+
+          <Box $width={"100%"} $flexDirection={{ base: "column", lg: "row", md: "row" }}>
+            <Text $fontFamily={"EB Garamond"} $fontSize={"1rem"} $fontWeight={"400"}>
+              Ao se conectar, você concorda com nossa
+            </Text>
+            <Button onClick={goToPrivacyPolicy}>
+              <Text $fontFamily={"EB Garamond"} $fontSize={"1rem"} $fontWeight={"700"} $textDecoration={"underline"}>
+                Política de Privacidade
+              </Text>
+            </Button>
+          </Box>
         </Box>
       </Box>
     </AuraBG>

@@ -62,7 +62,6 @@ const Callback: React.FC = () => {
       $width={"100dvw"}
       $height={"100dvh"}
       $background={"#CDECCE"}
-      $padding={"0px 30px"}
     >
       <GrainOverlay />
       <Box
@@ -78,7 +77,7 @@ const Callback: React.FC = () => {
         />
       </Box>
       <Box
-        $width={"100%"}
+        $width={"85%"}
         $height={"15%"}
         $justifyContent={"flex-start"}
         $padding={"15px 0px"}
@@ -89,9 +88,9 @@ const Callback: React.FC = () => {
           delay={100}
           animateBy="words"
           direction="top"
-          fontFamily={"Instrument Serif"}
-          fontSize={"1.3em"}
-          textAlign={"center"}
+          $fontFamily={"Instrument Serif"}
+          $fontSize={"1.3em"}
+          $textAlign={"center"}
         />
       </Box>
     </Box>

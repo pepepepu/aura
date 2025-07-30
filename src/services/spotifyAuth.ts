@@ -6,6 +6,7 @@ export const handleSpotifyLogin = () => {
   const SCOPES = [
     "user-top-read",
     "user-read-currently-playing",
+    "user-read-private",
   ];
   const scopesString = SCOPES.join(" ");
   const authUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(

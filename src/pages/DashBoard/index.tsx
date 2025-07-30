@@ -118,26 +118,26 @@ const Dashboard: React.FC = () => {
       interactive={false}
       grainy={true}
     >
+
+      <Dropdown
+        isOpen={isMenuOpen}
+        onClose={toggleMenu}
+        currentScreen="Tocando agora"
+      />
+      <AuraHeader
+        title="Tocando agora"
+        textColor={textColor}
+        onMenuClick={toggleMenu}
+      />
+
       <Box
-        $width={"100dvw"}
-        $height={"100dvh"}
-        $padding={"70px 40px 70px 40px"}
+        $width={{ base: "100%", lg: "95%" }}
+        $height={"100%"}
+        $padding={"70px 40px"}
         $flexDirection={"column"}
         $gap={"8px"}
-        $justifyContent={"space-between"}
+        $justifyContent={"flex-end"}
       >
-        <Box />
-        <AuraHeader
-          title="Tocando agora"
-          textColor={textColor}
-          onMenuClick={toggleMenu}
-        />
-
-        <Dropdown
-          isOpen={isMenuOpen}
-          onClose={toggleMenu}
-          currentScreen="Tocando agora"
-        />
 
         {isLoading ? (
           <Box
@@ -147,18 +147,18 @@ const Dashboard: React.FC = () => {
             $gap="6px"
           >
             <Text
-              fontFamily={"Instrument Serif"}
-              fontSize={"3.5rem"}
-              fontWeight={"400"}
-              lineHeight="auto"
+              $fontFamily={"Instrument Serif"}
+              $fontSize={"3.5rem"}
+              $fontWeight={"400"}
+              $lineHeight="auto"
             >
               {"Carregando"}
             </Text>
             <Text
-              fontFamily={"Instrument Serif"}
-              fontStyle={"italic"}
-              fontSize={"1.2rem"}
-              fontWeight={"400"}
+              $fontFamily={"Instrument Serif"}
+              $fontStyle={"italic"}
+              $fontSize={"1.2rem"}
+              $fontWeight={"400"}
             >
               {"Carregando"}
             </Text>
@@ -171,20 +171,20 @@ const Dashboard: React.FC = () => {
             $gap="6px"
           >
             <Text
-              fontFamily={"Instrument Serif"}
-              fontSize={"3.5rem"}
-              fontWeight={"400"}
-              lineHeight="auto"
-              color={textColor}
+              $fontFamily={"Instrument Serif"}
+              $fontSize={"3.5rem"}
+              $fontWeight={"400"}
+              $lineHeight="auto"
+              $color={textColor}
             >
               {isLoading ? "Carregando" : currentlyPlaying.name}
             </Text>
             <Text
-              fontFamily={"Instrument Serif"}
-              fontStyle={"italic"}
-              fontSize={"1.2rem"}
-              fontWeight={"400"}
-              color={textColor}
+              $fontFamily={"Instrument Serif"}
+              $fontStyle={"italic"}
+              $fontSize={"1.2rem"}
+              $fontWeight={"400"}
+              $color={textColor}
             >
               {isLoading
                 ? "Carregando"
@@ -193,10 +193,10 @@ const Dashboard: React.FC = () => {
           </Box>
         ) : (
           <Text
-            fontFamily={"Instrument Serif"}
-            fontStyle={"italic"}
-            fontSize={"1.3rem"}
-            fontWeight={"400"}
+            $fontFamily={"Instrument Serif"}
+            $fontStyle={"italic"}
+            $fontSize={"1.3rem"}
+            $fontWeight={"400"}
           >
             Nenhuma música está tocando no momento.
           </Text>

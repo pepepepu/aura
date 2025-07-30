@@ -1,12 +1,17 @@
-import React from "react";
-import { Box, Button, Text } from "../../atoms"; // Seus componentes de UI
+import React, { useState, useEffect } from "react";
+import { Box, Button, Text } from "../../atoms";
+import { getUserProfile } from "../../../services/getUserProfile";
 
-/**
- * Define as propriedades que o componente AuraHeader aceita.
- * @param {string} title - O título a ser exibido no centro do cabeçalho.
- * @param {string} textColor - A cor do texto do título.
- * @param {() => void} onMenuClick - A função a ser chamada quando o botão de menu for clicado.
- */
+interface SpotifyImage {
+  url: string;
+  height: number | null;
+  width: number | null;
+}
+
+interface SpotifyUser {
+  display_name: string;
+  images: SpotifyImage[];
+}
 interface AuraHeaderProps {
   title: string;
   textColor: string;
@@ -18,22 +23,41 @@ const AuraHeader: React.FC<AuraHeaderProps> = ({
   textColor,
   onMenuClick,
 }) => {
+  const [user, setUser] = useState<SpotifyUser | null>(null);
+
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const storedToken = window.localStorage.getItem("spotify_token");
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (token) {
+      getUserProfile(token)
+        .then((userData) => {
+          setUser(userData);
+        })
+        .catch((error) => {
+          console.error("Erro ao buscar perfil no Header:", error);
+        });
+    }
+  }, [token]);
+
   return (
     <Box
-      // --- ALTERAÇÕES ADICIONADAS ---
-      $position="absolute" // Posiciona o header de forma absoluta em relação ao container pai.
-      $top="50px" // Define a distância de 30px do topo.
-      $zIndex={2} // Garante que o header fique sobre outros elementos.
-      // Lógica para garantir que o header permaneça centralizado horizontalmente
+      $position="absolute"
+      $top="50px"
+      $zIndex={2}
       $left="50%"
       $transform="translateX(-50%)"
-      // --- PROPRIEDADES ORIGINAIS MANTIDAS ---
       $width={"85dvw"}
       $justifyContent={"space-between"}
       $flexDirection="row"
       $alignItems={"center"}
     >
-      {/* Botão para abrir o menu dropdown */}
       <Button onClick={onMenuClick} $background="transparent" $border="none">
         <Box
           $width={"30px"}
@@ -45,23 +69,37 @@ const AuraHeader: React.FC<AuraHeaderProps> = ({
         />
       </Button>
 
-      {/* Título da tela */}
       <Text
-        fontFamily={"Instrument Serif"}
-        fontSize={"1.2rem"}
-        fontWeight={"400"}
-        color={textColor}
+        $fontFamily={"Instrument Serif"}
+        $fontSize={"1.2rem"}
+        $fontWeight={"400"}
+        $color={textColor}
       >
         {title}
       </Text>
 
-      {/* Espaçador para manter o título centralizado */}
-      <Box
-        $width={"30px"}
-        $height={"30px"}
-        $borderRadius={"100px"}
-        $background={"#ffffff4a"}
-      />
+
+      <Box $width={"30px"} $height={"30px"} $borderRadius={"100px"}>
+        {user?.images?.[0]?.url ? (
+          <img
+            src={user.images[0].url}
+            alt="Foto de perfil do usuário"
+            style={{
+              width: "100%",
+              height: "100%",
+              borderRadius: "50%",
+              objectFit: "cover",
+            }}
+          />
+        ) : (
+          <Box
+            $width={"100%"}
+            $height={"100%"}
+            $borderRadius={"50%"}
+            $background={"#ffffff4a"}
+          />
+        )}
+      </Box>
     </Box>
   );
 };

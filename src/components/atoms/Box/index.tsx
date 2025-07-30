@@ -1,129 +1,136 @@
 import styled, { css, keyframes } from "styled-components";
 
-// --- TIPOS ---
-
 type Size = string | number;
+
 type GradientType = "linear" | "radial";
 
-type GradientBackground = {
-  type?: GradientType;
-  direction?: string;
-  colors: string[];
-};
+const breakpoints = { sm: "576px", md: "768px", lg: "992px", xl: "1200px" };
+
+type ResponsiveProp<T> = T | { base?: T; sm?: T; md?: T; lg?: T; xl?: T; };
+
+type GradientBackground = { type?: GradientType; direction?: string; colors: string[]; };
 
 interface BoxProps {
-  $width?: Size;
-  $height?: Size;
-  $minWidth?: Size;
-  $minHeight?: Size;
-  $padding?: string;
-  $margin?: string;
+  $width?: ResponsiveProp<Size>;
+  $height?: ResponsiveProp<Size>;
+  $minWidth?: ResponsiveProp<Size>;
+  $minHeight?: ResponsiveProp<Size>;
+  $maxWidth?: ResponsiveProp<Size>;
+  $maxHeight?: ResponsiveProp<Size>;
+  $padding?: ResponsiveProp<string>;
+  $margin?: ResponsiveProp<string>;
+  $display?: ResponsiveProp<string>;
+  $flexDirection?: ResponsiveProp<string | "column" | "row" | "column-reverse" | "row-reverse">;
+  $justifyContent?: ResponsiveProp<string | "flex-start" | "flex-end" | "center" | "space-between" | "space-evenly" | "space-around">;
+  $alignItems?: ResponsiveProp<string | "flex-start" | "flex-end" | "center" | "stretch" | "start" | "end">;
+  $gap?: ResponsiveProp<string>;
+  $flexWrap?: ResponsiveProp<string | "nowrap" | "wrap" | "wrap-reverse">;
   $background?: string | "transparent";
-  $borderRadius?: string;
-  $display?: string;
-  $justifyContent?: string;
-  $alignItems?: string;
-  $flexDirection?: string;
-  $gap?: string;
   $color?: string;
   $border?: string;
   $borderColor?: string;
+  $borderRadius?: ResponsiveProp<string>;
   $boxShadow?: string;
-  $position?: string;
+  $position?: string | "static" | "relative" | "fixed" | "absolute" | "sticky";
   $zIndex?: number;
-  $boxWithHover?: boolean;
-  $hoverBackground?: string;
   $right?: string;
   $top?: string;
   $bottom?: string;
   $left?: string;
   $transform?: string;
+  $transition?: string;
   $cursor?: string;
   $userSelect?: string;
-  $transition?: string;
-  $hideScrollbar?: boolean;
-  $overflow?: string;
-  $overflowY?: string;
-  $overflowX?: string;
-  $flexWrap?: string;
   $opacity?: number | string;
+  $overflow?: string | "visible" | "hidden" | "scroll" | "auto";
+  $overflowY?: string | "visible" | "hidden" | "scroll" | "auto";
+  $overflowX?: string | "visible" | "hidden" | "scroll" | "auto";
+  $hideScrollbar?: boolean;
+  $boxWithHover?: boolean;
+  $hoverBackground?: string;
   $gradientBackground?: GradientBackground;
   $animateGradient?: boolean;
-  // --- PROPRIEDADES DE GRID ADICIONADAS ---
-  $gridTemplateColumns?: string;
-  $aspectRatio?: string;
+  $backdropFilter?: string;
 }
-
-// --- FUNÇÕES AUXILIARES ---
-
-const formatSize = (value?: Size) => {
+const formatSize = (value?: Size): string => {
   if (typeof value === "number") return `${value}px`;
   return value || "auto";
 };
-
+const handleResponsiveProp = (cssProperty: string, value: any, formatter: (v: any) => string = v => v) => {
+  if (value === undefined) return null;
+  if (typeof value !== 'object' || value === null) return css`${String.raw`${cssProperty}: ${formatter(value)};`}`;
+  return css`
+    ${value.base !== undefined ? `${cssProperty}: ${formatter(value.base)};` : ''}
+    ${value.sm !== undefined ? `@media (min-width: ${breakpoints.sm}) { ${cssProperty}: ${formatter(value.sm)}; }` : ''}
+    ${value.md !== undefined ? `@media (min-width: ${breakpoints.md}) { ${cssProperty}: ${formatter(value.md)}; }` : ''}
+    ${value.lg !== undefined ? `@media (min-width: ${breakpoints.lg}) { ${cssProperty}: ${formatter(value.lg)}; }` : ''}
+    ${value.xl !== undefined ? `@media (min-width: ${breakpoints.xl}) { ${cssProperty}: ${formatter(value.xl)}; }` : ''}
+  `;
+};
 const generateBoxGradient = (gradient?: GradientBackground) => {
   if (!gradient || !gradient.colors?.length) return undefined;
   const type = gradient.type || "linear";
-  const direction =
-    gradient.direction || (type === "radial" ? "circle at center" : "to right");
+  const direction = gradient.direction || (type === "radial" ? "circle at center" : "to right");
   const colors = gradient.colors.join(", ");
   return `${type}-gradient(${direction}, ${colors})`;
 };
-
-const animateGradient = keyframes`
+const animateGradientKeyframes = keyframes`
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 `;
 
-// --- COMPONENTE ESTILIZADO ---
 
 const Box = styled.div<BoxProps>`
-  width: ${({ $width }) => formatSize($width)};
-  height: ${({ $height }) => formatSize($height)};
-  min-width: ${({ $minWidth }) => formatSize($minWidth)};
-  min-height: ${({ $minHeight }) => formatSize($minHeight)};
-  padding: ${({ $padding }) => $padding || "0"};
-  margin: ${({ $margin }) => $margin || "0"};
-  background: ${({ $gradientBackground, $background }) =>
-    generateBoxGradient($gradientBackground) || $background || "transparent"};
-  border-radius: ${({ $borderRadius }) => $borderRadius || "0"};
-  display: ${({ $display }) => $display || "flex"};
-  justify-content: ${({ $justifyContent }) => $justifyContent || "center"};
-  align-items: ${({ $alignItems }) => $alignItems || "center"};
-  flex-direction: ${({ $flexDirection }) => $flexDirection || "column"};
-  gap: ${({ $gap }) => $gap || "0px"};
+  ${({ $width }) => handleResponsiveProp('width', $width, formatSize)}
+  ${({ $height }) => handleResponsiveProp('height', $height, formatSize)}
+  ${({ $minWidth }) => handleResponsiveProp('min-width', $minWidth, formatSize)}
+  ${({ $minHeight }) => handleResponsiveProp('min-height', $minHeight, formatSize)}
+  ${({ $maxWidth }) => handleResponsiveProp('max-width', $maxWidth, formatSize)}
+  ${({ $maxHeight }) => handleResponsiveProp('max-height', $maxHeight, formatSize)}
+  ${({ $padding }) => handleResponsiveProp('padding', $padding)}
+  ${({ $margin }) => handleResponsiveProp('margin', $margin)}
+
+  /* 2. Layout (Flexbox) - CORREÇÃO PRINCIPAL DE LAYOUT */
+  ${({ $display = "flex" }) => handleResponsiveProp('display', $display)}
+  ${({ $flexDirection = "column" }) => handleResponsiveProp('flex-direction', $flexDirection)}
+  ${({ $justifyContent = "center" }) => handleResponsiveProp('justify-content', $justifyContent)}
+  ${({ $alignItems = "center" }) => handleResponsiveProp('align-items', $alignItems)}
+  ${({ $gap = "0" }) => handleResponsiveProp('gap', $gap)}
+  ${({ $flexWrap = "nowrap" }) => handleResponsiveProp('flex-wrap', $flexWrap)}
+  
+  /* 3. Estilos Visuais */
+  -webkit-backdrop-filter: ${({ $backdropFilter }) => $backdropFilter || "none"};
+  backdrop-filter: ${({ $backdropFilter }) => $backdropFilter || "none"};
+  background: ${({ $gradientBackground, $background }) => generateBoxGradient($gradientBackground) || $background || "transparent"};
   color: ${({ $color }) => $color || "inherit"};
   border: ${({ $border }) => $border || "none"};
   border-color: ${({ $borderColor }) => $borderColor || "none"};
   box-shadow: ${({ $boxShadow }) => $boxShadow || "none"};
-  position: ${({ $position }) => $position || "relative"};
+  ${({ $borderRadius }) => handleResponsiveProp('border-radius', $borderRadius)}
+  opacity: ${({ $opacity }) => ($opacity !== undefined ? $opacity : 1)};
+  
+  /* 4. Posicionamento */
+  position: ${({ $position }) => $position || "static"};
   right: ${({ $right }) => $right || "auto"};
   top: ${({ $top }) => $top || "auto"};
   bottom: ${({ $bottom }) => $bottom || "auto"};
   left: ${({ $left }) => $left || "auto"};
+  z-index: ${({ $zIndex }) => $zIndex || "auto"};
+  box-sizing: border-box;
+
+  /* 5. Comportamento e Interação */
   transform: ${({ $transform }) => $transform || "none"};
   cursor: ${({ $cursor }) => $cursor || "default"};
   user-select: ${({ $userSelect }) => $userSelect || "auto"};
   transition: ${({ $transition }) => $transition || "background 0.9s ease"};
-  flex-wrap: ${({ $flexWrap }) => $flexWrap || "nowrap"};
-  opacity: ${({ $opacity }) => ($opacity !== undefined ? $opacity : 1)};
-  z-index: ${({ $zIndex }) => $zIndex || "auto"};
+  will-change: transform;
 
-  /* --- REGRAS DE CSS PARA GRID ADICIONADAS --- */
-  grid-template-columns: ${({ $gridTemplateColumns }) => $gridTemplateColumns};
-  aspect-ratio: ${({ $aspectRatio }) => $aspectRatio};
-
-  box-sizing: border-box;
-
-  ${({ $overflow, $overflowX, $overflowY }) =>
-    $overflow
-      ? `overflow: ${$overflow};`
-      : css`
-          overflow-x: ${$overflowX || "hidden"};
-          overflow-y: ${$overflowY || "hidden"};
-        `}
-
+  ${({ $overflow }) => $overflow && handleResponsiveProp('overflow', $overflow)}
+  ${({ $overflowY }) => $overflowY && handleResponsiveProp('overflow-y', $overflowY)}
+  ${({ $overflowX }) => $overflowX && handleResponsiveProp('overflow-x', $overflowX)}
+  
+  /* Efeitos e Animações */
   ${({ $boxWithHover, $hoverBackground }) =>
     $boxWithHover &&
     css`
@@ -133,11 +140,10 @@ const Box = styled.div<BoxProps>`
     `}
 
   ${({ $gradientBackground, $animateGradient }) =>
-    $gradientBackground &&
-    $animateGradient &&
+    $gradientBackground && $animateGradient &&
     css`
       background-size: 200% 200%;
-      animation: ${animateGradient} 8s ease infinite;
+      animation: ${animateGradientKeyframes} 8s ease infinite;
     `}
 
   ${({ $hideScrollbar }) =>
@@ -157,13 +163,13 @@ const Box = styled.div<BoxProps>`
             background: transparent;
           }
           &::-webkit-scrollbar-thumb {
-            background-color: #bfbfbf;
+            background-color: #ffffff44;
             border-radius: 9999px;
             border: 2px solid transparent;
             background-clip: content-box;
           }
           scrollbar-width: thin;
-          scrollbar-color: #bfbfbf transparent;
+          scrollbar-color: #ffffff44 transparent;
         `}
 `;
 

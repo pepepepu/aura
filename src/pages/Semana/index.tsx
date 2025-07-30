@@ -115,35 +115,29 @@ const AuraSemanal: React.FC = () => {
       />
 
       <Box
-        $width="100%"
-        $height="70%"
-        $justifyContent="center"
-        $alignItems="center"
-        $padding="110px 30px 0px 30px"
-      ></Box>
-
-      <Box
-        $width="100%"
-        $justifyContent="center"
-        $alignItems="center"
-        $flexDirection="column"
+        $width={"100%"}
+        $height={"100%"}
+        $justifyContent={"flex-end"}
+        $alignItems={"center"}
+        $padding={"50px 20px"}
+        $flexDirection={"column"}
       >
         {isLoading ? (
-          <Text color="#EFEFEF">Carregando aura</Text>
+          <Text $color={"#EFEFEF"}>Carregando aura</Text>
         ) : angelInfo ? (
           <>
             <Text
-              fontFamily={"Instrument Serif"}
-              fontSize={"4rem"}
-              color={"#EFEFEF"}
+              $fontFamily={"Instrument Serif"}
+              $fontSize={"4rem"}
+              $color={"#EFEFEF"}
             >
               {angelInfo.angelNumber}
             </Text>
             <Text
-              fontFamily={"Instrument Serif"}
-              fontStyle={"italic"}
-              fontSize={"1.2rem"}
-              color={"#EFEFEF"}
+              $fontFamily={"Instrument Serif"}
+              $fontStyle={"italic"}
+              $fontSize={"1.2rem"}
+              $color={"#EFEFEF"}
             >
               {angelInfo.words}
             </Text>

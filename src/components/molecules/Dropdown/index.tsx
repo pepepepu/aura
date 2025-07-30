@@ -68,7 +68,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
       { label: "Tocando agora", onClick: () => navigate("/dashboard") },
       { label: "Minha aura", onClick: () => navigate("/minhaAura") },
       { label: "Energia da semana", onClick: () => navigate("/auraSemanal") },
-      { label: "Synesthetic", onClick: () => {}, disabled: true },
+      { label: "Synesthetic", onClick: () => { }, disabled: true },
       { label: "Sair", onClick: handleLogout },
     ],
     [navigate]
@@ -82,7 +82,6 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          // O container principal agora controla a animação do fundo e do blur
           key="menu-wrapper"
           initial="hidden"
           animate="visible"
@@ -110,13 +109,12 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
             $padding={"70px 0px 0px 38px"}
             $alignItems={"flex-start"}
           >
-            {/* O botão de fechar agora é parte do container de conteúdo animado */}
             <motion.div variants={menuItemVariants}>
               <Button onClick={onClose}>
                 <Text
-                  fontFamily={"Instrument Serif"}
-                  fontSize={"1.5rem"}
-                  color={"#dddcdc"}
+                  $fontFamily={"Instrument Serif"}
+                  $fontSize={"1.5rem"}
+                  $color={"#dddcdc"}
                 >
                   X
                 </Text>
@@ -155,9 +153,9 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
                   }}
                 >
                   <Text
-                    fontFamily={"Instrument Serif"}
-                    fontSize={"2rem"}
-                    color={option.disabled ? "#dddcdc6e" : "#dddcdc"}
+                    $fontFamily={"Instrument Serif"}
+                    $fontSize={"2rem"}
+                    $color={option.disabled ? "#dddcdc6e" : "#dddcdc"}
                   >
                     {option.label}
                   </Text>
