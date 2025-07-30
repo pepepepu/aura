@@ -72,8 +72,8 @@ const AuraPopUp: React.FC<AuraPopUpProps> = ({ onClose }) => {
           Ode ao que é Aura
         </Text>
         <Box
-          $width={"100%"}
-          $maxHeight={"55dvh"}
+          $width={{ base: "90%", lg: "50%" }}
+          $maxHeight={"60dvh"}
           $overflowY={"auto"}
           $justifyContent="flex-start"
         >
@@ -83,13 +83,13 @@ const AuraPopUp: React.FC<AuraPopUpProps> = ({ onClose }) => {
             $fontWeight={"400"}
             $textAlign="center"
           >
-            Aura é o feitiço que ensina os olhos a ouvir, o portal que revela a cor secreta guardada em cada som. É a tradução da vibração em luz, a resposta luminosa para a melodia que habita em você.
+            Aura é a ressonância primordial, o dom de perceber com os olhos a música da existência. É o desvelar da cor que habita cada vibração, a manifestação visível da energia que uma melodia desperta em você.
             <br></br>
             <br></br>
-            Não se trata apenas da canção que passa, mas daquela que permanece. Para o instante, ela é o brilho efêmero, a dança de cores que espelha o seu agora. Para a alma, ela tece o tempo, criando um mosaico de emoções com as suas trilhas mais queridas, a sua assinatura anímica em tons e brilhos.
+            Ela transcende a canção passageira para tocar aquilo que é permanente. No momento presente, é o fulgor efêmero, um reflexo do seu estado de espírito em cores dançantes. Na jornada da alma, ela compõe o seu universo particular, um mosaico de sentimentos desenhado com suas músicas mais queridas. É o seu campo de energia, a sua identidade vibracional expressa em luz.
             <br></br>
             <br></br>
-            É a sua essência musical, antes invisível, finalmente liberta para dançar diante dos seus olhos.
+            É a sua essência musical, antes um eco sentido no peito, finalmente liberta para dançar no campo da sua visão.
           </Text>
         </Box>
         <Text $margin={"10px 0px"} $fontFamily={"Instrument Serif"} $fontSize={"1rem"} $fontStyle={"italic"}>
