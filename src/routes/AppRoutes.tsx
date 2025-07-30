@@ -6,6 +6,7 @@ import {
   MinhaAura,
   AuraSemanal,
   PrivacyPolicy,
+  TermsAndConditions,
 } from "../pages";
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -14,6 +15,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<SplashScreen />} />
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
       <Route path="/callback" element={<Callback />} />
       <Route element={<ProtectedRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />

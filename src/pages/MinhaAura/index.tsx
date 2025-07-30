@@ -177,6 +177,7 @@ const MinhaAura: React.FC = () => {
                 $fontWeight={"400"}
                 $color={textColor}
                 style={{ opacity: 0.8, marginTop: "10px" }}
+                $textAlign={"center"}
               >
                 {topTrack.name} -{" "}
                 {topTrack.artists.map((a) => a.name).join(", ")}

@@ -53,6 +53,10 @@ const SplashScreen: React.FC = () => {
     navigate("/privacy-policy");
   };
 
+  const goToTermsAndConditions = () => {
+    navigate("/terms-and-conditions");
+  };
+
   const openPopUp = () => {
     setIsPopupOpen(true);
   };
@@ -115,7 +119,7 @@ const SplashScreen: React.FC = () => {
           $gap={"15px"}
         >
           <Button
-            $width={{ base: "65%", lg: "20%" }}
+            $width={{ base: "65%", lg: "30%" }}
             $padding={"15px 0px"}
             $border={"1px solid #141414"}
             $borderRadius={"100px"}
@@ -135,13 +139,23 @@ const SplashScreen: React.FC = () => {
 
           <Box $width={"100%"} $flexDirection={{ base: "column", lg: "row", md: "row" }}>
             <Text $fontFamily={"EB Garamond"} $fontSize={"1rem"} $fontWeight={"400"}>
-              Ao se conectar, você concorda com nossa
+              Ao se conectar, você concorda com nossos
             </Text>
-            <Button onClick={goToPrivacyPolicy}>
-              <Text $fontFamily={"EB Garamond"} $fontSize={"1rem"} $fontWeight={"700"} $textDecoration={"underline"}>
-                Política de Privacidade
+            <Box $flexDirection={"row"}>
+              <Button onClick={goToTermsAndConditions}>
+                <Text $fontFamily={"EB Garamond"} $fontSize={"1rem"} $fontWeight={"700"} $textDecoration={"underline"}>
+                  Termos e Condições
+                </Text>
+              </Button>
+              <Text $fontFamily={"EB Garamond"} $fontSize={"1rem"} $fontWeight={"400"}>
+                e
               </Text>
-            </Button>
+              <Button onClick={goToPrivacyPolicy}>
+                <Text $fontFamily={"EB Garamond"} $fontSize={"1rem"} $fontWeight={"700"} $textDecoration={"underline"}>
+                  Política de Privacidade
+                </Text>
+              </Button>
+            </Box>
           </Box>
         </Box>
       </Box>
