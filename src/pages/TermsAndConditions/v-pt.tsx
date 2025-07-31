@@ -150,7 +150,7 @@ const VersaoPTBR: React.FC = () => {
           Você pode parar de usar nosso Serviço a qualquer momento. A maneira
           recomendada de desvincular sua conta é revogar o acesso do Aura
           diretamente nas configurações da sua conta Spotify, acessando
-          https://www.spotify.com/account/apps/.
+          https://www.spotify.com/account/apps.
           <br></br>
           <br></br>
           Nós nos reservamos o direito de suspender ou encerrar seu acesso ao
