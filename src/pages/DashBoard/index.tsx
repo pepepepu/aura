@@ -43,13 +43,6 @@ const Dashboard: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
-  // 3. Atualizamos a função de logout
-  const handleLogout = () => {
-    window.localStorage.removeItem("lastfm_sk");
-    window.localStorage.removeItem("lastfm_user");
-    navigate("/");
-  };
-
   useEffect(() => {
     const fetchCurrentlyPlaying = async () => {
       // 4. Verificamos as novas chaves no localStorage

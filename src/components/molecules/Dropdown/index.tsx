@@ -58,8 +58,10 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
 }) => {
   const navigate = useNavigate();
 
+  // 3. Atualizamos a função de logout
   const handleLogout = () => {
-    window.localStorage.removeItem("spotify_token");
+    window.localStorage.removeItem("lastfm_sk");
+    window.localStorage.removeItem("lastfm_user");
     navigate("/");
   };
 
@@ -68,7 +70,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
       { label: "Tocando agora", onClick: () => navigate("/dashboard") },
       { label: "Minha aura", onClick: () => navigate("/minhaAura") },
       { label: "Energia da semana", onClick: () => navigate("/auraSemanal") },
-      { label: "Synesthetic", onClick: () => { }, disabled: true },
+      { label: "Synesthetic", onClick: () => {}, disabled: true },
       { label: "Sair", onClick: handleLogout },
     ],
     [navigate]
