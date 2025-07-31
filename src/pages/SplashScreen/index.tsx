@@ -41,7 +41,7 @@ const SplashScreen: React.FC = () => {
 
   const handleConnectClick = () => {
     setIsConnecting(true);
-  }
+  };
 
   const handleTransitionEnd = () => {
     setTimeout(() => {
@@ -72,9 +72,7 @@ const SplashScreen: React.FC = () => {
       isTransitioning={isConnecting}
       onTransitionComplete={handleTransitionEnd}
     >
-      {isPopupOpen && (
-        <AuraPopUp onClose={() => setIsPopupOpen(false)} />
-      )}
+      {isPopupOpen && <AuraPopUp onClose={() => setIsPopupOpen(false)} />}
       <Box
         $width={"100dvw"}
         $height={"100dvh"}
@@ -82,7 +80,7 @@ const SplashScreen: React.FC = () => {
         $padding={"30px 0px 20px 0px"}
       >
         <Box $width={"80%"} $justifyContent={"flex-end"} $flexDirection={"row"}>
-          <Button onClick={openPopUp} >
+          <Button onClick={openPopUp}>
             <Text
               $fontFamily={"EB Garamond"}
               $fontSize={"1.5rem"}
@@ -137,25 +135,58 @@ const SplashScreen: React.FC = () => {
             </Box>
           </Button>
 
-          <Box $width={"100%"} $flexDirection={{ base: "column", lg: "row", md: "row" }}>
-            <Text $fontFamily={"EB Garamond"} $fontSize={"1rem"} $fontWeight={"400"}>
+          <Box
+            $width={"100%"}
+            $flexDirection={{ base: "column", lg: "row", md: "row" }}
+          >
+            <Text
+              $fontFamily={"EB Garamond"}
+              $fontSize={"1rem"}
+              $fontWeight={"400"}
+            >
               Ao se conectar, você concorda com nossos
             </Text>
             <Box $flexDirection={"row"}>
               <Button onClick={goToTermsAndConditions}>
-                <Text $fontFamily={"EB Garamond"} $fontSize={"1rem"} $fontWeight={"700"} $textDecoration={"underline"}>
+                <Text
+                  $fontFamily={"EB Garamond"}
+                  $fontSize={"1rem"}
+                  $fontWeight={"700"}
+                  $textDecoration={"underline"}
+                >
                   Termos e Condições
                 </Text>
               </Button>
-              <Text $fontFamily={"EB Garamond"} $fontSize={"1rem"} $fontWeight={"400"}>
+              <Text
+                $fontFamily={"EB Garamond"}
+                $fontSize={"1rem"}
+                $fontWeight={"400"}
+              >
                 e
               </Text>
               <Button onClick={goToPrivacyPolicy}>
-                <Text $fontFamily={"EB Garamond"} $fontSize={"1rem"} $fontWeight={"700"} $textDecoration={"underline"}>
+                <Text
+                  $fontFamily={"EB Garamond"}
+                  $fontSize={"1rem"}
+                  $fontWeight={"700"}
+                  $textDecoration={"underline"}
+                >
                   Política de Privacidade
                 </Text>
               </Button>
             </Box>
+          </Box>
+
+          <Box $width={{ base: "85%", lg: "45%", md: "60%" }}>
+            <Text
+              $fontFamily={"Instrument Serif"}
+              $fontSize={{ base: "0.8rem", md: "0.9rem" }}
+              $fontWeight={"400"}
+              $textAlign="center"
+            >
+              Aura é uma aplicação independente que utiliza a API do Spotify.
+              Não possuímos afiliação com o Spotify AB.
+            </Text>
           </Box>
         </Box>
       </Box>
