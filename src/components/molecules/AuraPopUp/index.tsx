@@ -13,12 +13,14 @@ const fadeOut = keyframes` from { opacity: 1; } to { opacity: 0; }`;
 const scaleUp = keyframes` from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; }`;
 const scaleDown = keyframes` from { transform: scale(1); opacity: 1; } to { transform: scale(0.95); opacity: 0; }`;
 
-const AnimatedWrapper = styled(Box) <{ $isClosing: boolean }>`
-  animation: ${({ $isClosing }) => ($isClosing ? fadeOut : fadeIn)} 0.3s ease-in-out forwards;
+const AnimatedWrapper = styled(Box)<{ $isClosing: boolean }>`
+  animation: ${({ $isClosing }) => ($isClosing ? fadeOut : fadeIn)} 0.3s
+    ease-in-out forwards;
 `;
 
-const AnimatedContent = styled(Box) <{ $isClosing: boolean }>`
-  animation: ${({ $isClosing }) => ($isClosing ? scaleDown : scaleUp)} 0.3s ease-in-out forwards;
+const AnimatedContent = styled(Box)<{ $isClosing: boolean }>`
+  animation: ${({ $isClosing }) => ($isClosing ? scaleDown : scaleUp)} 0.3s
+    ease-in-out forwards;
 `;
 
 const AuraPopUp: React.FC<AuraPopUpProps> = ({ onClose }) => {
@@ -83,16 +85,34 @@ const AuraPopUp: React.FC<AuraPopUpProps> = ({ onClose }) => {
             $fontWeight={"400"}
             $textAlign="center"
           >
-            Aura é a ressonância primordial, o dom de perceber com os olhos a música da existência. É o desvelar da cor que habita cada vibração, a manifestação visível da energia que uma melodia desperta em você.
+            O Aura conecta-se à sua conta do Spotify e cria uma experiência
+            visual baseada nas músicas que você ouve. Acompanhe cores, energia e
+            estados de espírito representados em animações enquanto a música
+            toca.
             <br></br>
             <br></br>
-            Ela transcende a canção passageira para tocar aquilo que é permanente. No momento presente, é o fulgor efêmero, um reflexo do seu estado de espírito em cores dançantes. Na jornada da alma, ela compõe o seu universo particular, um mosaico de sentimentos desenhado com suas músicas mais queridas. É o seu campo de energia, a sua identidade vibracional expressa em luz.
+            Aura é a ressonância primordial, o dom de perceber com os olhos a
+            música da existência. É o desvelar da cor que habita cada vibração,
+            a manifestação visível da energia que uma melodia desperta em você.
             <br></br>
             <br></br>
-            É a sua essência musical, antes um eco sentido no peito, finalmente liberta para dançar no campo da sua visão.
+            Ela transcende a canção passageira para tocar aquilo que é
+            permanente. No momento presente, é o fulgor efêmero, um reflexo do
+            seu estado de espírito em cores dançantes. Na jornada da alma, ela
+            compõe o seu universo particular, um mosaico de sentimentos
+            desenhado com suas músicas mais queridas. É o seu campo de energia,
+            a sua identidade vibracional expressa em luz.
+            <br></br>
+            <br></br>É a sua essência musical, antes um eco sentido no peito,
+            finalmente liberta para dançar no campo da sua visão.
           </Text>
         </Box>
-        <Text $margin={"10px 0px"} $fontFamily={"Instrument Serif"} $fontSize={"1rem"} $fontStyle={"italic"}>
+        <Text
+          $margin={"10px 0px"}
+          $fontFamily={"Instrument Serif"}
+          $fontSize={"1rem"}
+          $fontStyle={"italic"}
+        >
           Clique em qualquer lugar para fechar
         </Text>
       </AnimatedContent>
