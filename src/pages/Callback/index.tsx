@@ -1,6 +1,10 @@
+// src/pages/Callback/index.tsx
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuraBlobs, Box, BlurText, GrainOverlay } from "../../components";
+// 1. Importamos a nova função do nosso serviço de autenticação
+import { getLastfmSession } from "../../services/lastFmAuth";
 
 const Callback: React.FC = () => {
   const navigate = useNavigate();
@@ -9,23 +13,29 @@ const Callback: React.FC = () => {
   useEffect(() => {
     const processAuth = async () => {
       try {
-        const params = new URLSearchParams(window.location.hash.substring(1));
-        const accessToken = params.get("access_token");
-        const error = params.get("error");
+        // 2. Lemos os parâmetros da busca na URL (?...) em vez do hash (#...)
+        const params = new URLSearchParams(window.location.search);
+        const token = params.get("token"); // Procuramos por 'token', não 'access_token'
 
-        if (error) {
-          setStatus("Dissonância na sua aura... Recalibrando sua energia.");
-          console.error(`Spotify Auth Error: ${error}`);
+        // Se não houver token, o usuário provavelmente negou o acesso ou houve um erro.
+        if (!token) {
+          setStatus("Não sentimos sua energia. Vamos tentar novamente.");
+          console.error("Callback do Last.fm alcançado sem um token.");
           setTimeout(() => navigate("/"), 4000);
           return;
         }
 
-        if (accessToken) {
-          window.localStorage.setItem("spotify_token", accessToken);
+        // 3. A mágica principal: trocamos o token pela sessão
+        setStatus("Conectando com sua alma musical...");
+        const session = await getLastfmSession(token);
 
-          setStatus("Conectando com sua alma musical...");
-          await new Promise((resolve) => setTimeout(resolve, 2000));
+        // 4. Verificamos se a sessão foi obtida com sucesso
+        if (session && session.sk && session.name) {
+          // 5. Salvamos os dados da sessão no localStorage
+          window.localStorage.setItem("lastfm_sk", session.sk);
+          window.localStorage.setItem("lastfm_user", session.name);
 
+          // Agora, continuamos com sua bela sequência de status
           setStatus("Mapeando a geografia da sua aura...");
           await new Promise((resolve) => setTimeout(resolve, 2000));
 
@@ -37,16 +47,15 @@ const Callback: React.FC = () => {
 
           navigate("/dashboard");
         } else {
-          setStatus(
-            "Não conseguimos sentir sua energia. Vamos tentar novamente."
-          );
+          // Se a função `getLastfmSession` retornou null, houve um erro na API
+          setStatus("Dissonância na sua aura... Recalibrando sua energia.");
           console.error(
-            "Callback page reached without access_token or error in hash."
+            "Falha ao obter a sessão do Last.fm após a autorização."
           );
           setTimeout(() => navigate("/"), 4000);
         }
       } catch (e) {
-        console.error("Falha ao processar o callback do Spotify:", e);
+        console.error("Falha ao processar o callback do Last.fm:", e);
         setStatus(
           "Houve uma interferência cósmica. Retornando ao ponto de partida."
         );
@@ -57,12 +66,9 @@ const Callback: React.FC = () => {
     processAuth();
   }, [navigate]);
 
+  // Nenhuma mudança é necessária no JSX. A interface permanece a mesma!
   return (
-    <Box
-      $width={"100dvw"}
-      $height={"100dvh"}
-      $background={"#CDECCE"}
-    >
+    <Box $width={"100dvw"} $height={"100dvh"} $background={"#CDECCE"}>
       <GrainOverlay />
       <Box
         $width={"150px"}

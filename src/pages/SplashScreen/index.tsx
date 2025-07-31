@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AuraBG, Box, Button, Image, Text, AuraPopUp } from "../../components";
-import spotifyIcon from "../../assets/icons/spotify.png";
-import { handleSpotifyLogin } from "../../services/spotifyAuth";
+import lastFMIcon from "../../assets/icons/last-FM.png";
+import { handleLastfmLogin } from "../../services/lastFmAuth";
 import { useNavigate } from "react-router-dom";
 
 const themes = [
@@ -45,7 +45,7 @@ const SplashScreen: React.FC = () => {
 
   const handleTransitionEnd = () => {
     setTimeout(() => {
-      handleSpotifyLogin();
+      handleLastfmLogin();
     }, 300);
   };
 
@@ -124,13 +124,13 @@ const SplashScreen: React.FC = () => {
             onClick={handleConnectClick}
           >
             <Box $width={"100%"} $flexDirection={"row"} $gap={"10px"}>
-              <Image src={spotifyIcon} width={"25px"} />
+              <Image src={lastFMIcon} width={"23px"} $borderRadius={"3px"} />
               <Text
                 $fontFamily={"EB Garamond"}
                 $fontSize={"1.1rem"}
                 $fontWeight={"400"}
               >
-                Conectar com o Spotify
+                Conectar com o LastFM
               </Text>
             </Box>
           </Button>
@@ -175,18 +175,6 @@ const SplashScreen: React.FC = () => {
                 </Text>
               </Button>
             </Box>
-          </Box>
-
-          <Box $width={{ base: "85%", lg: "45%", md: "60%" }}>
-            <Text
-              $fontFamily={"Instrument Serif"}
-              $fontSize={{ base: "0.8rem", md: "0.9rem" }}
-              $fontWeight={"400"}
-              $textAlign="center"
-            >
-              Aura é uma aplicação independente que utiliza a API do Spotify.
-              Não possuímos afiliação com o Spotify AB.
-            </Text>
           </Box>
         </Box>
       </Box>
