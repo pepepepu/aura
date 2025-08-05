@@ -70,8 +70,14 @@ npm install
 ```
 
 ```env
-VITE_SPOTIFY_CLIENT_ID=sua_client_id_mística
-VITE_SPOTIFY_CLIENT_SECRET=sua_chave_ultra_secreta
+# Sua identidade secreta no Spotify
+VITE_SPOTIFY_CLIENT_ID="seu_client_id_místico"
+
+# O portal de retorno após a autenticação
+VITE_SPOTIFY_REDIRECT_URI="seu_uri_de_redirecionamento"
+
+# O ponto de encontro para autorização cósmica
+VITE_SPOTIFY_AUTH_ENDPOINT="seu_endpoint_de_autenticação"
 ```
 
 ```bash
