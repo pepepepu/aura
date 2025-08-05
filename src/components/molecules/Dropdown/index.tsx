@@ -68,7 +68,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
       { label: "Tocando agora", onClick: () => navigate("/dashboard") },
       { label: "Minha aura", onClick: () => navigate("/minhaAura") },
       { label: "Energia da semana", onClick: () => navigate("/auraSemanal") },
-      { label: "Synesthetic", onClick: () => { }, disabled: true },
+      { label: "Synesthetic", onClick: () => {}, disabled: true },
       { label: "Sair", onClick: handleLogout },
     ],
     [navigate]
@@ -101,7 +101,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
             flexDirection: "column",
             justifyContent: "space-between",
             alignItems: "center",
-            willChange: "opacity, backdrop-filter", // Dica de otimização
+            willChange: "opacity, backdrop-filter",
           }}
         >
           <Box

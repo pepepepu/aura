@@ -1,13 +1,11 @@
 import styled from "styled-components";
-// Importe os helpers e tipos do arquivo central
 import {
   handleResponsiveProp,
   formatSize,
   type Size,
-  type ResponsiveProp
-} from "../../../utils/styledHelpers"; // Ajuste o caminho se necessário
+  type ResponsiveProp,
+} from "../../../utils/styledHelpers";
 
-// Defina a interface de props aqui ou no seu arquivo de tipos
 interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   $maxWidth?: ResponsiveProp<Size>;
   $width?: ResponsiveProp<Size>;
@@ -24,12 +22,12 @@ interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 
 const Image = styled.img<ImageProps>`
   /* Aplicando a lógica responsiva */
-  ${({ $maxWidth }) => handleResponsiveProp('max-width', $maxWidth, formatSize)}
-  ${({ $width }) => handleResponsiveProp('width', $width, formatSize)}
-  ${({ $height }) => handleResponsiveProp('height', $height, formatSize)}
-  ${({ $margin }) => handleResponsiveProp('margin', $margin)}
-  ${({ $borderRadius }) => handleResponsiveProp('border-radius', $borderRadius)}
-  ${({ $display = "block" }) => handleResponsiveProp('display', $display)}
+  ${({ $maxWidth }) => handleResponsiveProp("max-width", $maxWidth, formatSize)}
+  ${({ $width }) => handleResponsiveProp("width", $width, formatSize)}
+  ${({ $height }) => handleResponsiveProp("height", $height, formatSize)}
+  ${({ $margin }) => handleResponsiveProp("margin", $margin)}
+  ${({ $borderRadius }) => handleResponsiveProp("border-radius", $borderRadius)}
+  ${({ $display = "block" }) => handleResponsiveProp("display", $display)}
 
   /* Props que não precisam ser responsivas (mas poderiam ser) */
   box-shadow: ${({ $boxShadow }) => $boxShadow || "none"};

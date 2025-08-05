@@ -1,9 +1,8 @@
 import React, { useRef } from "react";
 import html2canvas from "html2canvas";
-import { AuraBG, Box } from "../.."; // Seus componentes de UI
+import { AuraBG, Box } from "../..";
 import type { ColorPaletteResult } from "../../../utils/extractColorPalette";
 
-// Define as propriedades que o gerador recebe
 interface GeradorDeImagemAuraProps {
   trackName: string;
   artistName: string;
@@ -17,24 +16,19 @@ const GeradorDeImagemAura: React.FC<GeradorDeImagemAuraProps> = ({
   palette,
   poeticWords,
 }) => {
-  // Ref para o elemento que será 'fotografado'
   const printRef = useRef<HTMLDivElement>(null);
 
   const handleDownloadImage = async () => {
     const element = printRef.current;
     if (!element) return;
 
-    // Usa html2canvas para criar o canvas a partir do nosso molde
     const canvas = await html2canvas(element, {
-      useCORS: true, // Essencial para carregar imagens de outras origens, se houver
-      // O backgroundColor agora é controlado pelo próprio AuraBG
-      scale: 2, // Aumenta a resolução da imagem final para 2160x3840
+      useCORS: true,
+      scale: 2,
     });
 
-    // Converte o canvas para uma imagem PNG
     const data = canvas.toDataURL("image/png");
 
-    // Cria um link temporário para iniciar o download
     const link = document.createElement("a");
     link.href = data;
     link.download = `minha-aura-${trackName
@@ -48,7 +42,6 @@ const GeradorDeImagemAura: React.FC<GeradorDeImagemAuraProps> = ({
 
   return (
     <>
-      {/* Botão de Download que fica visível para o usuário */}
       <Box $position="fixed" $bottom="30px" $right="30px" $zIndex={5}>
         <button
           onClick={handleDownloadImage}
@@ -68,8 +61,6 @@ const GeradorDeImagemAura: React.FC<GeradorDeImagemAuraProps> = ({
         </button>
       </Box>
 
-      {/* Componente "Molde" - Fica escondido fora da tela */}
-      {/* Ele agora usa o AuraBG como fundo e tem o layout da tela MinhaAura */}
       <div
         ref={printRef}
         style={{
@@ -78,7 +69,7 @@ const GeradorDeImagemAura: React.FC<GeradorDeImagemAuraProps> = ({
           top: "-9999px",
           width: "1080px",
           height: "1920px",
-          overflow: "hidden", // Garante que nada saia dos limites da imagem
+          overflow: "hidden",
         }}
       >
         <AuraBG
@@ -86,7 +77,7 @@ const GeradorDeImagemAura: React.FC<GeradorDeImagemAuraProps> = ({
           height={"100%"}
           colors={palette.auraColors}
           backgroundColor={palette.background}
-          interactive={false} // A animação deve ser não-interativa para a captura
+          interactive={false}
           grainy={true}
         >
           <div

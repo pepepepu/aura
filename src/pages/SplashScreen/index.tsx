@@ -176,18 +176,6 @@ const SplashScreen: React.FC = () => {
               </Button>
             </Box>
           </Box>
-
-          <Box $width={{ base: "85%", lg: "45%", md: "60%" }}>
-            <Text
-              $fontFamily={"Instrument Serif"}
-              $fontSize={{ base: "0.8rem", md: "0.9rem" }}
-              $fontWeight={"400"}
-              $textAlign="center"
-            >
-              Aura é uma aplicação independente que utiliza a API do Spotify.
-              Não possuímos afiliação com o Spotify AB.
-            </Text>
-          </Box>
         </Box>
       </Box>
     </AuraBG>
