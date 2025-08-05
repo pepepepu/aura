@@ -22,13 +22,25 @@ Explore os feitiços musicais que o Aura conjura pra você:
 
 A música tocou, o Aura sentiu. Veja **em tempo real** qual é a aura da sua vibe atual cores e animações que traduzem sua trilha sonora do momento.
 
+<p align="center">
+<img src="./src/assets/images/aura-screen01.png" alt="Captura de Tela - Tocando Agora" width="100%"/>
+</p>
+
 ### 🌀 Energia Semanal
 
 Um painel emocional da sua semana em forma de um lindo mosaico 3x3 com suas músicas mais ouvidas. No meio? A essência da sua energia o resumo cósmico da sua vibe da semana.
 
+<p align="center">
+<img src="./src/assets/images/aura-screen02.png" alt="Captura de Tela - Tocando Agora" width="100%"/>
+</p>
+
 ### 💖 Minha Aura
 
 A sua marca musical registrada. Descubra sua **aura pessoal** baseada na música que mais tocou seu coração nos últimos dias. É como um horóscopo, só que com BPM e batidas.
+
+<p align="center">
+<img src="./src/assets/images/aura-screen03.png" alt="Captura de Tela - Tocando Agora" width="100%"/>
+</p>
 
 ### 🤫 Em Breve: Synesthetic
 
