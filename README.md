@@ -1,5 +1,9 @@
 # ✨ Aura ✨
 
+<p align="center">
+<img src="./src/assets/images/aura-cover.png" alt="Capa do Projeto Aura" width="100%"/>
+</p>
+
 > _"Sintonize sua alma com a melodia do seu eu. Qual é a cor da sua música?"_
 
 ## 🔮 O que é o Aura?
