@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, Text } from "../../atoms";
-import { getUserProfile } from "../../../services/getUserProfile";
 
 interface SpotifyImage {
   url: string;
@@ -34,18 +33,6 @@ const AuraHeader: React.FC<AuraHeaderProps> = ({
     }
   }, []);
 
-  useEffect(() => {
-    if (token) {
-      getUserProfile(token)
-        .then((userData) => {
-          setUser(userData);
-        })
-        .catch((error) => {
-          console.error("Erro ao buscar perfil no Header:", error);
-        });
-    }
-  }, [token]);
-
   return (
     <Box
       $position="absolute"
@@ -77,7 +64,6 @@ const AuraHeader: React.FC<AuraHeaderProps> = ({
       >
         {title}
       </Text>
-
 
       <Box $width={"30px"} $height={"30px"} $borderRadius={"100px"}>
         {user?.images?.[0]?.url ? (
