@@ -1,16 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Box, Button, Text } from "../../atoms";
 
-interface SpotifyImage {
-  url: string;
-  height: number | null;
-  width: number | null;
-}
-
-interface SpotifyUser {
-  display_name: string;
-  images: SpotifyImage[];
-}
 interface AuraHeaderProps {
   title: string;
   textColor: string;
@@ -22,17 +12,6 @@ const AuraHeader: React.FC<AuraHeaderProps> = ({
   textColor,
   onMenuClick,
 }) => {
-  const [user, setUser] = useState<SpotifyUser | null>(null);
-
-  const [token, setToken] = useState("");
-
-  useEffect(() => {
-    const storedToken = window.localStorage.getItem("spotify_token");
-    if (storedToken) {
-      setToken(storedToken);
-    }
-  }, []);
-
   return (
     <Box
       $position="absolute"
@@ -66,25 +45,12 @@ const AuraHeader: React.FC<AuraHeaderProps> = ({
       </Text>
 
       <Box $width={"30px"} $height={"30px"} $borderRadius={"100px"}>
-        {user?.images?.[0]?.url ? (
-          <img
-            src={user.images[0].url}
-            alt="Foto de perfil do usuário"
-            style={{
-              width: "100%",
-              height: "100%",
-              borderRadius: "50%",
-              objectFit: "cover",
-            }}
-          />
-        ) : (
-          <Box
-            $width={"100%"}
-            $height={"100%"}
-            $borderRadius={"50%"}
-            $background={"#ffffff4a"}
-          />
-        )}
+        <Box
+          $width={"100%"}
+          $height={"100%"}
+          $borderRadius={"50%"}
+          $background={"#ffffff4a"}
+        />
       </Box>
     </Box>
   );
