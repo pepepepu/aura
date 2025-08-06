@@ -66,14 +66,15 @@ const AuraPopUp: React.FC<AuraPopUpProps> = ({ onClose }) => {
         <Text
           $fontSize="1.8rem"
           $fontWeight="400"
+          $fontFamily={"Instrument Serif"}
           $color="#333"
           style={{ lineHeight: 1 }}
         >
-          &times;
+          X
         </Text>
       </Button>
       <AnimatedContent
-        $width={"80%"}
+        $width={"100%"}
         $position="relative"
         onClick={(e) => e.stopPropagation()}
         $isClosing={isClosing}

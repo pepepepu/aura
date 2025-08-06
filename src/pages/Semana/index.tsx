@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuraBG, AuraHeader, Box, Dropdown, Text } from "../../components";
 import { checkMainColor } from "../../utils/checkMainColor";
@@ -12,8 +12,10 @@ import {
   type AuraTrack,
 } from "../../services/lastFMServices";
 import { extractVibrantColor } from "../../utils/colorExtractor";
+import { UserContext } from "../../context/userContext";
 
 const AuraSemanal: React.FC = () => {
+  const { userInfo } = useContext(UserContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [vibrantColors, setVibrantColors] = useState<string[]>([]);
@@ -81,8 +83,9 @@ const AuraSemanal: React.FC = () => {
     >
       <AuraHeader
         title="Sua semana foi"
-        textColor={"#FFF"}
+        textColor={"#EFEFEF"}
         onMenuClick={toggleMenu}
+        profileImageUrl={userInfo?.imageUrl}
       />
       <Dropdown
         isOpen={isMenuOpen}

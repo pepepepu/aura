@@ -10,6 +10,11 @@ export interface AuraTrack {
   };
 }
 
+export interface UserInfo {
+  name: string;
+  imageUrl: string;
+}
+
 // --- SEÇÃO LAST.FM ---
 const LASTFM_API_KEY = import.meta.env.VITE_LASTFM_API_KEY;
 const API_BASE_URL = "https://ws.audioscrobbler.com/2.0/";
@@ -113,6 +118,33 @@ export const getTopTrackForPeriod = async (
     return null;
   } catch (error) {
     console.error(`Erro ao buscar top track para o período ${period}:`, error);
+    return null;
+  }
+};
+
+export const getUserInfo = async (): Promise<UserInfo | null> => {
+  const username = window.localStorage.getItem("lastfm_username");
+  if (!username) return null; // Não é um erro, o usuário pode não estar logado
+
+  const url = `${API_BASE_URL}?method=user.getInfo&user=${username}&api_key=${LASTFM_API_KEY}&format=json`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (data.error) throw new Error(data.message);
+
+    // O Last.fm retorna várias imagens. A de índice 2 (large) é um bom tamanho para perfil.
+    const imageUrl =
+      data.user.image?.find((img: any) => img.size === "large")?.["#text"] ||
+      "";
+
+    return {
+      name: data.user.name,
+      imageUrl: imageUrl,
+    };
+  } catch (error) {
+    console.error("Erro ao buscar informações do usuário do Last.fm:", error);
     return null;
   }
 };

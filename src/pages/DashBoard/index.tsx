@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuraBG, AuraHeader, Box, Dropdown, Text } from "../../components";
 import { themes } from "../../styles/themes";
@@ -7,8 +7,10 @@ import {
   type ColorPaletteResult,
 } from "../../utils/extractColorPalette";
 import { getNowPlaying, type AuraTrack } from "../../services/lastFMServices";
+import { UserContext } from "../../context/userContext";
 
 const Dashboard: React.FC = () => {
+  const { userInfo } = useContext(UserContext);
   const [currentlyPlaying, setCurrentlyPlaying] = useState<AuraTrack | null>(
     null
   );
@@ -95,6 +97,7 @@ const Dashboard: React.FC = () => {
         title="Tocando agora"
         textColor={textColor}
         onMenuClick={toggleMenu}
+        profileImageUrl={userInfo?.imageUrl}
       />
 
       <Box

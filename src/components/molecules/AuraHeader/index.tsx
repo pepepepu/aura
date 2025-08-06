@@ -5,12 +5,14 @@ interface AuraHeaderProps {
   title: string;
   textColor: string;
   onMenuClick: () => void;
+  profileImageUrl?: string | null;
 }
 
 const AuraHeader: React.FC<AuraHeaderProps> = ({
   title,
   textColor,
   onMenuClick,
+  profileImageUrl,
 }) => {
   return (
     <Box
@@ -44,13 +46,26 @@ const AuraHeader: React.FC<AuraHeaderProps> = ({
         {title}
       </Text>
 
-      <Box $width={"30px"} $height={"30px"} $borderRadius={"100px"}>
-        <Box
-          $width={"100%"}
-          $height={"100%"}
-          $borderRadius={"50%"}
-          $background={"#ffffff4a"}
-        />
+      <Box $width={"30px"} $height={"30px"} $borderRadius={"50%"}>
+        {profileImageUrl ? (
+          <img
+            src={profileImageUrl}
+            alt="Foto de perfil do usuário"
+            style={{
+              width: "100%",
+              height: "100%",
+              borderRadius: "50%",
+              objectFit: "cover",
+            }}
+          />
+        ) : (
+          <Box
+            $width={"100%"}
+            $height={"100%"}
+            $borderRadius={"50%"}
+            $background={"#ffffff4a"}
+          />
+        )}
       </Box>
     </Box>
   );

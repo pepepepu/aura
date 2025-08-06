@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuraBG, AuraHeader, Box, Dropdown, Text } from "../../components";
 import { themes } from "../../styles/themes";
@@ -12,8 +12,10 @@ import {
   getCoverArtFromSpotify,
   type AuraTrack,
 } from "../../services/lastFMServices";
+import { UserContext } from "../../context/userContext";
 
 const MinhaAura: React.FC = () => {
+  const { userInfo } = useContext(UserContext);
   const [topTrack, setTopTrack] = useState<AuraTrack | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [albumPalette, setAlbumPalette] = useState<ColorPaletteResult | null>(
@@ -99,9 +101,10 @@ const MinhaAura: React.FC = () => {
       grainy={true}
     >
       <AuraHeader
-        title="Minha aura"
+        title="Minha Aura"
         textColor={textColor}
         onMenuClick={toggleMenu}
+        profileImageUrl={userInfo?.imageUrl}
       />
 
       <Dropdown

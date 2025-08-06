@@ -79,14 +79,15 @@ const SplashScreen: React.FC = () => {
         $justifyContent={"space-between"}
         $padding={"30px 0px 20px 0px"}
       >
-        <Box $width={"80%"} $justifyContent={"flex-end"} $flexDirection={"row"}>
+        <Box $width={"90%"} $justifyContent={"flex-end"} $flexDirection={"row"}>
           <Button onClick={openPopUp}>
             <Text
               $fontFamily={"EB Garamond"}
-              $fontSize={"1.5rem"}
-              $fontWeight={"800"}
+              $fontSize={"1.2rem"}
+              $fontWeight={"500"}
+              $textDecoration="underline"
             >
-              ???
+              tutorial
             </Text>
           </Button>
         </Box>
