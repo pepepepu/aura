@@ -13,7 +13,7 @@ import {
 import {
   getHumorFromColor,
   type HumorResult,
-} from "../../utils/getHumorFromColor"; // <<< 1. Importa a nova função
+} from "../../utils/getHumorFromColor";
 
 interface CurrentTrackInfo {
   name: string;
@@ -31,37 +31,52 @@ const IChoose: React.FC = () => {
   const { userInfo } = useContext(UserContext);
 
   useEffect(() => {
+    let isFetching = false;
+    let currentSongName: string | null = null;
+
     const fetchCurrentSong = async () => {
-      const track: AuraTrack | null = await getNowPlaying();
+      if (isFetching) return;
 
-      if (track && track.name !== currentTrack?.name) {
-        const imageUrl = await getCoverArtFromSpotify(
-          track.name,
-          track.artists[0].name
-        );
-        const colors = await extractAuraMoodColors(imageUrl);
+      isFetching = true;
 
-        const humor = colors ? getHumorFromColor(colors.predominant) : null;
+      try {
+        const track: AuraTrack | null = await getNowPlaying();
+        if (track && track.name !== currentSongName) {
+          currentSongName = track.name;
 
-        setCurrentTrack({
-          name: track.name,
-          artist: track.artists[0].name,
-          colors: colors,
-          humor: humor,
-        });
-      } else if (!track && currentTrack !== null) {
+          const imageUrl = await getCoverArtFromSpotify(
+            track.name,
+            track.artists[0].name
+          );
+          const colors = await extractAuraMoodColors(imageUrl);
+          const humor = colors ? getHumorFromColor(colors.predominant) : null;
+
+          setCurrentTrack({
+            name: track.name,
+            artist: track.artists[0].name,
+            colors: colors,
+            humor: humor,
+          });
+        } else if (!track) {
+          currentSongName = null;
+          setCurrentTrack(null);
+        }
+      } catch (error) {
+        console.error("Erro no fluxo de IChoose:", error);
         setCurrentTrack(null);
-      }
-
-      if (isLoading) {
-        setIsLoading(false);
+      } finally {
+        isFetching = false;
+        if (isLoading) {
+          setIsLoading(false);
+        }
       }
     };
 
     fetchCurrentSong();
-    const intervalId = setInterval(fetchCurrentSong, 300);
+    const intervalId = setInterval(fetchCurrentSong, 3500);
+
     return () => clearInterval(intervalId);
-  }, [currentTrack, isLoading]);
+  }, [isLoading]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -93,8 +108,7 @@ const IChoose: React.FC = () => {
         $justifyContent="center"
         $alignItems="center"
         $flexDirection="column"
-        $gap="40px"
-        $padding="80px 20px"
+        $padding={"70px 40px"}
       >
         {isLoading ? (
           <Text $color="#555555" $fontFamily={"Instrument Serif"}>
