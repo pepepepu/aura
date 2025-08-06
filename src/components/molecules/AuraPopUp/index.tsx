@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { keyframes, styled } from "styled-components";
-import { Box, Text } from "../..";
+import { Box, Text, Button } from "../.."; // Assumindo que o Button está no mesmo lugar
 
 interface AuraPopUpProps {
   onClose: () => void;
@@ -48,12 +48,30 @@ const AuraPopUp: React.FC<AuraPopUpProps> = ({ onClose }) => {
       $background="rgba(255, 255, 255, 0.068)"
       $backdropFilter="blur(8px)"
       $zIndex={1000}
-      onClick={handleClose}
       $isClosing={isClosing}
       $display="flex"
       $alignItems="center"
       $justifyContent="center"
     >
+      <Button
+        onClick={handleClose}
+        $position="absolute"
+        $top="15px"
+        $right="0px"
+        $background="transparent"
+        $border="none"
+        $padding="10px"
+        style={{ cursor: "pointer" }}
+      >
+        <Text
+          $fontSize="1.8rem"
+          $fontWeight="400"
+          $color="#333"
+          style={{ lineHeight: 1 }}
+        >
+          &times;
+        </Text>
+      </Button>
       <AnimatedContent
         $width={"80%"}
         $position="relative"
@@ -63,6 +81,7 @@ const AuraPopUp: React.FC<AuraPopUpProps> = ({ onClose }) => {
         $display="flex"
         $flexDirection="column"
         $alignItems="center"
+        $padding="20px"
       >
         <Text
           $fontFamily={"Instrument Serif"}
@@ -165,14 +184,7 @@ const AuraPopUp: React.FC<AuraPopUpProps> = ({ onClose }) => {
             liberta para dançar no campo da sua visão.
           </Text>
         </Box>
-        <Text
-          $margin={"10px 0px"}
-          $fontFamily={"Instrument Serif"}
-          $fontSize={"1rem"}
-          $fontStyle={"italic"}
-        >
-          Clique em qualquer lugar para fechar
-        </Text>
+        {/* --- TEXTO DE "CLIQUE FORA" REMOVIDO --- */}
       </AnimatedContent>
     </AnimatedWrapper>
   );

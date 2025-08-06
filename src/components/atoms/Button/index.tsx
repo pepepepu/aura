@@ -4,7 +4,7 @@ import {
   handleResponsiveProp,
   formatSize,
   type Size,
-  type ResponsiveProp
+  type ResponsiveProp,
 } from "../../../utils/styledHelpers";
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   $width?: ResponsiveProp<Size>;
@@ -16,9 +16,26 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   $border?: string;
   $borderRadius?: ResponsiveProp<string>;
   $fontSize?: ResponsiveProp<string>;
-  $fontWeight?: ResponsiveProp<string | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900">;
+  $fontWeight?: ResponsiveProp<
+    | string
+    | "100"
+    | "200"
+    | "300"
+    | "400"
+    | "500"
+    | "600"
+    | "700"
+    | "800"
+    | "900"
+  >;
   $cursor?: string;
   $transition?: string;
+  $position?: string;
+
+  $right?: string;
+  $top?: string;
+  $bottom?: string;
+  $left?: string;
 
   // Props de lógica customizada
   $hoverBackground?: string;
@@ -31,20 +48,28 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const StyledButton = styled.button<ButtonProps>`
-  ${({ $width }) => handleResponsiveProp('width', $width, formatSize)}
-  ${({ $minWidth }) => handleResponsiveProp('min-width', $minWidth, formatSize)}
-  ${({ $height }) => handleResponsiveProp('height', $height, formatSize)}
-  ${({ $padding }) => handleResponsiveProp('padding', $padding)}
-  ${({ $borderRadius = "6px" }) => handleResponsiveProp('border-radius', $borderRadius)}
-  ${({ $fontSize }) => handleResponsiveProp('font-size', $fontSize)}
-  ${({ $fontWeight }) => handleResponsiveProp('font-weight', $fontWeight)}
-  ${({ $gap = "0" }) => handleResponsiveProp('gap', $gap)}
+  ${({ $width }) => handleResponsiveProp("width", $width, formatSize)}
+  ${({ $minWidth }) => handleResponsiveProp("min-width", $minWidth, formatSize)}
+  ${({ $height }) => handleResponsiveProp("height", $height, formatSize)}
+  ${({ $padding }) => handleResponsiveProp("padding", $padding)}
+  ${({ $borderRadius = "6px" }) =>
+    handleResponsiveProp("border-radius", $borderRadius)}
+  ${({ $fontSize }) => handleResponsiveProp("font-size", $fontSize)}
+  ${({ $fontWeight }) => handleResponsiveProp("font-weight", $fontWeight)}
+  ${({ $gap = "0" }) => handleResponsiveProp("gap", $gap)}
+  
+  position: ${({ $position }) => $position || "static"};
+  right: ${({ $right }) => $right || "auto"};
+  top: ${({ $top }) => $top || "auto"};
+  bottom: ${({ $bottom }) => $bottom || "auto"};
+  left: ${({ $left }) => $left || "auto"};
 
   background: ${({ $background }) => $background || "transparent"};
   color: ${({ $color }) => $color || "#fff"};
   border: ${({ $border }) => $border || "none"};
   cursor: ${({ $cursor }) => $cursor || "pointer"};
-  transition: ${({ $transition }) => $transition || "box-shadow 0.2s, background-color 0.5s, color 0.3s"};
+  transition: ${({ $transition }) =>
+    $transition || "box-shadow 0.2s, background-color 0.5s, color 0.3s"};
   box-shadow: ${({ $boxShadow }) => $boxShadow || "none"};
 
   display: inline-flex;
@@ -62,25 +87,35 @@ const StyledButton = styled.button<ButtonProps>`
     height: 2px;
     border-radius: 0;
     width: ${({ $underlineOnHover, $isUnderlineActive }) =>
-    $isUnderlineActive ? "70%" : $underlineOnHover ? "0" : "0"};
+      $isUnderlineActive ? "70%" : $underlineOnHover ? "0" : "0"};
     background: ${({ $afterBackground }) => $afterBackground || "transparent"};
     transition: ${({ $underlineOnHover }) =>
-    $underlineOnHover ? "width 0.3s ease-in-out" : "none"};
+      $underlineOnHover ? "width 0.3s ease-in-out" : "none"};
   }
   &:hover::after {
     width: ${({ $underlineOnHover }) => ($underlineOnHover ? "70%" : "0")};
   }
 
   &:hover {
-    ${({ $hoverBackground }) => $hoverBackground && css`background: ${$hoverBackground};`}
-    ${({ $hoverColor }) => $hoverColor && css`color: ${$hoverColor};`}
+    ${({ $hoverBackground }) =>
+      $hoverBackground &&
+      css`
+        background: ${$hoverBackground};
+      `}
+    ${({ $hoverColor }) =>
+      $hoverColor &&
+      css`
+        color: ${$hoverColor};
+      `}
   }
 `;
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ children, ...rest }, ref) => {
     return (
-      <StyledButton ref={ref} {...rest}>{children}</StyledButton>
+      <StyledButton ref={ref} {...rest}>
+        {children}
+      </StyledButton>
     );
   }
 );
