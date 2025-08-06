@@ -1,4 +1,3 @@
-// Tipos e dados fornecidos pelo usuário
 type Tonalidade = "claro" | "medioClaro" | "medio" | "medioEscuro" | "escuro";
 
 type CorPoetica = {
@@ -108,8 +107,6 @@ export const coresPoeticas: CorPoetica[] = [
   },
 ];
 
-// --- FUNÇÕES AUXILIARES ---
-
 function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
@@ -186,13 +183,6 @@ function categorizarCor(
   return { cor, tom };
 }
 
-// --- FUNÇÃO PRINCIPAL ---
-
-/**
- * Recebe um array de 5 cores hexadecimais e retorna um array de 5 palavras poéticas ÚNICAS.
- * @param coresHex - Um array contendo 5 strings de cores no formato hexadecimal.
- * @returns Um array de 5 strings, cada uma sendo uma palavra poética única.
- */
 export function gerarPoesiaDasCores(coresHex: string[]): string[] {
   if (coresHex.length !== 5) {
     throw new Error("A função espera um array com exatamente 5 cores.");
@@ -226,26 +216,22 @@ export function gerarPoesiaDasCores(coresHex: string[]): string[] {
     let palavraEscolhida: string | undefined;
 
     if (palavrasDisponiveis.length > 0) {
-      // Se há palavras disponíveis no tom exato, escolhe uma
       palavraEscolhida =
         palavrasDisponiveis[
           Math.floor(Math.random() * palavrasDisponiveis.length)
         ];
     } else {
-      // Se não há, busca em TODAS as tonalidades da mesma cor por uma palavra disponível
       const todasAsPalavrasDaCor = Object.values(corPoeticaObj.tons).flat();
       palavrasDisponiveis = todasAsPalavrasDaCor.filter(
         (p) => !palavrasUsadas.has(p)
       );
 
       if (palavrasDisponiveis.length > 0) {
-        // Se há palavras disponíveis em outras tonalidades, escolhe uma
         palavraEscolhida =
           palavrasDisponiveis[
             Math.floor(Math.random() * palavrasDisponiveis.length)
           ];
       } else {
-        // Como último recurso (caso extremamente raro), permite uma repetição para não falhar
         palavraEscolhida =
           palavrasDoTom[Math.floor(Math.random() * palavrasDoTom.length)] ||
           "inefável";

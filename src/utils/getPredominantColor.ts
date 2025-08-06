@@ -5,6 +5,7 @@ interface RGB {
 }
 
 function rgbToHex({ r, g, b }: RGB): string {
+  if (isNaN(r) || isNaN(g) || isNaN(b)) return "#333333";
   const toHex = (c: number) => Math.round(c).toString(16).padStart(2, "0");
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
@@ -13,16 +14,16 @@ function getLuminance({ r, g, b }: RGB): number {
   return 0.299 * r + 0.587 * g + 0.114 * b;
 }
 
-export async function extractVibrantColor(
-  imageSource: string | HTMLImageElement
+export async function getPredominantColor(
+  imageSource: string | null | undefined
 ): Promise<string | null> {
-  return new Promise((resolve, reject) => {
-    const img =
-      imageSource instanceof HTMLImageElement ? imageSource : new Image();
-
-    if (typeof imageSource === "string") {
-      img.crossOrigin = "Anonymous";
+  return new Promise((resolve) => {
+    if (!imageSource) {
+      return resolve(null);
     }
+
+    const img = new Image();
+    img.crossOrigin = "Anonymous";
 
     img.onload = () => {
       const canvas = document.createElement("canvas");
@@ -55,13 +56,12 @@ export async function extractVibrantColor(
           a = imageData[i + 3];
         if (a < 128) continue;
 
-        const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
-        const maxComponent = Math.max(r, g, b),
-          minComponent = Math.min(r, g, b);
+        const maxComponent = Math.max(r, g, b);
+        const minComponent = Math.min(r, g, b);
         const saturation =
           maxComponent === 0 ? 0 : (maxComponent - minComponent) / maxComponent;
 
-        const luminanceNormalized = luminance / 255;
+        const luminanceNormalized = getLuminance({ r, g, b }) / 255;
 
         const lightScore = saturation * luminanceNormalized;
         if (lightScore > maxLightScore) {
@@ -83,6 +83,7 @@ export async function extractVibrantColor(
       const LUMINANCE_LOWER_THRESHOLD = 25;
 
       let chosenColor: RGB;
+
       if (lightLuminance > LUMINANCE_UPPER_THRESHOLD) {
         if (darkLuminance > LUMINANCE_LOWER_THRESHOLD) {
           chosenColor = vibrantDarkColor;
@@ -96,15 +97,11 @@ export async function extractVibrantColor(
       resolve(rgbToHex(chosenColor));
     };
 
-    img.onerror = (err) => {
-      console.error("Erro ao carregar a imagem:", err);
-      reject(new Error("Falha ao carregar a imagem."));
+    img.onerror = () => {
+      console.error("Erro ao carregar a imagem:", imageSource);
+      resolve(null);
     };
 
-    if (typeof imageSource === "string") {
-      img.src = imageSource;
-    } else if (img.complete) {
-      img.onload(new Event("load"));
-    }
+    img.src = imageSource;
   });
 }

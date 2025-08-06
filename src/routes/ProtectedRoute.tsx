@@ -1,12 +1,13 @@
-import React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import React from "react";
+import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectedRoute: React.FC = () => {
-  const token = window.localStorage.getItem('spotify_token');
+  const sessionKey = window.localStorage.getItem("lastfm_session_key");
 
-  if (!token) {
+  if (!sessionKey) {
     return <Navigate to="/" replace />;
   }
+
   return <Outlet />;
 };
 

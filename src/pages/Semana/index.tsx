@@ -2,30 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuraBG, AuraHeader, Box, Dropdown, Text } from "../../components";
 import { checkMainColor } from "../../utils/checkMainColor";
-import { extractVibrantColor } from "../../utils/extractVibrantColors";
 import {
   getAngelNumberFromColor,
   type AngelNumberResult,
 } from "../../utils/angelNumberGenerator";
-
-interface Artist {
-  name: string;
-}
-
-interface AlbumImage {
-  url: string;
-  height: number;
-  width: number;
-}
-
-interface Track {
-  id: string;
-  name: string;
-  artists: Artist[];
-  album: {
-    images: AlbumImage[];
-  };
-}
+import {
+  getTopTracksWeekly,
+  getCoverArtFromSpotify,
+  type AuraTrack,
+} from "../../services/lastFMServices";
+import { extractVibrantColor } from "../../utils/colorExtractor";
 
 const AuraSemanal: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,59 +24,49 @@ const AuraSemanal: React.FC = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleLogout = () => {
+    window.localStorage.removeItem("lastfm_session_key");
+    window.localStorage.removeItem("lastfm_username");
+    navigate("/");
+  };
+
   useEffect(() => {
     const fetchAndProcessTracks = async () => {
       setIsLoading(true);
-      const token = window.localStorage.getItem("spotify_token");
-      if (!token) {
-        navigate("/");
-        return;
-      }
-
-      const headers = { Authorization: `Bearer ${token}` };
-      const topTracksEndpoint =
-        "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=9";
-
       try {
-        const response = await fetch(topTracksEndpoint, { headers });
+        const topTracks = await getTopTracksWeekly();
 
-        if (response.status === 401) {
-          window.localStorage.removeItem("spotify_token");
-          navigate("/");
-          return;
-        }
-
-        if (response.ok) {
-          const data = await response.json();
-          if (data.items && data.items.length > 0) {
-            const colorPromises = data.items.map((track: Track) => {
-              const imageUrl = track.album.images[0]?.url;
-              if (!imageUrl) return Promise.resolve(null);
-              return extractVibrantColor(imageUrl);
-            });
-
-            const resolvedColors = await Promise.all(colorPromises);
-            const validColors = resolvedColors.filter(
-              (color): color is string => color !== null
+        if (topTracks && topTracks.length > 0) {
+          const colorPromises = topTracks.map(async (track: AuraTrack) => {
+            const imageUrl = await getCoverArtFromSpotify(
+              track.name,
+              track.artists[0].name
             );
-            setVibrantColors(validColors);
+            return extractVibrantColor(imageUrl);
+          });
 
-            if (validColors.length > 0) {
-              const corPai = checkMainColor(validColors);
-              const angelData = getAngelNumberFromColor(corPai);
-              setAngelInfo(angelData);
-            }
+          const resolvedColors = await Promise.all(colorPromises);
+          const validColors = resolvedColors.filter(
+            (c): c is string => c !== null
+          );
+          setVibrantColors(validColors);
+
+          if (validColors.length > 0) {
+            const corPai = checkMainColor(validColors);
+            const angelData = getAngelNumberFromColor(corPai);
+            setAngelInfo(angelData);
           }
         }
       } catch (error) {
-        console.error("Erro ao buscar ou processar as músicas:", error);
+        console.error("Erro no fluxo final do Aura Semanal:", error);
+        handleLogout();
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchAndProcessTracks();
-  }, [navigate]);
+  }, []);
 
   return (
     <AuraBG
@@ -113,7 +89,6 @@ const AuraSemanal: React.FC = () => {
         onClose={toggleMenu}
         currentScreen="Energia da semana"
       />
-
       <Box
         $width={"100%"}
         $height={"100%"}
@@ -123,7 +98,13 @@ const AuraSemanal: React.FC = () => {
         $flexDirection={"column"}
       >
         {isLoading ? (
-          <Text $color={"#EFEFEF"}>Carregando aura</Text>
+          <Text
+            $color={"#EFEFEF"}
+            $fontFamily={"Instrument Serif"}
+            $fontStyle={"italic"}
+          >
+            Calculando sua energia...
+          </Text>
         ) : angelInfo ? (
           <>
             <Text
@@ -138,11 +119,20 @@ const AuraSemanal: React.FC = () => {
               $fontStyle={"italic"}
               $fontSize={"1.2rem"}
               $color={"#EFEFEF"}
+              $textAlign={"center"}
             >
               {angelInfo.words}
             </Text>
           </>
-        ) : null}
+        ) : (
+          <Text
+            $color={"#EFEFEF"}
+            $textAlign={"center"}
+            $fontFamily={"Instrument Serif"}
+          >
+            Não foi possível calcular sua energia. Ouça mais músicas!
+          </Text>
+        )}
       </Box>
     </AuraBG>
   );

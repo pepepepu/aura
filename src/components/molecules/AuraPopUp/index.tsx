@@ -72,10 +72,13 @@ const AuraPopUp: React.FC<AuraPopUpProps> = ({ onClose }) => {
           Ode ao que é Aura
         </Text>
         <Box
-          $width={{ base: "90%", lg: "50%" }}
+          $width={{ base: "90%", lg: "60%" }}
           $maxHeight={"60dvh"}
           $overflowY={"auto"}
           $justifyContent="flex-start"
+          $alignItems="center"
+          $gap="30px"
+          $padding={{ base: "0 10px", md: "0 20px" }}
         >
           <Text
             $fontFamily={"Instrument Serif"}
@@ -83,26 +86,83 @@ const AuraPopUp: React.FC<AuraPopUpProps> = ({ onClose }) => {
             $fontWeight={"400"}
             $textAlign="center"
           >
-            O Aura conecta-se à sua conta do Spotify e cria uma experiência
-            visual baseada nas músicas que você ouve. Acompanhe cores, energia e
-            estados de espírito representados em animações enquanto a música
-            toca.
-            <br></br>
-            <br></br>
-            Aura é a ressonância primordial, o dom de perceber com os olhos a
-            música da existência. É o desvelar da cor que habita cada vibração,
-            a manifestação visível da energia que uma melodia desperta em você.
-            <br></br>
-            <br></br>
-            Ela transcende a canção passageira para tocar aquilo que é
-            permanente. No momento presente, é o fulgor efêmero, um reflexo do
-            seu estado de espírito em cores dançantes. Na jornada da alma, ela
-            compõe o seu universo particular, um mosaico de sentimentos
-            desenhado com suas músicas mais queridas. É o seu campo de energia,
-            a sua identidade vibracional expressa em luz.
-            <br></br>
-            <br></br>É a sua essência musical, antes um eco sentido no peito,
-            finalmente liberta para dançar no campo da sua visão.
+            O Aura revela a energia das suas músicas em cores. Para isso, ele
+            utiliza seu histórico do <strong>Last.fm</strong>, que registra o
+            que você ouve no <strong>Spotify</strong> e em outros players.
+          </Text>
+
+          <Box $width="100%" $alignItems="flex-start" $gap="15px">
+            <Text
+              $fontFamily={"Instrument Serif"}
+              $fontSize={"1.5rem"}
+              $textAlign="center"
+            >
+              Como Começar
+            </Text>
+
+            <Text
+              $textAlign={"justify"}
+              style={{ textIndent: "-20px", marginLeft: "20px" }}
+            >
+              <strong>1. Crie uma conta no Last.fm:</strong> Se você ainda não
+              tem, o primeiro passo é se registrar. É rápido e gratuito.
+              <a
+                href="https://www.last.fm/join"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: "inherit",
+                  fontWeight: "bold",
+                  textDecoration: "underline",
+                  marginLeft: "4px",
+                }}
+              >
+                Clique aqui para criar.
+              </a>
+            </Text>
+
+            <Text
+              $textAlign={"justify"}
+              style={{ textIndent: "-20px", marginLeft: "20px" }}
+            >
+              <strong>2. Conecte seu Spotify:</strong> Nas configurações do
+              Last.fm, autorize a conexão com o Spotify. Assim, tudo que você
+              ouvir será registrado (isso se chama "scrobbling").
+              <a
+                href="https://www.last.fm/settings/applications"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: "inherit",
+                  fontWeight: "bold",
+                  textDecoration: "underline",
+                  marginLeft: "4px",
+                }}
+              >
+                Clique aqui para conectar.
+              </a>
+            </Text>
+
+            <Text
+              $textAlign={"justify"}
+              style={{ textIndent: "-20px", marginLeft: "20px" }}
+            >
+              <strong>3. Volte e conecte-se ao Aura:</strong> Com tudo pronto,
+              basta fazer o login no Aura com sua conta Last.fm para que sua
+              energia musical seja revelada.
+            </Text>
+          </Box>
+
+          <Text
+            $fontFamily={"Instrument Serif"}
+            $fontSize={{ base: "1.1rem", md: "1.3rem" }}
+            $fontWeight={"400"}
+            $textAlign="center"
+            $fontStyle="italic"
+            style={{ opacity: 0.8 }}
+          >
+            É a sua essência musical, antes um eco sentido no peito, finalmente
+            liberta para dançar no campo da sua visão.
           </Text>
         </Box>
         <Text

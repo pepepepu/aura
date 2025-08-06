@@ -1,32 +1,20 @@
-/**
- * Define uma estrutura para representar uma cor no formato RGB.
- */
 interface RGB {
   r: number;
   g: number;
   b: number;
 }
 
-/**
- * Define a estrutura do objeto de paleta retornado.
- */
 export interface ColorPaletteResult {
   background: string;
   text: string;
   auraColors: string[];
 }
 
-/**
- * Converte um objeto de cor RGB para uma string hexadecimal.
- */
 function rgbToHex({ r, g, b }: RGB): string {
   const toHex = (c: number) => Math.round(c).toString(16).padStart(2, "0");
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
 
-/**
- * Interpola duas cores RGB para encontrar a cor que está no meio delas.
- */
 function getIntermediateColor(color1: RGB, color2: RGB): RGB {
   return {
     r: (color1.r + color2.r) / 2,
@@ -35,9 +23,6 @@ function getIntermediateColor(color1: RGB, color2: RGB): RGB {
   };
 }
 
-/**
- * Calcula a luminância relativa de uma cor, conforme as diretrizes WCAG.
- */
 function getRelativeLuminance({ r, g, b }: RGB): number {
   const sRGB = [r, g, b].map((val) => {
     const s = val / 255;
@@ -46,9 +31,6 @@ function getRelativeLuminance({ r, g, b }: RGB): number {
   return 0.2126 * sRGB[0] + 0.7152 * sRGB[1] + 0.0722 * sRGB[2];
 }
 
-/**
- * Calcula a taxa de contraste entre duas cores, conforme as diretrizes WCAG.
- */
 function getContrastRatio(color1: RGB, color2: RGB): number {
   const lum1 = getRelativeLuminance(color1);
   const lum2 = getRelativeLuminance(color2);
@@ -57,15 +39,6 @@ function getContrastRatio(color1: RGB, color2: RGB): number {
   return (lighter + 0.05) / (darker + 0.05);
 }
 
-/**
- * Analisa uma imagem e extrai uma paleta de cores otimizada para legibilidade e estética.
- *
- * @param {string | HTMLImageElement} imageSource A URL da imagem ou o elemento HTML.
- * @param {number} [quantizationQuality=10] Fator de quantização para a cor predominante.
- * @param {number} [contrastThreshold=4.5] O limite mínimo de contraste WCAG (4.5 para AA).
- * @param {number} [monochromeThreshold=0.1] O limite de saturação para considerar uma imagem monocromática.
- * @returns {Promise<ColorPaletteResult>} Uma Promise que resolve com um objeto contendo cores de fundo, texto e para a aura.
- */
 export async function extractColorPalette(
   imageSource: string | HTMLImageElement,
   quantizationQuality: number = 10,
@@ -82,9 +55,6 @@ export async function extractColorPalette(
 
     img.onload = () => {
       const canvas = document.createElement("canvas");
-      // CORREÇÃO FINAL: Força o canvas a usar o espaço de cor 'display-p3'.
-      // Isso instrui o Chrome (e outros navegadores) a processar as cores na mesma
-      // gama ampla que o Safari usa por padrão, resultando em cores mais ricas e fiéis.
       const context = canvas.getContext("2d", {
         colorSpace: "display-p3",
         willReadFrequently: true,
@@ -103,7 +73,6 @@ export async function extractColorPalette(
 
       const imageData = context.getImageData(0, 0, newWidth, newHeight).data;
 
-      // --- Coleta de Dados ---
       let vibrantDarkColor: RGB = { r: 0, g: 0, b: 0 };
       let vibrantLightColor: RGB = { r: 255, g: 255, b: 255 };
       let mostSaturatedColor: RGB = { r: 128, g: 128, b: 128 };
@@ -171,7 +140,6 @@ export async function extractColorPalette(
         totalB += b;
       }
 
-      // --- Pós-Processamento e Cálculo das Cores Base ---
       let maxCount = 0,
         dominantKey = "";
       for (const [key, count] of colorCounts.entries()) {
@@ -187,9 +155,7 @@ export async function extractColorPalette(
         b: b_q * quantizationQuality,
       };
 
-      // --- Montagem da Paleta Final ---
       if (maxOverallSaturation < monochromeThreshold) {
-        // CASO MONOCROMÁTICO
         const mediumColor: RGB = {
           r: totalR / pixelCount,
           g: totalG / pixelCount,
@@ -213,11 +179,8 @@ export async function extractColorPalette(
           ].map(rgbToHex),
         });
       } else {
-        // CASO COLORIDO
         let background = predominantColor;
         let text = mostSaturatedColor;
-
-        // Garante contraste para o texto
         const primaryContrast = getContrastRatio(background, text);
         if (primaryContrast < contrastThreshold) {
           const contrastWithLight = getContrastRatio(
@@ -233,8 +196,6 @@ export async function extractColorPalette(
               ? vibrantLightColor
               : vibrantDarkColor;
         }
-
-        // Gera cores intermediárias para enriquecer a paleta da aura
         const harmonicMediumColor = getIntermediateColor(
           vibrantDarkColor,
           vibrantLightColor
@@ -244,7 +205,6 @@ export async function extractColorPalette(
           vibrantLightColor
         );
 
-        // Monta a paleta da aura com 5 cores garantidas
         const auraColors = [
           vibrantDarkColor,
           vibrantLightColor,

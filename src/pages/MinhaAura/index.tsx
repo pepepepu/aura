@@ -7,23 +7,14 @@ import {
   type ColorPaletteResult,
 } from "../../utils/extractColorPalette";
 import { gerarPoesiaDasCores } from "../../utils/poeticColors";
-
-interface Artist {
-  name: string;
-  id: string;
-}
-
-interface Track {
-  id: string;
-  name: string;
-  artists: Artist[];
-  album: {
-    images: { url: string }[];
-  };
-}
+import {
+  getTopTrackForPeriod,
+  getCoverArtFromSpotify,
+  type AuraTrack,
+} from "../../services/lastFMServices";
 
 const MinhaAura: React.FC = () => {
-  const [topTrack, setTopTrack] = useState<Track | null>(null);
+  const [topTrack, setTopTrack] = useState<AuraTrack | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [albumPalette, setAlbumPalette] = useState<ColorPaletteResult | null>(
     null
@@ -33,61 +24,54 @@ const MinhaAura: React.FC = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    window.localStorage.removeItem("spotify_token");
+    window.localStorage.removeItem("lastfm_session_key");
+    window.localStorage.removeItem("lastfm_username");
     navigate("/");
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
   useEffect(() => {
     const fetchTopTrack = async () => {
       setIsLoading(true);
-      const token = window.localStorage.getItem("spotify_token");
-      if (!token) {
-        navigate("/");
-        return;
-      }
-
-      const headers = { Authorization: `Bearer ${token}` };
-      const topTracksEndpoint =
-        "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=1";
-
       try {
-        const response = await fetch(topTracksEndpoint, { headers });
+        const track = await getTopTrackForPeriod("7day");
 
-        if (response.status === 401) {
-          handleLogout();
-          return;
-        }
+        if (track) {
+          setTopTrack(track);
+          const imageUrl = await getCoverArtFromSpotify(
+            track.name,
+            track.artists[0].name
+          );
 
-        if (response.ok) {
-          const data = await response.json();
-          if (data.items && data.items.length > 0) {
-            const mostListenedTrack = data.items[0];
-            setTopTrack(mostListenedTrack);
+          if (imageUrl) {
+            const palette = await extractColorPalette(imageUrl);
+            setAlbumPalette(palette);
 
-            const imageUrl = mostListenedTrack.album.images[0]?.url;
-            if (imageUrl) {
-              const palette = await extractColorPalette(imageUrl);
-              setAlbumPalette(palette);
-              if (palette.auraColors && palette.auraColors.length >= 5) {
-                const colorsForPoetry = palette.auraColors.slice(0, 5);
-                const words = gerarPoesiaDasCores(colorsForPoetry);
-                setPoeticWords(words);
-              }
+            if (
+              palette &&
+              palette.auraColors &&
+              palette.auraColors.length >= 5
+            ) {
+              const colorsForPoetry = palette.auraColors.slice(0, 5);
+              const words = gerarPoesiaDasCores(colorsForPoetry);
+              setPoeticWords(words);
             }
-          } else {
-            setTopTrack(null);
           }
+        } else {
+          setTopTrack(null);
         }
       } catch (err) {
-        console.error("Erro ao buscar top tracks:", err);
+        console.error("Erro ao buscar top track em MinhaAura:", err);
+        handleLogout();
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchTopTrack();
-  }, [navigate]);
-
+  }, []);
   const [currentThemeIndex, setCurrentThemeIndex] = useState(0);
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -96,10 +80,6 @@ const MinhaAura: React.FC = () => {
     return () => clearInterval(intervalId);
   }, []);
   const currentTheme = themes[currentThemeIndex];
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
 
   const backgroundColor = albumPalette
     ? albumPalette.background
@@ -140,7 +120,7 @@ const MinhaAura: React.FC = () => {
       >
         {isLoading ? (
           <Box>
-            <Text color={textColor} $fontFamily={"Instrument Serif"}>
+            <Text $color={textColor} $fontFamily={"Instrument Serif"}>
               Analisando sua aura...
             </Text>
           </Box>

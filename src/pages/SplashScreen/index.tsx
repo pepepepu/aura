@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AuraBG, Box, Button, Image, Text, AuraPopUp } from "../../components";
-import spotifyIcon from "../../assets/icons/spotify.png";
-import { handleSpotifyLogin } from "../../services/spotifyAuth";
+import lastFmIcom from "../../assets/icons/lastFM.png";
+import { handleLastfmLogin } from "../../services/lastFMAuth";
 import { useNavigate } from "react-router-dom";
 
 const themes = [
@@ -45,7 +45,7 @@ const SplashScreen: React.FC = () => {
 
   const handleTransitionEnd = () => {
     setTimeout(() => {
-      handleSpotifyLogin();
+      handleLastfmLogin();
     }, 300);
   };
 
@@ -124,13 +124,13 @@ const SplashScreen: React.FC = () => {
             onClick={handleConnectClick}
           >
             <Box $width={"100%"} $flexDirection={"row"} $gap={"10px"}>
-              <Image src={spotifyIcon} width={"25px"} />
+              <Image src={lastFmIcom} width={"23px"} $borderRadius={"5px"} />
               <Text
                 $fontFamily={"EB Garamond"}
                 $fontSize={"1.1rem"}
                 $fontWeight={"400"}
               >
-                Conectar com o Spotify
+                Conectar com o LastFM
               </Text>
             </Box>
           </Button>

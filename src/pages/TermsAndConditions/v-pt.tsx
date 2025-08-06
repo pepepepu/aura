@@ -14,63 +14,68 @@ const VersaoPTBR: React.FC = () => {
       $justifyContent={"flex-start"}
     >
       <Text $textAlign={"justify"}>
-        Bem-vindx ao Aura!
+        Bem-vindo(a) ao Aura!
         <br></br>
         <br></br>
         Estes Termos de Serviço governam o seu acesso e uso do nosso site e dos
         serviços de visualização de música oferecidos pelo Aura. Por favor, leia
         estes Termos com atenção. Ao acessar ou usar nosso Serviço, você
         concorda em ficar vinculado a estes Termos e à nossa Política de
-        Privacidade
+        Privacidade.
       </Text>
+
       <Box $width={"100%"} $alignItems={"flex-start"} $gap={"5px"}>
         <Text $textAlign={"justify"} $fontSize={"1.5rem"}>
           1. Descrição do Serviço
         </Text>
         <Text $textAlign={"justify"}>
-          O Aura é um serviço que se conecta à sua conta Spotify para criar
-          experiências visuais e interativas com base nos seus dados de audição,
-          como a música que você está ouvindo, suas faixas e artistas mais
-          ouvidos e as características acústicas das músicas. O Serviço é
-          fornecido apenas para seu uso pessoal e não comercial.
+          O Aura é um serviço que se conecta à sua conta{" "}
+          <strong>Last.fm</strong> para acessar seu histórico de músicas e
+          utiliza a API pública do <strong>Spotify</strong> para obter as capas
+          dos álbuns. Com esses dados, criamos experiências visuais e
+          interativas. O Serviço é fornecido apenas para seu uso pessoal e não
+          comercial.
         </Text>
       </Box>
+
       <Box $width={"100%"} $alignItems={"flex-start"} $gap={"5px"}>
         <Text $textAlign={"justify"} $fontSize={"1.5rem"}>
           2. Elegibilidade
         </Text>
         <Text $textAlign={"justify"}>
           Para usar o nosso Serviço, você deve ter idade legal para firmar um
-          contrato vinculativo e deve ser elegível para usar o serviço Spotify
-          de acordo com os termos da Spotify. Ao usar o Aura, você declara e
-          garante que cumpre esses requisitos.
+          contrato vinculativo e deve ser elegível para usar o serviço do
+          Last.fm de acordo com os termos do próprio Last.fm. Ao usar o Aura,
+          você declara e garante que cumpre esses requisitos.
         </Text>
       </Box>
+
       <Box $width={"100%"} $alignItems={"flex-start"} $gap={"5px"}>
         <Text $textAlign={"justify"} $fontSize={"1.5rem"}>
-          3. Integração com o Spotify e Contas de Usuário
+          3. Integração com APIs e Contas de Usuário
         </Text>
         <Text $textAlign={"justify"}>
           Para que o Aura funcione, é necessário que você autorize o acesso à
-          sua conta Spotify através do sistema de autenticação oficial do
-          Spotify (OAuth 2.0). Você é responsável por manter a confidencialidade
-          das suas credenciais do Spotify.
+          sua conta <strong>Last.fm</strong> através do sistema de autenticação
+          oficial do Last.fm. Você é responsável por manter a confidencialidade
+          das suas credenciais do Last.fm. O Aura não solicita e não requer
+          acesso ou login à sua conta do Spotify.
         </Text>
       </Box>
+
       <Box $width={"100%"} $alignItems={"flex-start"} $gap={"5px"}>
         <Text $textAlign={"justify"} $fontSize={"1.5rem"}>
-          4. Relacionamento com o Spotify
+          4. Relacionamento com Last.fm e Spotify
         </Text>
         <Text $textAlign={"justify"}>
-          O Aura é uma aplicação de terceiros que utiliza a API da Plataforma de
-          Desenvolvedores do Spotify para funcionar. O Aura não é afiliado,
-          associado, autorizado, endossado por, ou de qualquer forma
-          oficialmente conectado com o Spotify. A marca Spotify, bem como todos
-          os nomes, logotipos, músicas e dados relacionados são marcas
-          registradas e propriedade da Spotify AB. O uso da API do Spotify é
-          regido pelos Termos de Serviço para Desenvolvedores do Spotify.
+          O Aura é uma aplicação de terceiros que utiliza as APIs do Last.fm e
+          do Spotify para funcionar. O Aura não é afiliado, associado,
+          autorizado ou endossado por Last.fm ou Spotify. As marcas, nomes,
+          logotipos, músicas e dados relacionados são propriedade de seus
+          respectivos donos.
         </Text>
       </Box>
+
       <Box $width={"100%"} $alignItems={"flex-start"} $gap={"5px"}>
         <Text $textAlign={"justify"} $fontSize={"1.5rem"}>
           5. Propriedade Intelectual
@@ -83,65 +88,61 @@ const VersaoPTBR: React.FC = () => {
             O nome "Aura", o logotipo, o site, os visuais gerados (excluindo as
             capas dos álbuns), o código-fonte e todos os elementos de design são
             propriedade de Pedro Paulo Oliveira Barros Souza e protegidos por
-            leis de direitos autorais e marcas registradas. Você não pode
-            copiar, modificar ou distribuir nosso conteúdo sem nossa permissão
-            explícita.
+            leis de direitos autorais.
           </Text>
         </Box>
         <Box $width={"100%"} $alignItems={"flex-start"}>
           <Text $textAlign={"justify"} $fontWeight={"800"}>
-            ✦ Conteúdo do Spotify:
+            ✦ Conteúdo de Terceiros:
           </Text>
           <Text $textAlign={"justify"}>
-            Todo o conteúdo do Spotify (como nomes de músicas, artistas, capas
-            de álbuns, etc.) acessado através do nosso Serviço permanece
-            propriedade do Spotify e/ou de seus licenciadores.
+            Todo o conteúdo (como nomes de músicas, artistas, capas de álbuns,
+            etc.) acessado através do nosso Serviço permanece propriedade do
+            Last.fm, Spotify e/ou de seus licenciadores.
           </Text>
         </Box>
       </Box>
+
       <Box $width={"100%"} $alignItems={"flex-start"} $gap={"5px"}>
         <Text $textAlign={"justify"} $fontSize={"1.5rem"}>
-          6. Uso Aceitável e Responsabilidades do Usuário
+          6. Uso Aceitável
         </Text>
         <Text $textAlign={"justify"}>
           Você concorda em não usar o Serviço para:
-          <br></br>✦ Qualquer finalidade ilegal ou não autorizada.
-          <br></br>✦ Tentar fazer engenharia reversa, descompilar ou de outra
-          forma tentar descobrir o código-fonte do Serviço.
-          <br></br>✦ Introduzir vírus, malware ou qualquer outro código
-          malicioso.
-          <br></br>✦ Tentar contornar quaisquer medidas de segurança ou limites
-          de taxa impostos pelo Aura ou pelo Spotify.
+          <br />✦ Qualquer finalidade ilegal ou não autorizada.
+          <br />✦ Tentar fazer engenharia reversa ou de outra forma tentar
+          descobrir o código-fonte.
+          <br />✦ Introduzir vírus, malware ou qualquer outro código malicioso.
+          <br />✦ Tentar contornar quaisquer medidas de segurança do Aura,
+          Last.fm ou Spotify.
         </Text>
       </Box>
+
       <Box $width={"100%"} $alignItems={"flex-start"} $gap={"5px"}>
         <Text $textAlign={"justify"} $fontSize={"1.5rem"}>
-          7. Privacidade e Dados do Usuário
+          7. Privacidade e Dados
         </Text>
         <Text $textAlign={"justify"}>
-          Levamos sua privacidade a sério. Nossa Política de Privacidade
-          descreve em detalhes quais dados acessamos da sua conta Spotify, como
-          os utilizamos e por que não os armazenamos. Recomendamos fortemente
-          que você a leia.
+          Levamos sua privacidade a sério. Nossa{" "}
+          <strong>Política de Privacidade</strong> descreve em detalhes quais
+          dados acessamos da sua conta Last.fm, como os utilizamos e por que não
+          os armazenamos. Recomendamos fortemente que você a leia.
         </Text>
       </Box>
+
       <Box $width={"100%"} $alignItems={"flex-start"} $gap={"5px"}>
         <Text $textAlign={"justify"} $fontSize={"1.5rem"}>
           8. Isenção de Garantias e Limitação de Responsabilidade
         </Text>
         <Text $textAlign={"justify"}>
-          O Serviço é fornecido "COMO ESTÁ" e "CONFORME DISPONÍVEL", sem
-          garantias de qualquer tipo, expressas ou implícitas.
-          <br></br>
-          <br></br>
-          NA MÁXIMA EXTENSÃO PERMITIDA PELA LEI, PEDRO PAULO OLIVEIRA BARROS
-          SOUZA NÃO SERÁ RESPONSÁVEL POR QUAISQUER DANOS INDIRETOS, INCIDENTAIS,
-          ESPECIAIS, CONSEQUENCIAIS OU PUNITIVOS, OU QUALQUER PERDA DE DADOS,
-          USO, OU OUTRAS PERDAS INTANGÍVEIS, RESULTANTES DE (i) SEU ACESSO OU
-          USO OU INCAPACIDADE DE ACESSAR OU USAR O SERVIÇO; (ii) QUALQUER
-          INTERRUPÇÃO OU CESSAÇÃO DA TRANSMISSÃO DE OU PARA O NOSSO SERVIÇO.
+          O Serviço é fornecido "COMO ESTÁ", sem garantias de qualquer tipo. NA
+          MÁXIMA EXTENSÃO PERMITIDA PELA LEI, PEDRO PAULO OLIVEIRA BARROS SOUZA
+          NÃO SERÁ RESPONSÁVEL POR QUAISQUER DANOS INDIRETOS, INCIDENTAIS,
+          ESPECIAIS, CONSEQUENCIAIS OU PUNITIVOS RESULTANTES DO SEU ACESSO OU
+          USO DO SERVIÇO.
         </Text>
       </Box>
+
       <Box $width={"100%"} $alignItems={"flex-start"} $gap={"5px"}>
         <Text $textAlign={"justify"} $fontSize={"1.5rem"}>
           9. Encerramento
@@ -149,15 +150,11 @@ const VersaoPTBR: React.FC = () => {
         <Text $textAlign={"justify"}>
           Você pode parar de usar nosso Serviço a qualquer momento. A maneira
           recomendada de desvincular sua conta é revogar o acesso do Aura
-          diretamente nas configurações da sua conta Spotify, acessando
-          https://www.spotify.com/account/apps.
-          <br></br>
-          <br></br>
-          Nós nos reservamos o direito de suspender ou encerrar seu acesso ao
-          Serviço a qualquer momento, por qualquer motivo, especialmente se você
-          violar estes Termos.
+          diretamente nas configurações da sua conta <strong>Last.fm</strong>,
+          conforme descrito em nossa Política de Privacidade.
         </Text>
       </Box>
+
       <Box $width={"100%"} $alignItems={"flex-start"} $gap={"5px"}>
         <Text $textAlign={"justify"} $fontSize={"1.5rem"}>
           10. Alterações nos Termos
@@ -165,20 +162,20 @@ const VersaoPTBR: React.FC = () => {
         <Text $textAlign={"justify"}>
           Nós nos reservamos o direito de modificar estes Termos a qualquer
           momento. Se fizermos alterações, atualizaremos a data da "Última
-          Atualização" no fim desta página. O seu uso continuado do Serviço após
-          a data de vigência de tais alterações constituirá a sua aceitação dos
-          Termos modificados.
+          Atualização" no fim desta página.
         </Text>
       </Box>
+
       <Box $width={"100%"} $alignItems={"flex-start"} $gap={"5px"}>
         <Text $textAlign={"justify"} $fontSize={"1.5rem"}>
           11. Lei Aplicável
         </Text>
         <Text $textAlign={"justify"}>
           Estes Termos serão regidos e interpretados de acordo com as leis do
-          Brasil, sem levar em conta o conflito de disposições legais.
+          Brasil.
         </Text>
       </Box>
+
       <Box $width={"100%"} $alignItems={"flex-start"} $gap={"5px"}>
         <Text $textAlign={"justify"} $fontSize={"1.5rem"}>
           12. Contato
@@ -188,8 +185,11 @@ const VersaoPTBR: React.FC = () => {
           contato conosco pelo e-mail: spedrobreno.2012@hotmail.com.
         </Text>
       </Box>
+
       <Box $width={"100%"} $alignItems={"center"} $margin={"10px 0px 0px 0px"}>
-        <Text $fontStyle={"italic"}>Última Atualização: 30/07/2025</Text>
+        <Text $fontStyle={"italic"}>
+          Última Atualização: 06 de Agosto de 2025
+        </Text>
       </Box>
     </Box>
   );

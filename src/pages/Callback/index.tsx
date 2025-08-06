@@ -1,68 +1,57 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState, useRef } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { AuraBlobs, Box, BlurText, GrainOverlay } from "../../components";
+import { getSessionKey } from "../../services/lastFMAuth";
 
 const Callback: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [status, setStatus] = useState("Sintonizando sua frequência...");
+  const hasFetched = useRef(false);
 
   useEffect(() => {
     const processAuth = async () => {
+      const params = new URLSearchParams(location.search);
+      const token = params.get("token");
+
+      if (!token) {
+        setStatus(
+          "Não conseguimos sentir sua energia. Vamos tentar novamente."
+        );
+        setTimeout(() => navigate("/"), 4000);
+        return;
+      }
+
       try {
-        const params = new URLSearchParams(window.location.hash.substring(1));
-        const accessToken = params.get("access_token");
-        const error = params.get("error");
+        setStatus("Conectando com sua alma musical...");
+        await getSessionKey(token);
 
-        if (error) {
-          setStatus("Dissonância na sua aura... Recalibrando sua energia.");
-          console.error(`Spotify Auth Error: ${error}`);
-          setTimeout(() => navigate("/"), 4000);
-          return;
-        }
+        setStatus("Mapeando a geografia da sua aura...");
+        await new Promise((resolve) => setTimeout(resolve, 2000));
 
-        if (accessToken) {
-          window.localStorage.setItem("spotify_token", accessToken);
+        setStatus("Revelando seu universo interior...");
+        await new Promise((resolve) => setTimeout(resolve, 2000));
 
-          setStatus("Conectando com sua alma musical...");
-          await new Promise((resolve) => setTimeout(resolve, 2000));
+        setStatus("Sua energia foi sincronizada!");
+        await new Promise((resolve) => setTimeout(resolve, 2500));
 
-          setStatus("Mapeando a geografia da sua aura...");
-          await new Promise((resolve) => setTimeout(resolve, 2000));
-
-          setStatus("Revelando seu universo interior...");
-          await new Promise((resolve) => setTimeout(resolve, 2000));
-
-          setStatus("Sua energia foi sincronizada!");
-          await new Promise((resolve) => setTimeout(resolve, 2500));
-
-          navigate("/dashboard");
-        } else {
-          setStatus(
-            "Não conseguimos sentir sua energia. Vamos tentar novamente."
-          );
-          console.error(
-            "Callback page reached without access_token or error in hash."
-          );
-          setTimeout(() => navigate("/"), 4000);
-        }
-      } catch (e) {
-        console.error("Falha ao processar o callback do Spotify:", e);
+        navigate("/dashboard");
+      } catch (error) {
         setStatus(
           "Houve uma interferência cósmica. Retornando ao ponto de partida."
         );
+        console.error("Falha ao processar o callback do Last.fm:", error);
         setTimeout(() => navigate("/"), 4000);
       }
     };
 
-    processAuth();
-  }, [navigate]);
-
+    if (!hasFetched.current) {
+      hasFetched.current = true;
+      processAuth();
+    }
+  }, [navigate, location]);
   return (
-    <Box
-      $width={"100dvw"}
-      $height={"100dvh"}
-      $background={"#CDECCE"}
-    >
+    <Box $width={"100dvw"} $height={"100dvh"} $background={"#CDECCE"}>
       <GrainOverlay />
       <Box
         $width={"150px"}

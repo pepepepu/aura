@@ -6,23 +6,12 @@ import {
   extractColorPalette,
   type ColorPaletteResult,
 } from "../../utils/extractColorPalette";
-
-interface Artist {
-  name: string;
-  id: string;
-}
-
-interface Track {
-  id: string;
-  name: string;
-  artists: Artist[];
-  album: {
-    images: { url: string }[];
-  };
-}
+import { getNowPlaying, type AuraTrack } from "../../services/lastFMServices";
 
 const Dashboard: React.FC = () => {
-  const [currentlyPlaying, setCurrentlyPlaying] = useState<Track | null>(null);
+  const [currentlyPlaying, setCurrentlyPlaying] = useState<AuraTrack | null>(
+    null
+  );
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [albumPalette, setAlbumPalette] = useState<ColorPaletteResult | null>(
     null
@@ -31,60 +20,39 @@ const Dashboard: React.FC = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    window.localStorage.removeItem("spotify_token");
+    window.localStorage.removeItem("lastfm_session_key");
+    window.localStorage.removeItem("lastfm_username");
     navigate("/");
   };
 
   useEffect(() => {
     const fetchCurrentlyPlaying = async () => {
-      const token = window.localStorage.getItem("spotify_token");
-      if (!token) {
-        setIsLoading(false);
-        navigate("/");
-        return;
-      }
-      const headers = { Authorization: `Bearer ${token}` };
-      const spotifyApiBase = "https://api.spotify.com/v1/me";
       try {
-        const response = await fetch(
-          `${spotifyApiBase}/player/currently-playing`,
-          { headers }
-        );
+        const track = await getNowPlaying();
 
-        if (response.status === 401) {
-          handleLogout();
+        if (currentlyPlaying?.id === track?.id) {
           return;
         }
 
-        if (response.status === 200) {
-          const data = await response.json();
-          if (currentlyPlaying?.id !== data.item?.id) {
-            setCurrentlyPlaying(data.item);
+        setCurrentlyPlaying(track);
 
-            if (data.item?.album?.images?.[0]?.url) {
-              const imageUrl = data.item.album.images[0].url;
-              try {
-                const palette = await extractColorPalette(imageUrl);
-                setAlbumPalette(palette);
-              } catch (e) {
-                console.error("Erro ao extrair paleta de cores:", e);
-                setAlbumPalette(null);
-              }
-            }
-          }
-        } else if (response.status === 204) {
-          setCurrentlyPlaying(null);
+        if (track && track.album.images[0]?.url) {
+          const imageUrl = track.album.images[0].url;
+          const palette = await extractColorPalette(imageUrl);
+          setAlbumPalette(palette);
+        } else {
           setAlbumPalette(null);
         }
       } catch (err) {
-        console.error("Erro ao buscar música atual:", err);
+        console.error("Erro no fluxo do Dashboard:", err);
+        handleLogout();
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchCurrentlyPlaying();
-    const intervalId = setInterval(fetchCurrentlyPlaying, 2000);
+    const intervalId = setInterval(fetchCurrentlyPlaying, 5000);
     return () => clearInterval(intervalId);
   }, [navigate, currentlyPlaying]);
 
@@ -118,7 +86,6 @@ const Dashboard: React.FC = () => {
       interactive={false}
       grainy={true}
     >
-
       <Dropdown
         isOpen={isMenuOpen}
         onClose={toggleMenu}
@@ -138,7 +105,6 @@ const Dashboard: React.FC = () => {
         $gap={"8px"}
         $justifyContent={"flex-end"}
       >
-
         {isLoading ? (
           <Box
             $width={"100%"}
@@ -152,15 +118,7 @@ const Dashboard: React.FC = () => {
               $fontWeight={"400"}
               $lineHeight="auto"
             >
-              {"Carregando"}
-            </Text>
-            <Text
-              $fontFamily={"Instrument Serif"}
-              $fontStyle={"italic"}
-              $fontSize={"1.2rem"}
-              $fontWeight={"400"}
-            >
-              {"Carregando"}
+              {"Sintonizando..."}
             </Text>
           </Box>
         ) : currentlyPlaying ? (
@@ -177,7 +135,7 @@ const Dashboard: React.FC = () => {
               $lineHeight="auto"
               $color={textColor}
             >
-              {isLoading ? "Carregando" : currentlyPlaying.name}
+              {currentlyPlaying.name}
             </Text>
             <Text
               $fontFamily={"Instrument Serif"}
@@ -186,9 +144,7 @@ const Dashboard: React.FC = () => {
               $fontWeight={"400"}
               $color={textColor}
             >
-              {isLoading
-                ? "Carregando"
-                : currentlyPlaying.artists.map((a) => a.name).join(", ")}
+              {currentlyPlaying.artists.map((a) => a.name).join(", ")}
             </Text>
           </Box>
         ) : (
@@ -198,7 +154,7 @@ const Dashboard: React.FC = () => {
             $fontSize={"1.3rem"}
             $fontWeight={"400"}
           >
-            Nenhuma música está tocando no momento.
+            Nenhuma música está em scrobble no momento. Abra seu player!
           </Text>
         )}
       </Box>
