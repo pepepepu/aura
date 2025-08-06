@@ -124,7 +124,7 @@ export const getTopTrackForPeriod = async (
 
 export const getUserInfo = async (): Promise<UserInfo | null> => {
   const username = window.localStorage.getItem("lastfm_username");
-  if (!username) return null; // Não é um erro, o usuário pode não estar logado
+  if (!username) return null;
 
   const url = `${API_BASE_URL}?method=user.getInfo&user=${username}&api_key=${LASTFM_API_KEY}&format=json`;
 
@@ -134,10 +134,13 @@ export const getUserInfo = async (): Promise<UserInfo | null> => {
 
     if (data.error) throw new Error(data.message);
 
-    // O Last.fm retorna várias imagens. A de índice 2 (large) é um bom tamanho para perfil.
-    const imageUrl =
-      data.user.image?.find((img: any) => img.size === "large")?.["#text"] ||
-      "";
+    let imageUrl = data.user.image?.find((img: any) => img.size === "medium")?.[
+      "#text"
+    ];
+
+    if (!imageUrl || imageUrl.length === 0) {
+      imageUrl = null;
+    }
 
     return {
       name: data.user.name,

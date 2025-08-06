@@ -128,12 +128,7 @@ const MinhaAura: React.FC = () => {
             </Text>
           </Box>
         ) : topTrack ? (
-          <Box
-            $width={"100%"}
-            $alignItems={"center"}
-            $flexDirection="column"
-            $gap="5px"
-          >
+          <Box $width={"100%"} $alignItems={"center"} $flexDirection="column">
             <Text
               $fontFamily={"Instrument Serif"}
               $fontSize={"3.5rem"}
