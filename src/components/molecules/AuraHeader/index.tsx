@@ -47,10 +47,9 @@ const AuraHeader: React.FC<AuraHeaderProps> = ({
       </Text>
 
       <Box $width={"30px"} $height={"30px"} $borderRadius={"50%"}>
-        {/* Lógica simples: Se tem uma URL válida, mostra a imagem. Se não, mostra o placeholder. */}
         {profileImageUrl && profileImageUrl.length > 0 ? (
           <img
-            src={profileImageUrl} // << URL direta, sem proxy
+            src={profileImageUrl}
             alt="Foto de perfil do usuário"
             style={{
               width: "100%",
