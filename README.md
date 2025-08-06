@@ -1,8 +1,8 @@
 # ✨ Aura ✨
 
-\<p align="center"\>
-\<img src="./src/assets/images/aura-cover.png" alt="Capa do Projeto Aura" width="100%"/\>
-\</p\>
+<p align="center">
+<img src="./src/assets/images/aura-cover.png" alt="Capa do Projeto Aura" width="100%"/>
+</p>
 
 > _"Sintonize sua alma com a melodia do seu eu. Qual é a cor da sua música?"_
 
@@ -18,11 +18,11 @@ Chega de só escutar vem **sentir, ver e viver** suas músicas favoritas.
 
 Explore os feitiços musicais que o Aura conjura pra você:
 
-\<p align="center"\>
-\<img src="./src/assets/images/aura-screen01.png" alt="Captura de Tela - Tocando Agora" width="30%"/\>
-\<img src="./src/assets/images/aura-screen03.png" alt="Captura de Tela - Energia da Semana" width="30%"/\>
-\<img src="./src/assets/images/aura-screen02.png" alt="Captura de Tela - Minha Aura" width="30%"/\>
-\</p\>
+<p align="center">
+<img src="./src/assets/images/aura-screen01.png" alt="Captura de Tela - Tocando Agora" width="30%"/>
+<img src="./src/assets/images/aura-screen03.png" alt="Captura de Tela - Energia da Semana" width="30%"/>
+<img src="./src/assets/images/aura-screen02.png" alt="Captura de Tela - Minha Aura" width="30%"/>
+</p>
 
 ### 🌈 Tocando Agora
 
