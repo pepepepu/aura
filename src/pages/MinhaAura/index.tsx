@@ -135,6 +135,7 @@ const MinhaAura: React.FC = () => {
               $fontWeight={"400"}
               $lineHeight="1.1"
               $color={textColor}
+              $textAlign={"center"}
             >
               {poeticWords ? poeticWords[0].toUpperCase() : "Misterioso"}
             </Text>
