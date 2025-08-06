@@ -106,9 +106,13 @@ const AuraPopUp: React.FC<AuraPopUpProps> = ({ onClose }) => {
             $fontWeight={"400"}
             $textAlign="center"
           >
-            O Aura revela a energia das suas músicas em cores. Para isso, ele
-            utiliza seu histórico do <strong>Last.fm</strong>, que registra o
-            que você ouve no <strong>Spotify</strong> e em outros players.
+            Para revelar sua aura, o Aura escuta com os olhos.
+            <br />
+            <br />
+            Após descobrir suas músicas favoritas com o <strong>Last.fm</strong>
+            , ele lê a alma visual de cada canção em sua <strong>capa</strong>.
+            As cores mais vibrantes são extraídas e libertadas, transformando a
+            arte que você vê na energia que você sente.
           </Text>
 
           <Box $width="100%" $alignItems="flex-start" $gap="15px">

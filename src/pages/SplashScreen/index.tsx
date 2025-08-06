@@ -85,9 +85,9 @@ const SplashScreen: React.FC = () => {
               $fontFamily={"EB Garamond"}
               $fontSize={"1.2rem"}
               $fontWeight={"500"}
-              $textDecoration="underline"
+              $fontStyle={"italic"}
             >
-              tutorial
+              what is ur aura?
             </Text>
           </Button>
         </Box>
