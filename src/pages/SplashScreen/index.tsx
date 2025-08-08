@@ -84,10 +84,10 @@ const SplashScreen: React.FC = () => {
             <Text
               $fontFamily={"EB Garamond"}
               $fontSize={"1.2rem"}
-              $fontWeight={"500"}
+              $fontWeight={"400"}
               $fontStyle={"italic"}
             >
-              what is ur aura?
+              ajuda
             </Text>
           </Button>
         </Box>

@@ -11,12 +11,12 @@ const fadeOut = keyframes` from { opacity: 1; } to { opacity: 0; }`;
 const scaleUp = keyframes` from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; }`;
 const scaleDown = keyframes` from { transform: scale(1); opacity: 1; } to { transform: scale(0.95); opacity: 0; }`;
 
-const AnimatedWrapper = styled(Box)<{ $isClosing: boolean }>`
+const AnimatedWrapper = styled(Box) <{ $isClosing: boolean }>`
   animation: ${({ $isClosing }) => ($isClosing ? fadeOut : fadeIn)} 0.3s
     ease-in-out forwards;
 `;
 
-const AnimatedContent = styled(Box)<{ $isClosing: boolean }>`
+const AnimatedContent = styled(Box) <{ $isClosing: boolean }>`
   animation: ${({ $isClosing }) => ($isClosing ? scaleDown : scaleUp)} 0.3s
     ease-in-out forwards;
 `;
@@ -53,26 +53,24 @@ const AuraPopUp: React.FC<AuraPopUpProps> = ({ onClose }) => {
       $alignItems="center"
       $justifyContent="center"
     >
-      <Button
-        onClick={handleClose}
-        $position="absolute"
-        $top="15px"
-        $right="0px"
-        $background="transparent"
-        $border="none"
-        $padding="10px"
-        style={{ cursor: "pointer" }}
-      >
-        <Text
-          $fontSize="1.8rem"
-          $fontWeight="400"
-          $fontFamily={"Instrument Serif"}
-          $color="#333"
-          style={{ lineHeight: 1 }}
+
+      <Box $width={"90%"} $position={"absolute"} $alignItems={"flex-start"} $top={"50px"} $right={"0px"}>
+        <Button
+          onClick={handleClose}
+          $background="transparent"
+          $padding={"10px"}
+          $cursor={"pointer"}
         >
-          X
-        </Text>
-      </Button>
+          <Text
+            $fontSize={"1.8rem"}
+            $fontWeight={"800"}
+            $fontFamily={"Instrument Serif"}
+            $color={"#333"}
+          >
+            X
+          </Text>
+        </Button>
+      </Box>
       <AnimatedContent
         $width={"100%"}
         $position="relative"
@@ -179,17 +177,15 @@ const AuraPopUp: React.FC<AuraPopUpProps> = ({ onClose }) => {
 
           <Text
             $fontFamily={"Instrument Serif"}
-            $fontSize={{ base: "1.1rem", md: "1.3rem" }}
-            $fontWeight={"400"}
+            $fontSize={{ base: "1.2rem", md: "1.4rem" }}
+            $fontWeight={"500"}
             $textAlign="center"
-            $fontStyle="italic"
             style={{ opacity: 0.8 }}
           >
             É a sua essência musical, antes um eco sentido no peito, finalmente
             liberta para dançar no campo da sua visão.
           </Text>
         </Box>
-        {/* --- TEXTO DE "CLIQUE FORA" REMOVIDO --- */}
       </AnimatedContent>
     </AnimatedWrapper>
   );
