@@ -7,7 +7,7 @@ import {
   AuraSemanal,
   PrivacyPolicy,
   TermsAndConditions,
-  EuEscolho,
+  // EuEscolho,
 } from "../pages";
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -22,7 +22,7 @@ const AppRoutes = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/minhaAura" element={<MinhaAura />} />
         <Route path="/auraSemanal" element={<AuraSemanal />} />
-        <Route path="/i-choose" element={<EuEscolho />} />
+        {/* <Route path="/i-choose" element={<EuEscolho />} /> */}
       </Route>
     </Routes>
   );
