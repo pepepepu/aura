@@ -125,7 +125,12 @@ const SplashScreen: React.FC = () => {
             onClick={handleConnectClick}
           >
             <Box $width={"100%"} $flexDirection={"row"} $gap={"10px"}>
-              <Image src={lastFmIcom} width={"23px"} $borderRadius={"5px"} />
+              <Image
+                src={lastFmIcom}
+                width={"23px"}
+                $borderRadius={"5px"}
+                alt="Logo do LastFM"
+              />
               <Text
                 $fontFamily={"EB Garamond"}
                 $fontSize={"1.1rem"}
