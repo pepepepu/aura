@@ -186,7 +186,7 @@ const MapaDaAlma: React.FC = () => {
                 $fontFamily={"Instrument Serif"}
                 $fontSize={".9rem"}
                 $fontStyle={"italic"}
-                $textAlign={"justify"}
+                $textAlign={"right"}
               >
                 Baseado em: {topTrackName}, de {userInfo?.name}
               </Text>

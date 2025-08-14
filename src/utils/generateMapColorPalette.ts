@@ -120,8 +120,12 @@ export async function generateMapColorPalette(
         ...paletteRgb.map((bgColor) => getContrastRatio(white, bgColor))
       );
 
-      const bestTextColor =
-        minContrastForBlack >= minContrastForWhite ? black : white;
+      let bestTextColor: RGB;
+      if (minContrastForBlack >= minContrastForWhite) {
+        bestTextColor = black;
+      } else {
+        bestTextColor = mostSaturatedColor;
+      }
 
       resolve({
         palette: paletteRgb.map(rgbToHex),

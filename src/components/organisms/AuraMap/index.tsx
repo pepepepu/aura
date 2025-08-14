@@ -1,7 +1,6 @@
 import React, { useMemo, useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// 1. Adicionar fatorX e fatorY à interface de props.
 interface ConstelacaoMusicalProps {
   estiloMusical: string;
   corBase: string;
@@ -23,14 +22,13 @@ const gerarHashNumerico = (str: string): number => {
   return Math.abs(hash);
 };
 
-// 2. Modificar a função para receber fatorX e fatorY e remover o 'switch'.
 const gerarCoordenadas = (
   estilo: string,
   cor: string,
   largura: number,
   altura: number,
-  fatorX: number, // Recebe como parâmetro
-  fatorY: number // Recebe como parâmetro
+  fatorX: number,
+  fatorY: number
 ): Ponto[] => {
   if (largura === 0 || altura === 0) return [];
 
@@ -38,11 +36,8 @@ const gerarCoordenadas = (
   const hashEstilo = gerarHashNumerico(estilo);
   const hashCor = gerarHashNumerico(cor);
 
-  // O bloco 'switch' foi removido daqui.
-
   for (let i = 0; i < 7; i++) {
     const seed = hashEstilo + hashCor + i * 37;
-    // Usa os fatores passados por parâmetro diretamente.
     const x = (Math.sin(seed * fatorX) * 0.4 + 0.5) * largura;
     const y = (Math.cos(seed * fatorY) * 0.4 + 0.5) * altura;
     pontos.push({
@@ -54,14 +49,13 @@ const gerarCoordenadas = (
   return pontos;
 };
 
-// 3. Atualizar o componente para aceitar e usar as novas props.
 const ConstelacaoMusical: React.FC<ConstelacaoMusicalProps> = ({
   estiloMusical,
   corBase,
   corTraco,
   corGlow,
-  fatorX = 1.0, // Adiciona um valor padrão para segurança
-  fatorY = 1.0, // Adiciona um valor padrão para segurança
+  fatorX = 1.0,
+  fatorY = 1.0,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
@@ -89,10 +83,9 @@ const ConstelacaoMusical: React.FC<ConstelacaoMusicalProps> = ({
         corBase,
         dimensions.width,
         dimensions.height,
-        fatorX, // Passa o fatorX para a função
-        fatorY // Passa o fatorY para a função
+        fatorX,
+        fatorY
       ),
-    // 4. Adicionar fatorX e fatorY ao array de dependências do useMemo.
     [
       estiloMusical,
       corBase,
@@ -127,7 +120,6 @@ const ConstelacaoMusical: React.FC<ConstelacaoMusicalProps> = ({
     .map((p, i) => (i === 0 ? `M ${p.x} ${p.y}` : `L ${p.x} ${p.y}`))
     .join(" ");
 
-  // ... (resto do código do componente permanece o mesmo)
   const pontoVariants = {
     hidden: { scale: 0, opacity: 0 },
     visible: {
