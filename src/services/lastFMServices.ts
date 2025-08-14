@@ -152,10 +152,10 @@ export const getUserInfo = async (): Promise<UserInfo | null> => {
   }
 };
 
-export const getTrackTopGenre = async (
+export const getTrackTopGenres = async (
   trackName: string,
   artistName: string
-): Promise<string | null> => {
+): Promise<string[]> => {
   const url = `${API_BASE_URL}?method=track.getTopTags&artist=${encodeURIComponent(
     artistName
   )}&track=${encodeURIComponent(
@@ -168,13 +168,14 @@ export const getTrackTopGenre = async (
 
     if (data.error || !data.toptags?.tag || data.toptags.tag.length === 0) {
       console.warn(`Nenhum gênero encontrado para "${trackName}"`);
-      return null;
+      return [];
     }
-    const topGenre = data.toptags.tag[0].name;
-    return topGenre;
+    const topGenres = data.toptags.tag.slice(0, 5).map((tag: any) => tag.name);
+
+    return topGenres;
   } catch (error) {
-    console.error("Erro ao buscar gênero da música:", error);
-    return null;
+    console.error("Erro ao buscar gêneros da música:", error);
+    return [];
   }
 };
 

@@ -43,6 +43,8 @@ const auraGenres: GenreData[] = [
       "southern rock",
       "surf rock",
       "math rock",
+      "brazilian rock",
+      "rock nacional",
     ],
   },
   {
@@ -62,6 +64,8 @@ const auraGenres: GenreData[] = [
       "pop rock",
       "britpop",
       "chamber pop",
+      "brazilian pop",
+      "pop brasileiro",
     ],
   },
   {
@@ -80,7 +84,9 @@ const auraGenres: GenreData[] = [
       "lofi hip hop",
       "freestyle rap",
       "twerk",
-      "clap clap clap",
+      "rap nacional",
+      "trap brasileiro",
+      "funk consciente",
     ],
   },
   {
@@ -104,6 +110,8 @@ const auraGenres: GenreData[] = [
       "big room",
       "idm",
       "breakbeat",
+      "tecnobrega",
+      "brega funk",
     ],
   },
   {
@@ -119,6 +127,7 @@ const auraGenres: GenreData[] = [
       "motown",
       "quiet storm",
       "rhythm and blues",
+      "samba soul",
     ],
   },
   {
@@ -168,6 +177,9 @@ const auraGenres: GenreData[] = [
       "bluegrass",
       "indie folk",
       "neo-folk",
+      "mpb",
+      "tropicália",
+      "folk brasileiro",
     ],
   },
   {
@@ -185,6 +197,7 @@ const auraGenres: GenreData[] = [
       "progressive metal",
       "nu metal",
       "metalcore",
+      "metal brasileiro",
     ],
   },
   {
@@ -200,6 +213,7 @@ const auraGenres: GenreData[] = [
       "indietronica",
       "lo-fi indie",
       "alternative",
+      "indie brasileiro",
     ],
   },
   {
@@ -207,7 +221,15 @@ const auraGenres: GenreData[] = [
     x: 0.6,
     y: 1.0,
     energy: "Chill",
-    keywords: ["reggae", "ska", "dub", "roots reggae", "dancehall", "ragga"],
+    keywords: [
+      "reggae",
+      "ska",
+      "dub",
+      "roots reggae",
+      "dancehall",
+      "ragga",
+      "reggae brasileiro",
+    ],
   },
   {
     name: "Punk",
@@ -222,6 +244,7 @@ const auraGenres: GenreData[] = [
       "ska punk",
       "pop punk",
       "anarcho-punk",
+      "punk brasileiro",
     ],
   },
   {
@@ -235,6 +258,7 @@ const auraGenres: GenreData[] = [
       "dark ambient",
       "space ambient",
       "meditation music",
+      "ambient brasileiro",
     ],
   },
   {
@@ -242,7 +266,15 @@ const auraGenres: GenreData[] = [
     x: 0.8,
     y: 1.5,
     energy: "Upbeat",
-    keywords: ["funk", "disco", "boogie", "p-funk", "neo-funk"],
+    keywords: [
+      "funk",
+      "disco",
+      "boogie",
+      "p-funk",
+      "neo-funk",
+      "funk carioca",
+      "brazilian funk",
+    ],
   },
   {
     name: "Blues",
@@ -270,6 +302,9 @@ const auraGenres: GenreData[] = [
       "honky tonk",
       "outlaw country",
       "folk country",
+      "sertanejo",
+      "sertanejo universitário",
+      "moda de viola",
     ],
   },
   {
@@ -290,6 +325,9 @@ const auraGenres: GenreData[] = [
       "forró",
       "mpb",
       "tango",
+      "axé",
+      "frevo",
+      "maracatu",
     ],
   },
   {
@@ -304,6 +342,7 @@ const auraGenres: GenreData[] = [
       "psych folk",
       "neo-psychedelia",
       "psytrance",
+      "psicodelia brasileira",
     ],
   },
   {
@@ -318,6 +357,7 @@ const auraGenres: GenreData[] = [
       "contemporary christian music",
       "ccm",
       "praise",
+      "gospel brasileiro",
     ],
   },
   {
@@ -325,7 +365,14 @@ const auraGenres: GenreData[] = [
     x: 1.3,
     y: 0.4,
     energy: "Chill",
-    keywords: ["lo-fi", "lofi", "lofi hip hop", "lofi chill", "chillhop"],
+    keywords: [
+      "lo-fi",
+      "lofi",
+      "lofi hip hop",
+      "lofi chill",
+      "chillhop",
+      "lofi brasileiro",
+    ],
   },
 ];
 
@@ -337,22 +384,26 @@ const fallbackGenre: GenreData = {
   keywords: [],
 };
 
-export const genreClassifier = (genreName: string | null): AuraData => {
-  if (!genreName) return { ...fallbackGenre, genreName: fallbackGenre.name };
+export const genreClassifier = (genres: string[]): AuraData => {
+  if (!genres || genres.length === 0) {
+    return { ...fallbackGenre, genreName: fallbackGenre.name };
+  }
 
-  const lowerCaseGenre = genreName.toLowerCase();
+  for (const genreName of genres) {
+    const lowerCaseGenre = genreName.toLowerCase();
 
-  const foundGenre = auraGenres.find((g) =>
-    g.keywords.some((keyword) => lowerCaseGenre.includes(keyword))
-  );
+    const foundGenre = auraGenres.find((g) =>
+      g.keywords.some((keyword) => lowerCaseGenre.includes(keyword))
+    );
 
-  if (foundGenre) {
-    return {
-      x: foundGenre.x,
-      y: foundGenre.y,
-      energy: foundGenre.energy,
-      genreName: foundGenre.name,
-    };
+    if (foundGenre) {
+      return {
+        x: foundGenre.x,
+        y: foundGenre.y,
+        energy: foundGenre.energy,
+        genreName: foundGenre.name,
+      };
+    }
   }
 
   return { ...fallbackGenre, genreName: fallbackGenre.name };

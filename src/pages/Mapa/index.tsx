@@ -11,7 +11,7 @@ import { UserContext } from "../../context/userContext";
 import {
   getCoverArtFromSpotify,
   getTopTrackForPeriod,
-  getTrackTopGenre,
+  getTrackTopGenres,
 } from "../../services/lastFMServices";
 import { themes } from "../../styles/themes";
 import {
@@ -48,10 +48,12 @@ const MapaDaAlma: React.FC = () => {
 
         setTopTrackName(`${track.name} por ${track.artists[0].name}`);
 
-        const genre = await getTrackTopGenre(track.name, track.artists[0].name);
-        console.log(genre);
+        const genres = await getTrackTopGenres(
+          track.name,
+          track.artists[0].name
+        );
 
-        const classifiedAura = genreClassifier(genre);
+        const classifiedAura = genreClassifier(genres);
         setAuraData(classifiedAura);
 
         const words = getEnergyState(classifiedAura.energy);
