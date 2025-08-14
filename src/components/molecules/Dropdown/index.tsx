@@ -15,9 +15,6 @@ interface DropdownMenuProps {
   currentScreen: string;
 }
 
-// --- Variantes de Animação Otimizadas ---
-
-// NOVO: As variantes do backdrop agora também animam o 'backdropFilter'
 const backdropVariants: Variants = {
   visible: {
     opacity: 1,
@@ -68,8 +65,8 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
       { label: "Tocando agora", onClick: () => navigate("/dashboard") },
       { label: "Minha aura", onClick: () => navigate("/minhaAura") },
       { label: "Energia da semana", onClick: () => navigate("/auraSemanal") },
-      // { label: "I Choose", onClick: () => navigate("/i-choose") },
-      { label: "Synesthetic", onClick: () => { }, disabled: true },
+      { label: "Constelação", onClick: () => navigate("/constelacao") },
+      { label: "Synesthetic", onClick: () => {}, disabled: true },
       { label: "Sair", onClick: handleLogout },
     ],
     [navigate]

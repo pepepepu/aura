@@ -152,6 +152,32 @@ export const getUserInfo = async (): Promise<UserInfo | null> => {
   }
 };
 
+export const getTrackTopGenre = async (
+  trackName: string,
+  artistName: string
+): Promise<string | null> => {
+  const url = `${API_BASE_URL}?method=track.getTopTags&artist=${encodeURIComponent(
+    artistName
+  )}&track=${encodeURIComponent(
+    trackName
+  )}&api_key=${LASTFM_API_KEY}&format=json`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (data.error || !data.toptags?.tag || data.toptags.tag.length === 0) {
+      console.warn(`Nenhum gênero encontrado para "${trackName}"`);
+      return null;
+    }
+    const topGenre = data.toptags.tag[0].name;
+    return topGenre;
+  } catch (error) {
+    console.error("Erro ao buscar gênero da música:", error);
+    return null;
+  }
+};
+
 // --- SEÇÃO SPOTIFY (Client Credentials) ---
 const SPOTIFY_CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
 const SPOTIFY_CLIENT_SECRET = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
