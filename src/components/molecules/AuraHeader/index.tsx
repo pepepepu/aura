@@ -26,7 +26,12 @@ const AuraHeader: React.FC<AuraHeaderProps> = ({
       $flexDirection="row"
       $alignItems={"center"}
     >
-      <Button onClick={onMenuClick} $background="transparent" $border="none">
+      <Button
+        onClick={onMenuClick}
+        $background="transparent"
+        $border="none"
+        aria-label="Menu Principal"
+      >
         <Box
           $width={"30px"}
           $height={"30px"}

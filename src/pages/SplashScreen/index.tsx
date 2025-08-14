@@ -128,6 +128,7 @@ const SplashScreen: React.FC = () => {
               <Image
                 src={lastFmIcom}
                 width={"23px"}
+                height={"23px"}
                 $borderRadius={"5px"}
                 alt="Logo do LastFM"
               />
