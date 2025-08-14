@@ -44,7 +44,6 @@ const auraGenres: GenreData[] = [
       "surf rock",
       "math rock",
       "brazilian rock",
-      "rock nacional",
     ],
   },
   {
@@ -65,7 +64,6 @@ const auraGenres: GenreData[] = [
       "britpop",
       "chamber pop",
       "brazilian pop",
-      "pop brasileiro",
     ],
   },
   {
@@ -84,9 +82,9 @@ const auraGenres: GenreData[] = [
       "lofi hip hop",
       "freestyle rap",
       "twerk",
-      "rap nacional",
-      "trap brasileiro",
-      "funk consciente",
+      "brazilian rap",
+      "brazilian trap",
+      "conscious funk",
     ],
   },
   {
@@ -178,8 +176,8 @@ const auraGenres: GenreData[] = [
       "indie folk",
       "neo-folk",
       "mpb",
-      "tropicália",
-      "folk brasileiro",
+      "tropicalia",
+      "brazilian folk",
     ],
   },
   {
@@ -197,7 +195,7 @@ const auraGenres: GenreData[] = [
       "progressive metal",
       "nu metal",
       "metalcore",
-      "metal brasileiro",
+      "brazilian metal",
     ],
   },
   {
@@ -213,7 +211,7 @@ const auraGenres: GenreData[] = [
       "indietronica",
       "lo-fi indie",
       "alternative",
-      "indie brasileiro",
+      "brazilian indie",
     ],
   },
   {
@@ -228,7 +226,7 @@ const auraGenres: GenreData[] = [
       "roots reggae",
       "dancehall",
       "ragga",
-      "reggae brasileiro",
+      "brazilian reggae",
     ],
   },
   {
@@ -244,7 +242,7 @@ const auraGenres: GenreData[] = [
       "ska punk",
       "pop punk",
       "anarcho-punk",
-      "punk brasileiro",
+      "brazilian punk",
     ],
   },
   {
@@ -258,7 +256,7 @@ const auraGenres: GenreData[] = [
       "dark ambient",
       "space ambient",
       "meditation music",
-      "ambient brasileiro",
+      "brazilian ambient",
     ],
   },
   {
@@ -303,8 +301,8 @@ const auraGenres: GenreData[] = [
       "outlaw country",
       "folk country",
       "sertanejo",
-      "sertanejo universitário",
-      "moda de viola",
+      "university sertanejo",
+      "viola caipira",
     ],
   },
   {
@@ -322,10 +320,10 @@ const auraGenres: GenreData[] = [
       "samba",
       "bossa nova",
       "pagode",
-      "forró",
+      "forro",
       "mpb",
       "tango",
-      "axé",
+      "axe",
       "frevo",
       "maracatu",
     ],
@@ -342,7 +340,7 @@ const auraGenres: GenreData[] = [
       "psych folk",
       "neo-psychedelia",
       "psytrance",
-      "psicodelia brasileira",
+      "brazilian psychedelia",
     ],
   },
   {
@@ -357,7 +355,7 @@ const auraGenres: GenreData[] = [
       "contemporary christian music",
       "ccm",
       "praise",
-      "gospel brasileiro",
+      "brazilian gospel",
     ],
   },
   {
@@ -371,7 +369,7 @@ const auraGenres: GenreData[] = [
       "lofi hip hop",
       "lofi chill",
       "chillhop",
-      "lofi brasileiro",
+      "brazilian lo-fi",
     ],
   },
 ];
