@@ -22,7 +22,7 @@ const AppRoutes = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/minhaAura" element={<MinhaAura />} />
         <Route path="/auraSemanal" element={<AuraSemanal />} />
-        <Route path="/mapaDaAlma" element={<Mapa />} />
+        <Route path="/constelacao" element={<Mapa />} />
       </Route>
     </Routes>
   );
