@@ -59,6 +59,7 @@ const AuraPopUp: React.FC<AuraPopUpProps> = ({ onClose }) => {
         $alignItems={"flex-start"}
         $top={"50px"}
         $right={"0px"}
+        $zIndex={1}
       >
         <Button
           onClick={handleClose}
@@ -130,6 +131,7 @@ const AuraPopUp: React.FC<AuraPopUpProps> = ({ onClose }) => {
             <Text
               $textAlign={"justify"}
               style={{ textIndent: "-20px", marginLeft: "20px" }}
+              $fontFamily="Instrument Serif"
             >
               <strong>1. Crie uma conta no Last.fm:</strong> Se você ainda não
               tem, o primeiro passo é se registrar. É rápido e gratuito.
@@ -151,6 +153,7 @@ const AuraPopUp: React.FC<AuraPopUpProps> = ({ onClose }) => {
             <Text
               $textAlign={"justify"}
               style={{ textIndent: "-20px", marginLeft: "20px" }}
+              $fontFamily="Instrument Serif"
             >
               <strong>2. Conecte seu Spotify:</strong> Nas configurações do
               Last.fm, autorize a conexão com o Spotify. Assim, tudo que você
@@ -173,6 +176,7 @@ const AuraPopUp: React.FC<AuraPopUpProps> = ({ onClose }) => {
             <Text
               $textAlign={"justify"}
               style={{ textIndent: "-20px", marginLeft: "20px" }}
+              $fontFamily="Instrument Serif"
             >
               <strong>3. Volte e conecte-se ao Aura:</strong> Com tudo pronto,
               basta fazer o login no Aura com sua conta Last.fm para que sua
