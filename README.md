@@ -4,15 +4,15 @@
 <img src="./src/assets/images/aura-cover.png" alt="Capa do Projeto Aura" width="100%"/>
 </p>
 
-> _"Sintonize sua alma com a melodia do seu eu. Qual é a cor da sua música?"_
+> _"Sintonize sua alma com a melodia do seu eu. Qual é a cor da sua aura?"_
 
 ## 🔮 O que é o Aura?
 
-Você já _ouviu_ música hoje... mas será que já **viu** o som?
+A música que te habita não pede apenas para ser ouvida. Ela sussurra, arrepia, pulsa nas veias. Mas... e se você pudesse encará-la? Ver a cor da sua própria melancolia, a forma da sua euforia?
 
-**Aura** é um portal cósmico para quem ama música de verdade do tipo que sente cada batida no peito. Aqui, você transforma seus hábitos musicais em um espetáculo visual vibrante, colorido e dançante. Tudo isso a partir da sua conta no Spotify.
+**Aura** é o espelho da sua alma sonora. Conectado às memórias e rastros do seu Last.fm, ele traduz o que vibra dentro de você em uma dança de luz, uma paisagem que é só sua. Seus hábitos se despem para revelar sua essência em um balé de cores vivas.
 
-Chega de só escutar vem **sentir, ver e viver** suas músicas favoritas.
+Não seja apenas o ouvinte. Venha **tocar, enxergar e se tornar** a sua música.
 
 ## 🎶 O que você pode fazer?
 
@@ -29,17 +29,17 @@ Explore os feitiços musicais que o Aura conjura pra você:
 
 A música tocou, o Aura sentiu. Veja **em tempo real** qual é a aura da sua vibe atual cores e animações que traduzem sua trilha sonora do momento.
 
-### 🌀 Energia Semanal
+### 🌀 Energia da semana
 
-Um painel emocional da sua semana em forma de um lindo mosaico 3x3 com suas músicas mais ouvidas. No meio? A essência da sua energia o resumo cósmico da sua vibe da semana.
+Aqui é onde a 9 músicas mais ouvidas pelo usuário revelam suas 9 cores da semana. Entre elas, a Cor Pai guia a escolha de um número angelical e palavras que traduzem a vibração que o universo reservou com base no que foi ouvido.
 
 ### 💖 Minha Aura
 
-A sua marca musical registrada. Descubra sua **aura pessoal** baseada na música que mais tocou seu coração nos últimos dias. É como um horóscopo, só que com BPM e batidas.
+Minha Aura mergulha na canção que mais tocou sua alma, colhe as cores que dançam em suas notas e as traduz em palavras que revelam a luz, a sombra e o sopro da energia que você carrega.
 
 ### 🌠 Constelação
 
-A sua marca musical registrada. Descubra sua **aura pessoal** baseada na música que mais tocou seu coração nos últimos dias. É como um horóscopo, só que com BPM e batidas.
+Constelação nasce da sua música mais ouvida, traçando nos céus os gêneros que moldam seu som. Sete pontos se acendem e se unem em desenho único, enquanto uma estrela real (escolhida pela vibração do seu gênero principal) torna-se guia da sua jornada musical.
 
 ### 🤫 Em Breve: Synesthetic
 
@@ -47,18 +47,18 @@ _Shhh..._ vem aí algo mágico. Uma experiência **sinestésica em tempo real**,
 
 ## 🚀 Por trás da mágica
 
-As tecnologias que fazem tudo isso acontecer (sim, usamos feitiços também, mas esses são os técnicos):
+As tecnologias que manifestam essa energia:
 
-- **React**: Nosso caldeirão onde tudo é preparado.
-- **TypeScript**: A magia que garante que nada saia do tom.
-- **Framer Motion**: Porque aura que se preze tem que dançar.
-- **Styled-components & Sass**: O glamour visual que dá vida às cores.
-- **React Router DOM**: Nosso mapa para navegar entre os mundos do Aura.
-- **Spotify API**: A ponte cósmica que liga o Aura ao seu universo musical.
+- **React**: O núcleo onde a energia da sua alma musical toma forma.
+- **TypeScript**: A sintonia fina que garante que cada vibração se mantenha pura e coesa.
+- **Framer Motion**: Porque uma aura verdadeira precisa pulsar e fluir em movimento.
+- **Styled-components**: O espectro de cores que dá vida e corpo à sua energia.
+- **React Router DOM**: O mapa para navegar pelas diferentes camadas da sua própria Aura.
+- **LastFM API**: O canal que conecta a Aura diretamente à frequência da sua alma musical.
 
-## 🛠️ Quer ver a magia de perto?
+## 🛠️ Quer sentir essa energia de perto?
 
-Fácil, jovem feiticeiro(a)! Basta seguir os passos:
+Simples, explorador(a) da sua própria essência! Basta seguir os passos para sintonizar:
 
 ```bash
 # Clone o repositório
