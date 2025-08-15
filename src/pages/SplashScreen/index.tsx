@@ -33,7 +33,7 @@ const SplashScreen: React.FC = () => {
     if (isConnecting) return;
     const intervalId = setInterval(() => {
       setCurrentThemeIndex((prevIndex) => (prevIndex + 1) % themes.length);
-    }, 15000);
+    }, 10000);
     return () => clearInterval(intervalId);
   }, [isConnecting]);
 
@@ -67,7 +67,7 @@ const SplashScreen: React.FC = () => {
       height={"100dvh"}
       colors={currentTheme.colors}
       backgroundColor={currentTheme.backgroundColor}
-      interactive={false}
+      interactive={true}
       grainy={true}
       isTransitioning={isConnecting}
       onTransitionComplete={handleTransitionEnd}

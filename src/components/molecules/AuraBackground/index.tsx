@@ -60,7 +60,7 @@ const GrainOverlay = styled.div`
   z-index: 1;
   pointer-events: none;
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)"/></svg>');
-  opacity: 0.25;
+  opacity: 0.15;
 `;
 
 const ContentWrapper = styled(Box)`

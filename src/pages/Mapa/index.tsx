@@ -100,7 +100,7 @@ const MapaDaAlma: React.FC = () => {
       height={"100dvh"}
       colors={auraBgColors}
       backgroundColor={backgroundColor}
-      interactive={false}
+      interactive={true}
       grainy={true}
     >
       <AuraHeader
@@ -121,7 +121,7 @@ const MapaDaAlma: React.FC = () => {
         $height={"100%"}
         $justifyContent={"center"}
         $alignItems={"center"}
-        $padding={"20px 20px"}
+        $padding={"10vh 20px 20px 20px"}
         $gap={"20px"}
       >
         {isLoading ? (
@@ -129,7 +129,13 @@ const MapaDaAlma: React.FC = () => {
             Observando as estrelas da sua alma...
           </Text>
         ) : auraData ? (
-          <>
+          <Box
+            $flexDirection={{ base: "column", lg: "row", md: "column" }}
+            $width={"100%"}
+            $alignItems={{ base: "center", lg: "flex-end" }}
+            $justifyContent={"center"}
+            $gap={"20px"}
+          >
             <Box
               $width={{ base: "70dvw", lg: "40dvh", md: "60dvw" }}
               $height={{ base: "90dvw", lg: "50dvh", md: "70dvw" }}
@@ -188,10 +194,10 @@ const MapaDaAlma: React.FC = () => {
                 $fontStyle={"italic"}
                 $textAlign={"left"}
               >
-                Baseado em: {topTrackName}, de {userInfo?.name}
+                Fonte estelar: {topTrackName}, de {userInfo?.name}
               </Text>
             </Box>
-          </>
+          </Box>
         ) : (
           <Text $color={textColor} $fontFamily={"Instrument Serif"}>
             Não foi possível ver as estrelas sua alma. Tente ouvir mais músicas

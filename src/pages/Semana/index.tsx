@@ -80,6 +80,7 @@ const AuraSemanal: React.FC = () => {
           : ["#DFB065", "#9097CF", "#EDAB74", "#D991AF", "#e0b5c7"]
       }
       backgroundColor={vibrantColors.length > 0 ? vibrantColors[0] : "#A7AEC8"}
+      grainy={true}
     >
       <AuraHeader
         title="Sua semana foi"

@@ -97,7 +97,7 @@ const MinhaAura: React.FC = () => {
       height={"100dvh"}
       colors={auraBgColors}
       backgroundColor={backgroundColor}
-      interactive={false}
+      interactive={true}
       grainy={true}
     >
       <AuraHeader

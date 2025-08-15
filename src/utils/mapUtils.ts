@@ -44,6 +44,7 @@ const auraGenres: GenreData[] = [
       "surf rock",
       "math rock",
       "brazilian rock",
+      "soft rock",
     ],
   },
   {
