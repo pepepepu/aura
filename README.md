@@ -97,14 +97,14 @@ Abra o navegador em `localhost` e... **deixe a energia fluir!** 🌠
 
 ## 💌 Bora trocar uma ideia?
 
-Esse projeto foi feito com doses cavalares de cafeína, muito código e um amor imenso por música.
-Feito por **Pedro Paulo (PP)**. Desenvolvedor, entusiasta musical e invocador de experiências audiovisuais.
+Nascido da transmutação da essência em código, e de um amor que vibra na mesma frequência da música.
+Criado pela alma de **Pedro Paulo (PP)**. Desenvolvedor, um ser musical e catalisador de experiências que dão corpo à energia sonora.
 
 - 📧 **E-mail:** [spedrobreno.2012@hotmail.com](mailto:spedrobreno.2012@hotmail.com)
 - 💼 **LinkedIn:** [linkedin.com/in/pp-oliveira](https://www.linkedin.com/in/pp-oliveira/)
 
 ---
 
-Se curtir o projeto, deixa uma estrela ⭐, compartilha com quem ama música e bora colorir o mundo com sons!
+Se essa vibração ressoou em você, deixe um rastro de luz com sua estrela ⭐. Compartilhe essa sintonia com outras almas musicais e vamos, juntos, manifestar o espectro visível do som.
 
 ---
