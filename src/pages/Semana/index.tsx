@@ -1,17 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuraBG, AuraHeader, Box, Dropdown, Text } from "../../components";
-import { checkMainColor } from "../../utils/checkMainColor";
+import { checkMainColor } from "../../utils/color_functions/checkMainColor";
 import {
   getAngelNumberFromColor,
   type AngelNumberResult,
-} from "../../utils/angelNumberGenerator";
+} from "../../utils/data_library/angelNumberGenerator";
 import {
   getTopTracksWeekly,
   getCoverArtFromSpotify,
   type AuraTrack,
 } from "../../services/lastFMServices";
-import { extractVibrantColor } from "../../utils/colorExtractor";
+import { extractVibrantColor } from "../../utils/color_functions/colorExtractor";
 import { UserContext } from "../../context/userContext";
 
 const AuraSemanal: React.FC = () => {

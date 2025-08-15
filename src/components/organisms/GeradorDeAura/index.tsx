@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import html2canvas from "html2canvas";
 import { AuraBG, Box } from "../..";
-import type { ColorPaletteResult } from "../../../utils/extractColorPalette";
+import type { ColorPaletteResult } from "../../../utils/color_functions/extractColorPalette";
 
 interface GeradorDeImagemAuraProps {
   trackName: string;

@@ -5,7 +5,7 @@ import { themes } from "../../styles/themes";
 import {
   extractColorPalette,
   type ColorPaletteResult,
-} from "../../utils/extractColorPalette";
+} from "../../utils/color_functions/extractColorPalette";
 import { getNowPlaying, type AuraTrack } from "../../services/lastFMServices";
 import { UserContext } from "../../context/userContext";
 
@@ -85,7 +85,7 @@ const Dashboard: React.FC = () => {
       height={"100dvh"}
       colors={auraBgColors}
       backgroundColor={backgroundColor}
-      interactive={true}
+      interactive={false}
       grainy={true}
     >
       <Dropdown
@@ -129,7 +129,7 @@ const Dashboard: React.FC = () => {
             $width={"100%"}
             $alignItems={"flex-start"}
             $flexDirection="column"
-            $gap="6px"
+            $gap="5px"
           >
             <Text
               $fontFamily={"Instrument Serif"}

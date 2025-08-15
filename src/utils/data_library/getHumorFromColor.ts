@@ -9,7 +9,6 @@ export interface HumorResult {
   poem: string;
 }
 
-// Nossa paleta de 9 humores/cores base
 const moodPalette = [
   {
     name: "Vermelho",

@@ -4,7 +4,6 @@ interface RGB {
   b: number;
 }
 
-// A interface agora reflete os novos nomes das cores que você pediu
 export interface AuraMoodColors {
   vibrant: string;
   predominant: string;
@@ -18,7 +17,6 @@ function rgbToHex({ r, g, b }: RGB): string {
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
 
-// Função para calcular a "distância" matemática entre duas cores
 function colorDistance(rgb1: RGB, rgb2: RGB): number {
   return Math.sqrt(
     Math.pow(rgb1.r - rgb2.r, 2) +
@@ -73,9 +71,6 @@ export async function extractAuraMoodColors(
           throw new Error("Nenhum pixel válido encontrado na imagem.");
         }
 
-        // --- CÁLCULO DAS 4 NOVAS CORES ---
-
-        // 1. Cor Mais Predominante (mais frequente)
         let maxCount = 0;
         let predominantColor: RGB = { r: 0, g: 0, b: 0 };
         for (const { count, rgb } of colorCounts.values()) {
@@ -85,7 +80,6 @@ export async function extractAuraMoodColors(
           }
         }
 
-        // 2. Cor Mais Vibrante (mais saturada)
         let maxSaturation = -1;
         let vibrantColor: RGB = { r: 0, g: 0, b: 0 };
         for (const pixel of allPixels) {
@@ -98,7 +92,6 @@ export async function extractAuraMoodColors(
           }
         }
 
-        // 3. Cor Intermediária (a média de todas as cores da imagem)
         const total = allPixels.reduce(
           (acc, curr) => {
             acc.r += curr.r;
@@ -114,7 +107,6 @@ export async function extractAuraMoodColors(
           b: total.b / allPixels.length,
         };
 
-        // 4. Cor Mais Primária (o pixel da imagem mais próximo de um tom primário puro)
         const primaryColors: RGB[] = [
           { r: 255, g: 0, b: 0 }, // Vermelho
           { r: 0, g: 255, b: 0 }, // Verde

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import type { AuraMoodColors } from "../../../utils/auraMoodExtractor";
+import type { AuraMoodColors } from "../../../utils/data_library/auraMoodExtractor";
 import GrainOverlay from "../GrainOverlay";
 
 interface AuraMoodProps {

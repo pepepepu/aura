@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { keyframes, styled } from "styled-components";
-import { Box, Text, Button } from "../.."; // Assumindo que o Button está no mesmo lugar
+import { Box, Text, Button } from "../..";
 
 interface AuraPopUpProps {
   onClose: () => void;
@@ -11,12 +11,12 @@ const fadeOut = keyframes` from { opacity: 1; } to { opacity: 0; }`;
 const scaleUp = keyframes` from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; }`;
 const scaleDown = keyframes` from { transform: scale(1); opacity: 1; } to { transform: scale(0.95); opacity: 0; }`;
 
-const AnimatedWrapper = styled(Box) <{ $isClosing: boolean }>`
+const AnimatedWrapper = styled(Box)<{ $isClosing: boolean }>`
   animation: ${({ $isClosing }) => ($isClosing ? fadeOut : fadeIn)} 0.3s
     ease-in-out forwards;
 `;
 
-const AnimatedContent = styled(Box) <{ $isClosing: boolean }>`
+const AnimatedContent = styled(Box)<{ $isClosing: boolean }>`
   animation: ${({ $isClosing }) => ($isClosing ? scaleDown : scaleUp)} 0.3s
     ease-in-out forwards;
 `;
@@ -53,8 +53,13 @@ const AuraPopUp: React.FC<AuraPopUpProps> = ({ onClose }) => {
       $alignItems="center"
       $justifyContent="center"
     >
-
-      <Box $width={"90%"} $position={"absolute"} $alignItems={"flex-start"} $top={"50px"} $right={"0px"}>
+      <Box
+        $width={"90%"}
+        $position={"absolute"}
+        $alignItems={"flex-start"}
+        $top={"50px"}
+        $right={"0px"}
+      >
         <Button
           onClick={handleClose}
           $background="transparent"

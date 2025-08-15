@@ -17,12 +17,12 @@ import { themes } from "../../styles/themes";
 import {
   generateMapColorPalette,
   type MapColorPaletteResult,
-} from "../../utils/generateMapColorPalette";
+} from "../../utils/color_functions/generateMapColorPalette";
 import {
   genreClassifier,
   getEnergyState,
   type AuraData,
-} from "../../utils/mapUtils";
+} from "../../utils/data_library/mapUtils";
 
 const MapaDaAlma: React.FC = () => {
   const { userInfo } = useContext(UserContext);

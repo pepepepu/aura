@@ -1,5 +1,3 @@
-// src/services/lastFMServices.ts
-
 export interface AuraTrack {
   id: string;
   name: string;
@@ -122,6 +120,10 @@ export const getTopTrackForPeriod = async (
   }
 };
 
+/**
+ * Busca informações pessoais do usuário. (nome de usuário e foto de perfil)
+ * Usado no componente Header.
+ */
 export const getUserInfo = async (): Promise<UserInfo | null> => {
   const username = window.localStorage.getItem("lastfm_username");
   if (!username) return null;
@@ -152,6 +154,10 @@ export const getUserInfo = async (): Promise<UserInfo | null> => {
   }
 };
 
+/**
+ * Busca as tags relacionadas a uma música
+ * Usado em Constelação.
+ */
 export const getTrackTopGenres = async (
   trackName: string,
   artistName: string

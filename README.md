@@ -19,9 +19,10 @@ Chega de só escutar vem **sentir, ver e viver** suas músicas favoritas.
 Explore os feitiços musicais que o Aura conjura pra você:
 
 <p align="center">
-<img src="./src/assets/images/aura-screen01.png" alt="Captura de Tela - Tocando Agora" width="30%"/>
-<img src="./src/assets/images/aura-screen03.png" alt="Captura de Tela - Energia da Semana" width="30%"/>
-<img src="./src/assets/images/aura-screen02.png" alt="Captura de Tela - Minha Aura" width="30%"/>
+<img src="./src/assets/images/home.jpg" alt="Captura de Tela - Tocando Agora" width="24%"/>
+<img src="./src/assets/images/energia-semanal.jpg" alt="Captura de Tela - Energia da Semana" width="24%"/>
+<img src="./src/assets/images/minha-aura.jpg" alt="Captura de Tela - Minha Aura" width="24%"/>
+<img src="./src/assets/images/constelacao.jpg" alt="Captura de Tela - Constelação" width="24%"/>
 </p>
 
 ### 🌈 Tocando Agora
@@ -33,6 +34,10 @@ A música tocou, o Aura sentiu. Veja **em tempo real** qual é a aura da sua vib
 Um painel emocional da sua semana em forma de um lindo mosaico 3x3 com suas músicas mais ouvidas. No meio? A essência da sua energia o resumo cósmico da sua vibe da semana.
 
 ### 💖 Minha Aura
+
+A sua marca musical registrada. Descubra sua **aura pessoal** baseada na música que mais tocou seu coração nos últimos dias. É como um horóscopo, só que com BPM e batidas.
+
+### 🌠 Constelação
 
 A sua marca musical registrada. Descubra sua **aura pessoal** baseada na música que mais tocou seu coração nos últimos dias. É como um horóscopo, só que com BPM e batidas.
 

@@ -37,7 +37,6 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   $bottom?: string;
   $left?: string;
 
-  // Props de lógica customizada
   $hoverBackground?: string;
   $hoverColor?: string;
   $underlineOnHover?: boolean;

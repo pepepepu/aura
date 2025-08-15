@@ -391,16 +391,14 @@ export const genreClassifier = (genres: string[]): AuraData => {
 
   const foundMatches: GenreData[] = [];
 
-  // 1. Encontra as duas primeiras correspondências distintas
   for (const genreName of genres) {
-    if (foundMatches.length >= 2) break; // Para quando já temos 2
+    if (foundMatches.length >= 2) break;
 
     const lowerCaseGenre = genreName.toLowerCase();
     const foundGenre = auraGenres.find((g) =>
       g.keywords.some((keyword) => lowerCaseGenre.includes(keyword))
     );
 
-    // Adiciona apenas se encontrou um gênero E se ele ainda não foi adicionado
     if (
       foundGenre &&
       !foundMatches.some((match) => match.name === foundGenre.name)
@@ -409,14 +407,11 @@ export const genreClassifier = (genres: string[]): AuraData => {
     }
   }
 
-  // 2. Trata os resultados com base em quantas correspondências foram encontradas
   switch (foundMatches.length) {
     case 0:
-      // Não encontrou nenhuma correspondência
       return { ...fallbackGenre, genreName: fallbackGenre.name };
 
     case 1:
-      // Encontrou apenas uma correspondência
       const genreA = foundMatches[0];
       return {
         x: genreA.x,
@@ -434,8 +429,8 @@ export const genreClassifier = (genres: string[]): AuraData => {
       return {
         x: newX,
         y: newY,
-        energy: genreA_.energy, // Usa a energia do gênero principal
-        genreName: `${genreA_.name} / ${genreB_.name}`, // Cria um nome combinado
+        energy: genreA_.energy,
+        genreName: `${genreA_.name} / ${genreB_.name}`,
       };
 
     default:

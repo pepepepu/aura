@@ -5,8 +5,8 @@ import { themes } from "../../styles/themes";
 import {
   extractColorPalette,
   type ColorPaletteResult,
-} from "../../utils/extractColorPalette";
-import { gerarPoesiaDasCores } from "../../utils/poeticColors";
+} from "../../utils/color_functions/extractColorPalette";
+import { gerarPoesiaDasCores } from "../../utils/data_library/poeticColors";
 import {
   getTopTrackForPeriod,
   getCoverArtFromSpotify,

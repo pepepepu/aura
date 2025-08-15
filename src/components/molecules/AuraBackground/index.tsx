@@ -212,7 +212,6 @@ const AuraBackground: React.FC<AuraBackgroundProps> = ({
             initialStyle={style}
             color={colors[index % colors.length]}
             speed={speed}
-            // 5. Define qual shape deve expandir e quais devem sumir
             isExpanding={isTransitioning && isExpandingShape}
             isFadingOut={isTransitioning && !isExpandingShape}
             onExpandComplete={onTransitionComplete}

@@ -1,6 +1,6 @@
 import { AnimatePresence, motion, type Variants } from "framer-motion";
 import React, { useMemo } from "react";
-import { Box, Button, Text } from "../.."; // Seus componentes de UI
+import { Box, Button, Text } from "../..";
 import { useNavigate } from "react-router-dom";
 
 interface MenuOption {
