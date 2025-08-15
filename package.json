@@ -11,6 +11,7 @@
     "generate-sitemap": "node ./scripts/sitemap-generator.mjs"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "crypto-js": "^4.2.0",
     "html2canvas": "^1.4.1",
     "motion": "^12.23.6",

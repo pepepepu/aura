@@ -121,7 +121,7 @@ const MapaDaAlma: React.FC = () => {
         $height={"100%"}
         $justifyContent={"center"}
         $alignItems={"center"}
-        $padding={"10vh 20px 20px 20px"}
+        $padding={"20px 20px"}
         $gap={"20px"}
       >
         {isLoading ? (
@@ -157,7 +157,7 @@ const MapaDaAlma: React.FC = () => {
             <Box
               $width={{ base: "90%", lg: "30%", md: "60%" }}
               $gap={"10px"}
-              $alignItems={{ base: "flex-end", lg: "center", md: "center" }}
+              $alignItems={"flex-start"}
             >
               <Box $width={"100%"} $alignItems={"flex-start"}>
                 <Text
@@ -166,7 +166,7 @@ const MapaDaAlma: React.FC = () => {
                   $fontFamily={"Instrument Serif"}
                   $fontSize={"2.2rem"}
                 >
-                  {`1. ${poeticWords[0]}`}
+                  {`${poeticWords[0]}`}
                 </Text>{" "}
                 <Text
                   as="span"
@@ -177,8 +177,8 @@ const MapaDaAlma: React.FC = () => {
                 >
                   {poeticWords
                     .slice(1)
-                    .map((word, index) => `${index + 2}. ${word}`)
-                    .join(" ")}
+                    .map((word) => `${word}`)
+                    .join(" - ")}
                 </Text>
               </Box>
               <Text
@@ -186,7 +186,7 @@ const MapaDaAlma: React.FC = () => {
                 $fontFamily={"Instrument Serif"}
                 $fontSize={".9rem"}
                 $fontStyle={"italic"}
-                $textAlign={"right"}
+                $textAlign={"left"}
               >
                 Baseado em: {topTrackName}, de {userInfo?.name}
               </Text>

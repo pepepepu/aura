@@ -64,6 +64,7 @@ const auraGenres: GenreData[] = [
       "britpop",
       "chamber pop",
       "brazilian pop",
+      "clap clap clap",
     ],
   },
   {
@@ -387,116 +388,150 @@ export const genreClassifier = (genres: string[]): AuraData => {
     return { ...fallbackGenre, genreName: fallbackGenre.name };
   }
 
-  for (const genreName of genres) {
-    const lowerCaseGenre = genreName.toLowerCase();
+  const foundMatches: GenreData[] = [];
 
+  // 1. Encontra as duas primeiras correspondências distintas
+  for (const genreName of genres) {
+    if (foundMatches.length >= 2) break; // Para quando já temos 2
+
+    const lowerCaseGenre = genreName.toLowerCase();
     const foundGenre = auraGenres.find((g) =>
       g.keywords.some((keyword) => lowerCaseGenre.includes(keyword))
     );
 
-    if (foundGenre) {
-      return {
-        x: foundGenre.x,
-        y: foundGenre.y,
-        energy: foundGenre.energy,
-        genreName: foundGenre.name,
-      };
+    // Adiciona apenas se encontrou um gênero E se ele ainda não foi adicionado
+    if (
+      foundGenre &&
+      !foundMatches.some((match) => match.name === foundGenre.name)
+    ) {
+      foundMatches.push(foundGenre);
     }
   }
 
-  return { ...fallbackGenre, genreName: fallbackGenre.name };
+  // 2. Trata os resultados com base em quantas correspondências foram encontradas
+  switch (foundMatches.length) {
+    case 0:
+      // Não encontrou nenhuma correspondência
+      return { ...fallbackGenre, genreName: fallbackGenre.name };
+
+    case 1:
+      // Encontrou apenas uma correspondência
+      const genreA = foundMatches[0];
+      return {
+        x: genreA.x,
+        y: genreA.y,
+        energy: genreA.energy,
+        genreName: genreA.name,
+      };
+
+    case 2:
+      const genreA_ = foundMatches[0];
+      const genreB_ = foundMatches[1];
+      const newX = genreA_.x * 0.3 + genreB_.x * 0.3;
+      const newY = genreA_.y * 0.7 + genreB_.y * 0.3;
+
+      return {
+        x: newX,
+        y: newY,
+        energy: genreA_.energy, // Usa a energia do gênero principal
+        genreName: `${genreA_.name} / ${genreB_.name}`, // Cria um nome combinado
+      };
+
+    default:
+      return { ...fallbackGenre, genreName: fallbackGenre.name };
+  }
 };
 
 const energyWords: Record<Energy, string[]> = {
   Euphoric: [
-    "Sirius",
-    "Explosão",
-    "Radiança",
-    "Supernova",
-    "Luminescência",
-    "Cosmos",
-    "Ascensão",
+    "Sirius", // A Estrela do Cão — o brilho mais intenso no céu noturno
+    "Fama", // associada à fama e prestígio :contentReference[oaicite:0]{index=0}
+    "Iluminação", // simboliza iluminação espiritual :contentReference[oaicite:1]{index=1}
+    "Sabedoria", // guardiã do conhecimento hermético :contentReference[oaicite:2]{index=2}
+    "Portão", // considerada um portal entre mundos (Egito antigo) :contentReference[oaicite:3]{index=3}
+    "Companhia", // guardiã, como cão vigilante nos mitos :contentReference[oaicite:4]{index=4}
+    "Renovação", // sua ascensão marcava as cheias do Nilo e início de vida nova :contentReference[oaicite:5]{index=5}
   ],
   Rebellious: [
-    "Antares",
-    "Ruptura",
-    "Erupção",
-    "Caos",
-    "Colapso",
-    "Tempestade",
-    "Fragmento",
+    "Antares", // a “Rival de Ares” e “Coração do Escorpião”
+    "Transformação", // portal de purificação e renascimento :contentReference[oaicite:6]{index=6}
+    "Coragem", // concede coragem estratégica :contentReference[oaicite:7]{index=7}
+    "Fúria", // energia marciana de destruição :contentReference[oaicite:8]{index=8}
+    "Resiliência", // associado com superar bloqueios profundos :contentReference[oaicite:9]{index=9}
+    "Destino", // marcando caminhos extraordinários com ciclos intensos :contentReference[oaicite:10]{index=10}
+    "Guardião", // estrela real considerada guardiã celeste :contentReference[oaicite:11]{index=11}
   ],
   Melancholic: [
-    "Algol",
-    "Crepúsculo",
-    "Neblina",
-    "Sombras",
-    "Longevidade",
-    "Eco",
-    "Memória",
+    "Algol", // “a Estrela-demônio”, associada a ciclos sombrios
+    "Medo", // símbolo de perigo oculto e temor esotérico
+    "Obscuridade", // evocando mistério sombrio e introspecção
+    "Ciclos", // simbolizando retorno e repetição cíclica
+    "Dualidade", // ia/volta entre luz e escuridão, vida e morte
+    "Presságio", // conotação mítica de mau agouro
+    "Tristeza", // sonoridade melancólica e associações sombrias
   ],
   Introspective: [
-    "Polaris",
-    "Horizonte",
-    "Reflexo",
-    "Origem",
-    "Constelação",
-    "Véu",
-    "Profundezas",
+    "Polaris", // a Estrela Polar, ponto fixo de orientação
+    "Guia", // guia para o interior e para o Norte (em mapa e alma)
+    "Foco", // símbolo de estabilidade mental e direção
+    "Origem", // ponto de partida existencial e espiritual
+    "Constância", // presença firme apesar das mudanças terrestres
+    "Centro", // ancorando a bússola interna
+    "Silêncio", // quietude profunda da alma que busca sentido
   ],
   Sensual: [
-    "Vega",
-    "Calor",
-    "Curvatura",
-    "Noite",
-    "Pulso",
-    "Segredo",
-    "Veludo",
+    "Vega", // estrela sensual na Lira, luz suave e envolvente
+    "Atração", // encanto luminoso que seduz
+    "Harmonia", // musicalidade e afeto refinado
+    "Noite", // atmosfera noturna, íntima e quente
+    "Mistério", // seduz pelo indizível
+    "Eco", // reverberação de sentimentos íntimos
+    "Sedução", // luz que chama e envolve
   ],
   Upbeat: [
-    "Altair",
-    "Centelha",
-    "Cintilar",
-    "Aurora",
-    "Vibração",
-    "Fluxo",
-    "Êxtase",
+    "Altair", // estrela brilhante e vibrante da Águia
+    "Agilidade", // rápida no céu — energia em movimento
+    "Vivacidade", // representando vigor e entusiasmo
+    "Ascensão", // simboliza movimento ascendente
+    "Estímulo", // chama de motivação interna
+    "Brilho", // luz viva, inspiradora
+    "Ritmo", // cadência dinâmica da vida e criação
   ],
   Mystical: [
-    "Betelgeuse",
-    "Portal",
-    "Névoa",
-    "Oráculo",
-    "Infinito",
-    "Vórtice",
-    "Espectro",
+    "Betelgeuse", // gigante vermelha de Órion, enigmática e profunda
+    "Profundidade", // densidade existencial e mistério cósmico
+    "Ressonância", // eco ancestral no universo
+    "Oráculo", // fala através do tempo e do espaço
+    "Transcendência", // ultrapassa limites da matéria
+    "Vórtice", // energia que suga e transporta a consciência
+    "Infinito", // conexão com o eterno e desconhecido
   ],
   Powerful: [
-    "Rigel",
-    "Impacto",
-    "Trovão",
-    "Majestade",
-    "Corona",
-    "Forja",
-    "Eternidade",
+    "Rigel", // estrela azul potente de Órion, imponente
+    "Força", // impacto físico e simbólico
+    "Majestade", // presença orgulhosa no céu
+    "Autoridade", // influência dominante e inflexível
+    "Dominância", // energia que impõe respeito
+    "Imortalidade", // perene através do eon estelar
+    "Expansão", // crescimento em escala cósmica
   ],
   Chill: [
-    "Canopus",
-    "Brisa",
-    "Serenidade",
-    "Onda",
-    "Pausa",
-    "Aconchego",
-    "Calmaria",
+    "Canopus", // segunda mais brilhante do céu, navegadora
+    "Serenidade", // seu uso na navegação transmite calma
+    "Profundidade", // tranquilidade e amplitude
+    "Fluxo", // guia constante em longas jornadas
+    "Equilíbrio", // estabilidade para os navegantes
+    "Refúgio", // ponto de segurança no mar aberto
+    "Silêncio", // calma noturna, longe do ruído mundano
   ],
   Unknown: [
-    "Deneb",
-    "Enigma",
-    "Éter",
-    "Vazio",
-    "Horizonte",
-    "Mistério",
-    "Singularidade",
+    "Deneb", // estrela distante e elegante na Cauda do Cisne
+    "Mistério", // presente pelo alcance limítrofe do olhar
+    "Vácuo", // espaço entre estrelas, vasto e cheio de perguntas
+    "Potencial", // energia latente à espera de despertar
+    "Limite", // fronteira entre o conhecido e o desconhecido
+    "Vozes", // ecos de mundos além dos sentidos
+    "Horizonte", // linha onde o hoje encontra o talvez
   ],
 };
 
