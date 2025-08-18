@@ -12,7 +12,7 @@ import {
   type AuraTrack,
 } from "../../services/lastFMServices";
 import { extractVibrantColor } from "../../utils/color_functions/colorExtractor";
-import { getContrastingTextColor } from "../../utils/color_functions/getContrastingTextColor";
+import { getHarmoniousTextColor } from "../../utils/color_functions/getHarmoniousTextColor";
 import { UserContext } from "../../context/userContext";
 
 const AuraSemanal: React.FC = () => {
@@ -60,7 +60,7 @@ const AuraSemanal: React.FC = () => {
             const angelData = getAngelNumberFromColor(corPai);
             setAngelInfo(angelData);
             const mainBackgroundColor = validColors[0];
-            const contrastColor = getContrastingTextColor(mainBackgroundColor);
+            const contrastColor = getHarmoniousTextColor(mainBackgroundColor);
             setTextColor(contrastColor);
           }
         }
