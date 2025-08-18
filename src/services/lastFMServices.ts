@@ -48,11 +48,26 @@ const mapLastfmTrackToAuraTrack = (lastfmTrack: any): AuraTrack => {
 
   return {
     id: lastfmTrack.mbid || `${lastfmTrack.name}-${mainArtist.name}`,
-    name: cleanTrackName, // Usa o nome limpo da música
-    artists: allArtists,   // Usa a lista completa de artistas
+    name: cleanTrackName,
+    artists: allArtists,
     album: {
       images: [{ url: imageUrl }],
       mbid: lastfmTrack.album?.mbid,
+    },
+  };
+};
+
+const mapSpotifyTrackToAuraTrack = (spotifyTrack: any): AuraTrack => {
+  return {
+    id: spotifyTrack.id,
+    name: spotifyTrack.name,
+    artists: spotifyTrack.artists.map((artist: any) => ({
+      name: artist.name,
+      id: artist.id,
+    })),
+    album: {
+      images: [{ url: spotifyTrack.album.images[0]?.url || "" }],
+      mbid: undefined,
     },
   };
 };
@@ -73,15 +88,28 @@ export const getNowPlaying = async (): Promise<AuraTrack | null> => {
 
     if (data.error) throw new Error(data.message);
 
-    const firstTrack = data.recenttracks?.track?.[0];
+    const lastfmTrack = data.recenttracks?.track?.[0];
 
-    if (firstTrack && firstTrack["@attr"]?.nowplaying === "true") {
-      return mapLastfmTrackToAuraTrack(firstTrack);
+    if (lastfmTrack && lastfmTrack["@attr"]?.nowplaying === "true") {
+      console.log("Last.fm encontrou:", lastfmTrack.name, "-", lastfmTrack.artist["#text"]);
+
+      const spotifyTrack = await searchTrackOnSpotify(
+        lastfmTrack.name,
+        lastfmTrack.artist["#text"]
+      );
+
+      if (spotifyTrack) {
+        console.log("Spotify encontrou detalhes completos. Mapeando...");
+        return mapSpotifyTrackToAuraTrack(spotifyTrack);
+      } else {
+        console.warn("Não encontrado no Spotify. Usando dados do Last.fm como fallback.");
+        return mapLastfmTrackToAuraTrack(lastfmTrack);
+      }
     }
 
-    return null;
+    return null; // Nenhuma música tocando
   } catch (error) {
-    console.error("Erro ao buscar música atual do Last.fm:", error);
+    console.error("Erro no fluxo do getNowPlaying:", error);
     return null;
   }
 };
@@ -240,29 +268,39 @@ async function getSpotifyClientToken(): Promise<string | null> {
   return spotifyToken.value;
 }
 
-/**
- * Busca a URL da capa de uma música no Spotify usando o nome da faixa e do artista.
- */
-export async function getCoverArtFromSpotify(
+export async function searchTrackOnSpotify(
   trackName: string,
   artistName: string
-): Promise<string | null> {
+): Promise<any | null> {
   const token = await getSpotifyClientToken();
   if (!token) return null;
 
-  const query = encodeURIComponent(`track:${trackName} artist:${artistName}`);
+  const cleanTrackName = trackName.replace(/\s\(.+\)/, "").trim();
+
+  const query = encodeURIComponent(`track:${cleanTrackName} artist:${artistName}`);
   const url = `https://api.spotify.com/v1/search?q=${query}&type=track&limit=1`;
 
   try {
     const response = await fetch(url, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    if (!response.ok) return null;
+    if (!response.ok) {
+      console.error("Erro na busca do Spotify:", await response.text());
+      return null;
+    }
 
     const data = await response.json();
-    return data.tracks.items[0]?.album.images[0]?.url || null;
+    return data.tracks.items[0] || null;
   } catch (e) {
-    console.error(`Erro ao buscar capa no Spotify para "${trackName}"`, e);
+    console.error(`Erro ao buscar no Spotify para "${trackName}"`, e);
     return null;
   }
+}
+
+export async function getCoverArtFromSpotify(
+  trackName: string,
+  artistName: string
+): Promise<string | null> {
+  const track = await searchTrackOnSpotify(trackName, artistName);
+  return track?.album.images[0]?.url || null;
 }
