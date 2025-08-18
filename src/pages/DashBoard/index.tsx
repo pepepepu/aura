@@ -21,57 +21,6 @@ const Dashboard: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
-  const [isCapturing, setIsCapturing] = useState(false);
-
-  const handleNativeCapture = async () => {
-    setIsCapturing(true);
-
-    try {
-      // 1. Pede permissão ao usuário para capturar a tela
-      const stream = await navigator.mediaDevices.getDisplayMedia({
-        video: true, // <-- Correção. Apenas peça por um vídeo.
-        // @ts-ignore - Ignoramos o erro pois sabemos que a propriedade existe nos navegadores modernos
-        preferCurrentTab: true,
-      });
-
-      // 2. Pega a trilha de vídeo do fluxo
-      const track = stream.getVideoTracks()[0];
-
-      // 3. Cria um capturador de imagem a partir da trilha de vídeo
-      const imageCapture = new (window as any).ImageCapture(track);
-
-      // 4. Captura um único frame
-      const bitmap = await imageCapture.grabFrame();
-
-      // 5. Para o compartilhamento de tela (isso remove o aviso na aba)
-      track.stop();
-
-      // 6. Cria um canvas para desenhar o frame
-      const canvas = document.createElement("canvas");
-      canvas.width = bitmap.width;
-      canvas.height = bitmap.height;
-      const context = canvas.getContext("2d");
-      if (context) {
-        context.drawImage(bitmap, 0, 0, bitmap.width, bitmap.height);
-      }
-
-      // 7. Converte o canvas para imagem e inicia o download
-      const imageURL = canvas.toDataURL("image/png");
-      const link = document.createElement("a");
-      link.href = imageURL;
-      link.download = "minha-tela.png";
-      link.click();
-    } catch (err) {
-      console.error("Erro ao capturar a tela: ", err);
-      // O usuário pode ter negado a permissão
-      alert(
-        "Não foi possível capturar a tela. A permissão pode ter sido negada."
-      );
-    } finally {
-      setIsCapturing(false);
-    }
-  };
-
   const handleLogout = () => {
     window.localStorage.removeItem("lastfm_session_key");
     window.localStorage.removeItem("lastfm_username");
@@ -150,20 +99,6 @@ const Dashboard: React.FC = () => {
         onMenuClick={toggleMenu}
         profileImageUrl={userInfo?.imageUrl}
       />
-
-      <button
-        onClick={handleNativeCapture}
-        disabled={isCapturing}
-        data-html2canvas-ignore="true" // Este atributo não é mais necessário aqui, mas mantive por clareza
-        style={{
-          position: "absolute",
-          bottom: "20px",
-          right: "20px",
-          zIndex: 1000,
-        }}
-      >
-        {isCapturing ? "⏳" : "📷"}
-      </button>
 
       <Box
         $width={{ base: "100%", lg: "95%" }}
