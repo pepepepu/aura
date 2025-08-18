@@ -42,8 +42,6 @@ const Dashboard: React.FC = () => {
         video: true,
       });
 
-      const track = stream.getVideoTracks()[0];
-
       // --- INÍCIO DA MUDANÇA PARA COMPATIBILIDADE COM SAFARI ---
 
       // 2. Criar um elemento de vídeo temporário e oculto
