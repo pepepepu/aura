@@ -12,6 +12,7 @@ import {
   type AuraTrack,
 } from "../../services/lastFMServices";
 import { extractVibrantColor } from "../../utils/color_functions/colorExtractor";
+import { getContrastingTextColor } from "../../utils/color_functions/getContrastingTextColor";
 import { UserContext } from "../../context/userContext";
 
 const AuraSemanal: React.FC = () => {
@@ -20,6 +21,7 @@ const AuraSemanal: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [vibrantColors, setVibrantColors] = useState<string[]>([]);
   const [angelInfo, setAngelInfo] = useState<AngelNumberResult | null>(null);
+  const [textColor, setTextColor] = useState<string>("#EFEFEF");
   const navigate = useNavigate();
 
   const toggleMenu = () => {
@@ -57,6 +59,9 @@ const AuraSemanal: React.FC = () => {
             const corPai = checkMainColor(validColors);
             const angelData = getAngelNumberFromColor(corPai);
             setAngelInfo(angelData);
+            const mainBackgroundColor = validColors[0];
+            const contrastColor = getContrastingTextColor(mainBackgroundColor);
+            setTextColor(contrastColor);
           }
         }
       } catch (error) {
@@ -84,7 +89,7 @@ const AuraSemanal: React.FC = () => {
     >
       <AuraHeader
         title="Sua semana foi"
-        textColor={"#EFEFEF"}
+        textColor={textColor}
         onMenuClick={toggleMenu}
         profileImageUrl={userInfo?.imageUrl}
       />
@@ -103,7 +108,7 @@ const AuraSemanal: React.FC = () => {
       >
         {isLoading ? (
           <Text
-            $color={"#EFEFEF"}
+            $color={textColor}
             $fontFamily={"Instrument Serif"}
             $fontStyle={"italic"}
           >
@@ -114,7 +119,7 @@ const AuraSemanal: React.FC = () => {
             <Text
               $fontFamily={"Instrument Serif"}
               $fontSize={"4rem"}
-              $color={"#EFEFEF"}
+              $color={textColor}
             >
               {angelInfo.angelNumber}
             </Text>
@@ -122,7 +127,7 @@ const AuraSemanal: React.FC = () => {
               $fontFamily={"Instrument Serif"}
               $fontStyle={"italic"}
               $fontSize={"1.2rem"}
-              $color={"#EFEFEF"}
+              $color={textColor}
               $textAlign={"center"}
             >
               {angelInfo.words}
@@ -130,7 +135,7 @@ const AuraSemanal: React.FC = () => {
           </>
         ) : (
           <Text
-            $color={"#EFEFEF"}
+            $color={textColor}
             $textAlign={"center"}
             $fontFamily={"Instrument Serif"}
           >
