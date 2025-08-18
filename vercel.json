@@ -2,8 +2,7 @@
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "https://musical-aura.vercel.app",
-      "permanent": true
+      "destination": "https://musical-aura.vercel.app"
     }
   ]
 }
