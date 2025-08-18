@@ -20,18 +20,36 @@ const API_BASE_URL = "https://ws.audioscrobbler.com/2.0/";
 const mapLastfmTrackToAuraTrack = (lastfmTrack: any): AuraTrack => {
   const imageUrl =
     lastfmTrack.image?.find((img: any) => img.size === "extralarge")?.[
-      "#text"
+    "#text"
     ] || "";
 
+  const mainArtist = {
+    name: lastfmTrack.artist.name || lastfmTrack.artist["#text"],
+    id: lastfmTrack.artist.mbid,
+  };
+  const allArtists = [mainArtist];
+  const featRegex = /\s\(?(?:feat|ft)\.?\s([^)]+)\)?|\s(?:&|with)\s(.+)/i;
+  const match = lastfmTrack.name.match(featRegex);
+
+  let cleanTrackName = lastfmTrack.name;
+
+  if (match) {
+    cleanTrackName = lastfmTrack.name.replace(featRegex, "").trim();
+    const featuredArtistsString = match[1] || match[2];
+    const featuredArtists = featuredArtistsString
+      .split(/,\s*|\s*&\s*/)
+      .map((name: string) => ({
+        name: name.trim(),
+        id: "",
+      }));
+
+    allArtists.push(...featuredArtists);
+  }
+
   return {
-    id: lastfmTrack.mbid || `${lastfmTrack.name}-${lastfmTrack.artist.name}`,
-    name: lastfmTrack.name,
-    artists: [
-      {
-        name: lastfmTrack.artist.name || lastfmTrack.artist["#text"],
-        id: lastfmTrack.artist.mbid,
-      },
-    ],
+    id: lastfmTrack.mbid || `${lastfmTrack.name}-${mainArtist.name}`,
+    name: cleanTrackName, // Usa o nome limpo da música
+    artists: allArtists,   // Usa a lista completa de artistas
     album: {
       images: [{ url: imageUrl }],
       mbid: lastfmTrack.album?.mbid,
