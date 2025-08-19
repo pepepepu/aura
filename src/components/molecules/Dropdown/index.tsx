@@ -99,14 +99,16 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
             background: "rgba(0, 0, 0, 0.2)",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-between",
+            justifyContent: "center",
             alignItems: "center",
             willChange: "opacity, backdrop-filter",
           }}
         >
           <Box
             $width={"90%"}
-            $padding={"70px 0px 0px 38px"}
+            $position={"absolute"}
+            $top="40px"
+            $left="30px"
             $alignItems={"flex-start"}
           >
             <motion.div variants={menuItemVariants}>
@@ -130,6 +132,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
               flexDirection: "column",
               gap: "10px",
               alignItems: "center",
+              justifyContent: "center",
             }}
           >
             {filteredOptions.map((option) => (
@@ -169,8 +172,6 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
               </motion.div>
             ))}
           </motion.div>
-
-          <Box $width={"100%"} $padding={"150px 0px 0px 0px"} />
         </motion.div>
       )}
     </AnimatePresence>
