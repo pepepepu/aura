@@ -1,13 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  AuraBG,
-  AuraHeader,
-  AuraModal,
-  Box,
-  Dropdown,
-  Text,
-} from "../../components";
+import { AuraBG, AuraHeader, Box, Dropdown, Text } from "../../components";
 import { themes } from "../../styles/themes";
 import {
   extractColorPalette,
@@ -15,8 +8,6 @@ import {
 } from "../../utils/color_functions/extractColorPalette";
 import { getNowPlaying, type AuraTrack } from "../../services/lastFMServices";
 import { UserContext } from "../../context/userContext";
-
-import { useScreenCapture } from "../../hooks/useScreenCapture";
 
 const Dashboard: React.FC = () => {
   const { userInfo } = useContext(UserContext);
@@ -34,19 +25,6 @@ const Dashboard: React.FC = () => {
     window.localStorage.removeItem("lastfm_session_key");
     window.localStorage.removeItem("lastfm_username");
     navigate("/");
-  };
-
-  const { isCapturing, error, startCapture, clearError } = useScreenCapture();
-
-  const handleCaptureClick = () => {
-    // Passa um nome de arquivo dinâmico para a captura
-    const fileName = currentlyPlaying
-      ? `${currentlyPlaying.artists[0].name}_${currentlyPlaying.name}`.replace(
-          /\s+/g,
-          "-"
-        )
-      : "aura-music";
-    startCapture({ fileName });
   };
 
   useEffect(() => {
@@ -130,22 +108,6 @@ const Dashboard: React.FC = () => {
         $gap={"8px"}
         $justifyContent={"flex-end"}
       >
-        <button
-          onClick={handleCaptureClick}
-          disabled={isCapturing}
-          // data-html2canvas-ignore não é mais necessário, mas não atrapalha
-          style={{
-            position: "absolute",
-            bottom: "20px",
-            right: "20px",
-            zIndex: 1000,
-            /* ...seus outros estilos... */
-            cursor: isCapturing ? "wait" : "pointer",
-            opacity: isCapturing ? 0.7 : 1,
-          }}
-        >
-          {isCapturing ? "⏳" : "📷"}
-        </button>
         {isLoading ? (
           <Box
             $width={"100%"}
@@ -199,8 +161,6 @@ const Dashboard: React.FC = () => {
           </Text>
         )}
       </Box>
-
-      <AuraModal message={error} onClose={clearError} />
     </AuraBG>
   );
 };
