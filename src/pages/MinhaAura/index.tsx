@@ -108,6 +108,7 @@ const MinhaAura: React.FC = () => {
       />
 
       <Dropdown
+        textColor={textColor}
         isOpen={isMenuOpen}
         onClose={toggleMenu}
         currentScreen="Minha aura"

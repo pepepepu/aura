@@ -111,6 +111,7 @@ const MapaDaAlma: React.FC = () => {
       />
 
       <Dropdown
+        textColor={textColor}
         isOpen={isMenuOpen}
         onClose={toggleMenu}
         currentScreen="Constelação"

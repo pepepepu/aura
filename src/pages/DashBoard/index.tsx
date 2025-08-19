@@ -89,6 +89,7 @@ const Dashboard: React.FC = () => {
       grainy={true}
     >
       <Dropdown
+        textColor={textColor}
         isOpen={isMenuOpen}
         onClose={toggleMenu}
         currentScreen="Tocando agora"

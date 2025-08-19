@@ -13,12 +13,13 @@ interface DropdownMenuProps {
   isOpen: boolean;
   onClose: () => void;
   currentScreen: string;
+  textColor: string;
 }
 
 const backdropVariants: Variants = {
   visible: {
     opacity: 1,
-    backdropFilter: "blur(10px)",
+    backdropFilter: "blur(40px)",
   },
   hidden: {
     opacity: 0,
@@ -52,6 +53,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   isOpen,
   onClose,
   currentScreen,
+  textColor,
 }) => {
   const navigate = useNavigate();
 
@@ -112,7 +114,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
                 <Text
                   $fontFamily={"Instrument Serif"}
                   $fontSize={"1.5rem"}
-                  $color={"#dddcdc"}
+                  $color={textColor ? textColor : "#dddcdc"}
                 >
                   X
                 </Text>
@@ -153,7 +155,13 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
                   <Text
                     $fontFamily={"Instrument Serif"}
                     $fontSize={"2rem"}
-                    $color={option.disabled ? "#dddcdc6e" : "#dddcdc"}
+                    $color={
+                      option.disabled
+                        ? "#dddcdc6e"
+                        : textColor
+                        ? textColor
+                        : "#dddcdc"
+                    }
                   >
                     {option.label}
                   </Text>
