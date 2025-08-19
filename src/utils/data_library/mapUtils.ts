@@ -525,8 +525,6 @@ export const genreClassifier = (genres: string[]): AuraData => {
   const foundMatches: GenreData[] = [];
 
   for (const genreName of genres) {
-    if (foundMatches.length >= 2) break;
-
     const lowerCaseGenre = genreName.toLowerCase();
     const foundGenre = auraGenres.find((g) =>
       g.keywords.some((keyword) => lowerCaseGenre.includes(keyword))
@@ -540,35 +538,43 @@ export const genreClassifier = (genres: string[]): AuraData => {
     }
   }
 
-  switch (foundMatches.length) {
-    case 0:
-      return { ...fallbackGenre, genreName: fallbackGenre.name };
+  const matchesCount = foundMatches.length;
 
-    case 1:
-      const genreA = foundMatches[0];
-      return {
-        x: genreA.x,
-        y: genreA.y,
-        energy: genreA.energy,
-        genreName: genreA.name,
-      };
-
-    case 2:
-      const genreA_ = foundMatches[0];
-      const genreB_ = foundMatches[1];
-      const newX = genreA_.x * 0.3 + genreB_.x * 0.3;
-      const newY = genreA_.y * 0.7 + genreB_.y * 0.3;
-
-      return {
-        x: newX,
-        y: newY,
-        energy: genreA_.energy,
-        genreName: `${genreA_.name} / ${genreB_.name}`,
-      };
-
-    default:
-      return { ...fallbackGenre, genreName: fallbackGenre.name };
+  if (matchesCount === 0) {
+    return { ...fallbackGenre, genreName: fallbackGenre.name };
   }
+
+  if (matchesCount === 1) {
+    const genre = foundMatches[0];
+    return {
+      x: genre.x,
+      y: genre.y,
+      energy: genre.energy,
+      genreName: genre.name,
+    };
+  }
+
+  if (matchesCount >= 2) {
+    const totals = foundMatches.reduce(
+      (acc, genre) => {
+        acc.x += genre.x;
+        acc.y += genre.y;
+        return acc;
+      },
+      { x: 0, y: 0 }
+    );
+
+    const combinedName = foundMatches.map((genre) => genre.name).join(" / ");
+
+    return {
+      x: totals.x / matchesCount,
+      y: totals.y / matchesCount,
+      energy: foundMatches[0].energy,
+      genreName: combinedName,
+    };
+  }
+
+  return { ...fallbackGenre, genreName: fallbackGenre.name };
 };
 
 const energyWords: Record<Energy, string[]> = {

@@ -20,7 +20,7 @@ const API_BASE_URL = "https://ws.audioscrobbler.com/2.0/";
 const mapLastfmTrackToAuraTrack = (lastfmTrack: any): AuraTrack => {
   const imageUrl =
     lastfmTrack.image?.find((img: any) => img.size === "extralarge")?.[
-    "#text"
+      "#text"
     ] || "";
 
   const mainArtist = {
@@ -91,7 +91,12 @@ export const getNowPlaying = async (): Promise<AuraTrack | null> => {
     const lastfmTrack = data.recenttracks?.track?.[0];
 
     if (lastfmTrack && lastfmTrack["@attr"]?.nowplaying === "true") {
-      console.log("Last.fm encontrou:", lastfmTrack.name, "-", lastfmTrack.artist["#text"]);
+      console.log(
+        "Last.fm encontrou:",
+        lastfmTrack.name,
+        "-",
+        lastfmTrack.artist["#text"]
+      );
 
       const spotifyTrack = await searchTrackOnSpotify(
         lastfmTrack.name,
@@ -102,7 +107,9 @@ export const getNowPlaying = async (): Promise<AuraTrack | null> => {
         console.log("Spotify encontrou detalhes completos. Mapeando...");
         return mapSpotifyTrackToAuraTrack(spotifyTrack);
       } else {
-        console.warn("Não encontrado no Spotify. Usando dados do Last.fm como fallback.");
+        console.warn(
+          "Não encontrado no Spotify. Usando dados do Last.fm como fallback."
+        );
         return mapLastfmTrackToAuraTrack(lastfmTrack);
       }
     }
@@ -222,9 +229,9 @@ export const getTrackTopGenres = async (
       console.warn(`Nenhum gênero encontrado para "${trackName}"`);
       return [];
     }
-    const topGenres = data.toptags.tag.slice(0, 5).map((tag: any) => tag.name);
+    const allGenres = data.toptags.tag.map((tag: any) => tag.name);
 
-    return topGenres;
+    return allGenres;
   } catch (error) {
     console.error("Erro ao buscar gêneros da música:", error);
     return [];
@@ -277,7 +284,9 @@ export async function searchTrackOnSpotify(
 
   const cleanTrackName = trackName.replace(/\s\(.+\)/, "").trim();
 
-  const query = encodeURIComponent(`track:${cleanTrackName} artist:${artistName}`);
+  const query = encodeURIComponent(
+    `track:${cleanTrackName} artist:${artistName}`
+  );
   const url = `https://api.spotify.com/v1/search?q=${query}&type=track&limit=1`;
 
   try {
