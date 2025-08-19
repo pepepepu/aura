@@ -8,6 +8,7 @@ export type Energy =
   | "Mystical"
   | "Powerful"
   | "Chill"
+  | "Cultural"
   | "Unknown";
 
 export interface GenreData {
@@ -45,6 +46,18 @@ const auraGenres: GenreData[] = [
       "math rock",
       "brazilian rock",
       "soft rock",
+      "alternative rock",
+      "art rock",
+      "folk rock",
+      "punk rock",
+      "indie rock",
+      "latin rock",
+      "noise rock",
+      "gothic rock",
+      "post-grunge",
+      "post-hardcore",
+      "post-metal",
+      "alternative metal",
     ],
   },
   {
@@ -65,7 +78,19 @@ const auraGenres: GenreData[] = [
       "britpop",
       "chamber pop",
       "brazilian pop",
-      "clap clap clap",
+      "art pop",
+      "latin pop",
+      "dark pop",
+      "future pop",
+      "anime",
+      "anison",
+      "mandopop",
+      "arabic pop",
+      "french pop",
+      "polish hip hop",
+      "alternative pop",
+      "ballad",
+      "chanson",
     ],
   },
   {
@@ -86,7 +111,18 @@ const auraGenres: GenreData[] = [
       "twerk",
       "brazilian rap",
       "brazilian trap",
-      "conscious funk",
+      "brooklyn drill",
+      "chicago drill",
+      "ny drill",
+      "east coast hip hop",
+      "k-hip hop",
+      "alternative hip hop",
+      "emo rap",
+      "cloud rap",
+      "phonk",
+      "g-funk",
+      "pop rap",
+      "conscious hip-hop",
     ],
   },
   {
@@ -110,8 +146,41 @@ const auraGenres: GenreData[] = [
       "big room",
       "idm",
       "breakbeat",
-      "tecnobrega",
-      "brega funk",
+      "acid house",
+      "acid techno",
+      "microhouse",
+      "minimal",
+      "minimal techno",
+      "detroit techno",
+      "chicago house",
+      "hard techno",
+      "hard trance",
+      "deep techno",
+      "dub techno",
+      "gabber",
+      "hardstyle",
+      "bassline",
+      "2-step garage",
+      "garage",
+      "future garage",
+      "glitch hop",
+      "electro house",
+      "electro swing",
+      "dance",
+      "dancehall",
+      "downtempo",
+      "lo-fi",
+      "drill and bass",
+      "chillhop",
+      "chillout",
+      "club",
+      "hi-nrg",
+      "jungle",
+      "moombahton",
+      "nu disco",
+      "ebm",
+      "breakcore",
+      "dark techno",
     ],
   },
   {
@@ -128,6 +197,13 @@ const auraGenres: GenreData[] = [
       "quiet storm",
       "rhythm and blues",
       "samba soul",
+      "funk",
+      "funk carioca",
+      "boogie",
+      "p-funk",
+      "neo-funk",
+      "afropop",
+      "afrobeats",
     ],
   },
   {
@@ -144,6 +220,10 @@ const auraGenres: GenreData[] = [
       "swing",
       "bossa jazz",
       "fusion",
+      "avant-garde jazz",
+      "jazz fusion",
+      "post-bop",
+      "experimental jazz",
     ],
   },
   {
@@ -161,6 +241,9 @@ const auraGenres: GenreData[] = [
       "opera",
       "symphony",
       "string quartet",
+      "classical crossover",
+      "neoclassical",
+      "piano",
     ],
   },
   {
@@ -180,6 +263,9 @@ const auraGenres: GenreData[] = [
       "mpb",
       "tropicalia",
       "brazilian folk",
+      "folk metal",
+      "folk pop",
+      "ethereal wave",
     ],
   },
   {
@@ -198,6 +284,18 @@ const auraGenres: GenreData[] = [
       "nu metal",
       "metalcore",
       "brazilian metal",
+      "atmospheric black metal",
+      "melodic death metal",
+      "melodic metalcore",
+      "folk metal",
+      "gothic metal",
+      "industrial metal",
+      "oriental metal",
+      "groove metal",
+      "speed metal",
+      "crust punk",
+      "hardcore",
+      "hardcore punk",
     ],
   },
   {
@@ -214,6 +312,9 @@ const auraGenres: GenreData[] = [
       "lo-fi indie",
       "alternative",
       "brazilian indie",
+      "madchester",
+      "experimental rock",
+      "experimental hip-hop",
     ],
   },
   {
@@ -229,6 +330,7 @@ const auraGenres: GenreData[] = [
       "dancehall",
       "ragga",
       "brazilian reggae",
+      "dub reggae",
     ],
   },
   {
@@ -245,6 +347,9 @@ const auraGenres: GenreData[] = [
       "pop punk",
       "anarcho-punk",
       "brazilian punk",
+      "emo",
+      "emo rap",
+      "grindcore",
     ],
   },
   {
@@ -259,6 +364,8 @@ const auraGenres: GenreData[] = [
       "space ambient",
       "meditation music",
       "brazilian ambient",
+      "downtempo",
+      "ethereal wave",
     ],
   },
   {
@@ -274,6 +381,7 @@ const auraGenres: GenreData[] = [
       "neo-funk",
       "funk carioca",
       "brazilian funk",
+      "g-funk",
     ],
   },
   {
@@ -305,6 +413,7 @@ const auraGenres: GenreData[] = [
       "sertanejo",
       "university sertanejo",
       "viola caipira",
+      "country pop",
     ],
   },
   {
@@ -328,6 +437,7 @@ const auraGenres: GenreData[] = [
       "axe",
       "frevo",
       "maracatu",
+      "latin pop",
     ],
   },
   {
@@ -358,6 +468,7 @@ const auraGenres: GenreData[] = [
       "ccm",
       "praise",
       "brazilian gospel",
+      "christian rock",
     ],
   },
   {
@@ -372,6 +483,28 @@ const auraGenres: GenreData[] = [
       "lofi chill",
       "chillhop",
       "brazilian lo-fi",
+    ],
+  },
+  {
+    name: "World / Étnico",
+    x: 0.5,
+    y: 0.5,
+    energy: "Cultural",
+    keywords: [
+      "afrobeat",
+      "afrobeats",
+      "afropop",
+      "balkan",
+      "carnatic",
+      "bhangra",
+      "fado",
+      "flamenco",
+      "arabic pop",
+      "oriental metal",
+      "celtic",
+      "musica gaucha",
+      "forró",
+      "calypso",
     ],
   },
 ];
@@ -519,6 +652,15 @@ const energyWords: Record<Energy, string[]> = {
     "Equilíbrio", // estabilidade para os navegantes
     "Refúgio", // ponto de segurança no mar aberto
     "Silêncio", // calma noturna, longe do ruído mundano
+  ],
+  Cultural: [
+    "Aldebaran", // estrela real ligada à fertilidade, tradições e povos antigos
+    "Herança", // transmissão cultural entre gerações
+    "Tradição", // força dos costumes e práticas ancestrais
+    "Ritual", // expressão coletiva e sagrada
+    "Raízes", // conexão com a origem e a terra natal
+    "Memória", // lembrança viva de histórias e culturas
+    "Comunidade", // união de vozes, povos e identidades
   ],
   Unknown: [
     "Deneb", // estrela distante e elegante na Cauda do Cisne
