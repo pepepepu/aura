@@ -94,6 +94,7 @@ const AuraSemanal: React.FC = () => {
         profileImageUrl={userInfo?.imageUrl}
       />
       <Dropdown
+        textColor={textColor}
         isOpen={isMenuOpen}
         onClose={toggleMenu}
         currentScreen="Energia da semana"

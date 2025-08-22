@@ -13,12 +13,13 @@ interface DropdownMenuProps {
   isOpen: boolean;
   onClose: () => void;
   currentScreen: string;
+  textColor: string;
 }
 
 const backdropVariants: Variants = {
   visible: {
     opacity: 1,
-    backdropFilter: "blur(10px)",
+    backdropFilter: "blur(40px)",
   },
   hidden: {
     opacity: 0,
@@ -52,6 +53,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   isOpen,
   onClose,
   currentScreen,
+  textColor,
 }) => {
   const navigate = useNavigate();
 
@@ -91,20 +93,22 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
             position: "fixed",
             top: 0,
             left: 0,
-            width: "100vw",
-            height: "100vh",
+            width: "100dvw",
+            height: "100dvh",
             zIndex: 10,
             background: "rgba(0, 0, 0, 0.2)",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-between",
+            justifyContent: "center",
             alignItems: "center",
             willChange: "opacity, backdrop-filter",
           }}
         >
           <Box
             $width={"90%"}
-            $padding={"70px 0px 0px 38px"}
+            $position={"absolute"}
+            $top="40px"
+            $left="30px"
             $alignItems={"flex-start"}
           >
             <motion.div variants={menuItemVariants}>
@@ -112,7 +116,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
                 <Text
                   $fontFamily={"Instrument Serif"}
                   $fontSize={"1.5rem"}
-                  $color={"#dddcdc"}
+                  $color={textColor ? textColor : "#dddcdc"}
                 >
                   X
                 </Text>
@@ -128,6 +132,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
               flexDirection: "column",
               gap: "10px",
               alignItems: "center",
+              justifyContent: "center",
             }}
           >
             {filteredOptions.map((option) => (
@@ -153,7 +158,13 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
                   <Text
                     $fontFamily={"Instrument Serif"}
                     $fontSize={"2rem"}
-                    $color={option.disabled ? "#dddcdc6e" : "#dddcdc"}
+                    $color={
+                      option.disabled
+                        ? "#dddcdc6e"
+                        : textColor
+                        ? textColor
+                        : "#dddcdc"
+                    }
                   >
                     {option.label}
                   </Text>
@@ -161,8 +172,6 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
               </motion.div>
             ))}
           </motion.div>
-
-          <Box $width={"100%"} $padding={"150px 0px 0px 0px"} />
         </motion.div>
       )}
     </AnimatePresence>
