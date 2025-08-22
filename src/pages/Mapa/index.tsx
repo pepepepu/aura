@@ -12,6 +12,7 @@ import {
   getCoverArtFromSpotify,
   getTopTrackForPeriod,
   getTrackTopGenres,
+  getArtistTopGenres
 } from "../../services/lastFMServices";
 import { themes } from "../../styles/themes";
 import {
@@ -44,16 +45,27 @@ const MapaDaAlma: React.FC = () => {
       setIsLoading(true);
       try {
         const track = await getTopTrackForPeriod("7day");
-        if (!track) throw new Error("Nenhuma música encontrada.");
+        if (!track || !track.artists.length) {
+          throw new Error("Nenhuma música ou artista encontrado.");
+        }
 
-        setTopTrackName(`${track.name} por ${track.artists[0].name}`);
+        const mainArtistName = track.artists[0].name;
+        setTopTrackName(`${track.name} por ${mainArtistName}`);
 
-        const genres = await getTrackTopGenres(
-          track.name,
-          track.artists[0].name
-        );
+        const trackGenres = await getTrackTopGenres(track.name, mainArtistName);
+        let classifiedAura = genreClassifier(trackGenres);
 
-        const classifiedAura = genreClassifier(genres);
+        if (!classifiedAura.genreName.includes("/")) {
+          console.warn(
+            `Resultado da música foi fraco ('${classifiedAura.genreName}'). Tentando fallback com tags do artista...`
+          );
+          const artistGenres = await getArtistTopGenres(mainArtistName);
+
+          if (artistGenres.length > 0) {
+            const artistAura = genreClassifier(artistGenres);
+            classifiedAura = artistAura;
+          }
+        }
         setAuraData(classifiedAura);
 
         const words = getEnergyState(classifiedAura.energy);
@@ -61,7 +73,7 @@ const MapaDaAlma: React.FC = () => {
 
         const imageUrl = await getCoverArtFromSpotify(
           track.name,
-          track.artists[0].name
+          mainArtistName
         );
         if (imageUrl) {
           const paletteResult = await generateMapColorPalette(imageUrl);
@@ -69,6 +81,7 @@ const MapaDaAlma: React.FC = () => {
         }
       } catch (err) {
         console.error("Erro ao buscar dados para o Mapa da Alma:", err);
+        setAuraData(null);
       } finally {
         setIsLoading(false);
       }

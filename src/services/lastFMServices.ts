@@ -231,6 +231,35 @@ export const getTrackTopGenres = async (
   }
 };
 
+/**
+ * Busca as tags (gêneros) mais populares de um artista.
+ * Usado para obter o gênero de um artista.
+ */
+export const getArtistTopGenres = async (
+  artistName: string
+): Promise<string[]> => {
+  const url = `${API_BASE_URL}?method=artist.getTopTags&artist=${encodeURIComponent(
+    artistName
+  )}&api_key=${LASTFM_API_KEY}&format=json`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (data.error || !data.toptags?.tag || data.toptags.tag.length === 0) {
+      console.warn(`Nenhum gênero encontrado para o artista "${artistName}"`);
+      return [];
+    }
+
+    const topGenres = data.toptags.tag.slice(0, 5).map((tag: any) => tag.name);
+
+    return topGenres;
+  } catch (error) {
+    console.error("Erro ao buscar gêneros do artista:", error);
+    return [];
+  }
+};
+
 // --- SEÇÃO SPOTIFY (Client Credentials) ---
 const SPOTIFY_CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
 const SPOTIFY_CLIENT_SECRET = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
