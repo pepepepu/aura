@@ -68,7 +68,8 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
       { label: "Minha aura", onClick: () => navigate("/minhaAura") },
       { label: "Energia da semana", onClick: () => navigate("/auraSemanal") },
       { label: "Constelação", onClick: () => navigate("/constelacao") },
-      { label: "Synesthetic", onClick: () => {}, disabled: true },
+      { label: "Tarot", onClick: () => navigate("/tarot") },
+      // { label: "Synesthetic", onClick: () => {}, disabled: true },
       { label: "Sair", onClick: handleLogout },
     ],
     [navigate]

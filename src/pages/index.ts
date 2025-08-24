@@ -6,3 +6,4 @@ export { default as Dashboard } from "./DashBoard";
 export { default as MinhaAura } from "./MinhaAura";
 export { default as AuraSemanal } from "./Semana";
 export { default as Mapa } from "./Mapa";
+export { default as Tarot } from "./Tarot";

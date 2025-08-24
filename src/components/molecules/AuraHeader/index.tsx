@@ -31,6 +31,7 @@ const AuraHeader: React.FC<AuraHeaderProps> = ({
         $background="transparent"
         $border="none"
         aria-label="Menu Principal"
+        $cursor="pointer"
       >
         <Box
           $width={"30px"}
@@ -39,6 +40,7 @@ const AuraHeader: React.FC<AuraHeaderProps> = ({
             "radial-gradient(circle, #ff0000ae 0%, #ffff00ae 30%, #0077ffae 70%)"
           }
           $borderRadius={"100px"}
+          $cursor="pointer"
         />
       </Button>
 
