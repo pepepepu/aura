@@ -6,6 +6,7 @@ import {
   Box,
   Dropdown,
   Text,
+  AuraInfo
 } from "../../components";
 import { UserContext } from "../../context/userContext";
 import {
@@ -35,6 +36,11 @@ const MapaDaAlma: React.FC = () => {
   const [auraData, setAuraData] = useState<AuraData | null>(null);
   const [poeticWords, setPoeticWords] = useState<string[]>([]);
   const [topTrackName, setTopTrackName] = useState<string>("");
+
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
+
+  const handleOpenInfo = () => setIsInfoOpen(true);
+  const handleCloseInfo = () => setIsInfoOpen(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -113,14 +119,14 @@ const MapaDaAlma: React.FC = () => {
       height={"100dvh"}
       colors={auraBgColors}
       backgroundColor={backgroundColor}
-      interactive={true}
+      interactive={false}
       grainy={true}
     >
       <AuraHeader
         title="Constelação"
         textColor={textColor}
         onMenuClick={toggleMenu}
-        profileImageUrl={userInfo?.imageUrl}
+        onHelpClick={handleOpenInfo}
       />
 
       <Dropdown
@@ -129,6 +135,9 @@ const MapaDaAlma: React.FC = () => {
         onClose={toggleMenu}
         currentScreen="Constelação"
       />
+
+
+      {isInfoOpen && <AuraInfo onClose={handleCloseInfo} textColor={textColor} />}
 
       <Box
         $width={"85%"}

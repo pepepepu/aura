@@ -1,16 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuraBG, AuraHeader, Box, Dropdown, Text } from "../../components";
+import { AuraBG, AuraHeader, AuraInfo, Box, Dropdown, Text } from "../../components";
+import { getNowPlaying, type AuraTrack } from "../../services/lastFMServices";
 import { themes } from "../../styles/themes";
 import {
   extractColorPalette,
   type ColorPaletteResult,
 } from "../../utils/color_functions/extractColorPalette";
-import { getNowPlaying, type AuraTrack } from "../../services/lastFMServices";
-import { UserContext } from "../../context/userContext";
 
 const Dashboard: React.FC = () => {
-  const { userInfo } = useContext(UserContext);
   const [currentlyPlaying, setCurrentlyPlaying] = useState<AuraTrack | null>(
     null
   );
@@ -20,6 +18,11 @@ const Dashboard: React.FC = () => {
   );
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
+
+  const handleOpenInfo = () => setIsInfoOpen(true);
+  const handleCloseInfo = () => setIsInfoOpen(false);
 
   const handleLogout = () => {
     window.localStorage.removeItem("lastfm_session_key");
@@ -98,8 +101,10 @@ const Dashboard: React.FC = () => {
         title="Tocando agora"
         textColor={textColor}
         onMenuClick={toggleMenu}
-        profileImageUrl={userInfo?.imageUrl}
+        onHelpClick={handleOpenInfo}
       />
+
+      {isInfoOpen && <AuraInfo onClose={handleCloseInfo} textColor={textColor} />}
 
       <Box
         $width={{ base: "100%", lg: "95%" }}

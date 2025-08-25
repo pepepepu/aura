@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuraBG, AuraHeader, Box, Dropdown, Text } from "../../components";
+import { AuraBG, AuraHeader, Box, Dropdown, Text, AuraInfo } from "../../components";
 import { themes } from "../../styles/themes";
 import {
   extractColorPalette,
@@ -12,10 +12,8 @@ import {
   getCoverArtFromSpotify,
   type AuraTrack,
 } from "../../services/lastFMServices";
-import { UserContext } from "../../context/userContext";
 
 const MinhaAura: React.FC = () => {
-  const { userInfo } = useContext(UserContext);
   const [topTrack, setTopTrack] = useState<AuraTrack | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [albumPalette, setAlbumPalette] = useState<ColorPaletteResult | null>(
@@ -24,6 +22,10 @@ const MinhaAura: React.FC = () => {
   const [poeticWords, setPoeticWords] = useState<string[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
+
+  const handleOpenInfo = () => setIsInfoOpen(true);
+  const handleCloseInfo = () => setIsInfoOpen(false);
 
   const handleLogout = () => {
     window.localStorage.removeItem("lastfm_session_key");
@@ -97,14 +99,14 @@ const MinhaAura: React.FC = () => {
       height={"100dvh"}
       colors={auraBgColors}
       backgroundColor={backgroundColor}
-      interactive={true}
+      interactive={false}
       grainy={true}
     >
       <AuraHeader
         title="Minha Aura"
         textColor={textColor}
         onMenuClick={toggleMenu}
-        profileImageUrl={userInfo?.imageUrl}
+        onHelpClick={handleOpenInfo}
       />
 
       <Dropdown
@@ -113,6 +115,8 @@ const MinhaAura: React.FC = () => {
         onClose={toggleMenu}
         currentScreen="Minha aura"
       />
+
+      {isInfoOpen && <AuraInfo onClose={handleCloseInfo} textColor={textColor} />}
 
       <Box
         $width={"85%"}

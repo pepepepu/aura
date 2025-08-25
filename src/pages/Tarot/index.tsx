@@ -1,14 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   AuraBG,
   AuraHeader,
+  AuraInfo,
   Box,
   Dropdown,
   GrainOverlay,
   Text,
+  SVG
 } from "../../components";
-import { UserContext } from "../../context/userContext";
 import {
   getCoverArtFromSpotify,
   getTopTrackForPeriod,
@@ -21,11 +22,10 @@ import {
   mapPaletteToMajorArcana,
   type TarotCardWithDetailsResult,
 } from "../../utils/data_library/tarot";
-
 import { themes } from "../../styles/themes";
-
 import { AnimatePresence, motion } from "framer-motion";
 import styled, { keyframes } from "styled-components";
+import Aura from "../../assets/svg/aura.svg?react"
 
 const magicGlow = keyframes`
   0% { opacity: 0.8; transform: scale(1.0); }
@@ -33,7 +33,7 @@ const magicGlow = keyframes`
   100% { opacity: 0.8; transform: scale(1.0); }
 `;
 
-const CardWrapper = styled(Box)<{ glowColor: string }>`
+const CardWrapper = styled(Box) <{ glowColor: string }>`
   position: relative;
   cursor: pointer;
   perspective: 1000px;
@@ -67,7 +67,6 @@ const cardFaceStyles: React.CSSProperties = {
 };
 
 const Tarot: React.FC = () => {
-  const { userInfo } = useContext(UserContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [tarotCard, setTarotCard] = useState<TarotCardWithDetailsResult | null>(
     null
@@ -80,6 +79,11 @@ const Tarot: React.FC = () => {
     null
   );
   const [showInitialText, setShowInitialText] = useState(true);
+
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
+
+  const handleOpenInfo = () => setIsInfoOpen(true);
+  const handleCloseInfo = () => setIsInfoOpen(false);
 
   const handleLogout = () => {
     window.localStorage.removeItem("lastfm_session_key");
@@ -163,7 +167,7 @@ const Tarot: React.FC = () => {
         title="Seu Tarot Musical"
         textColor={textColor}
         onMenuClick={toggleMenu}
-        profileImageUrl={userInfo?.imageUrl}
+        onHelpClick={handleOpenInfo}
       />
       <Dropdown
         textColor={textColor}
@@ -171,6 +175,8 @@ const Tarot: React.FC = () => {
         onClose={toggleMenu}
         currentScreen="Tarot"
       />
+
+      {isInfoOpen && <AuraInfo onClose={handleCloseInfo} textColor={textColor} />}
 
       {isLoading ? (
         <Box>
@@ -218,17 +224,11 @@ const Tarot: React.FC = () => {
                     $width={"100%"}
                     $height={"100%"}
                     $border={`1px solid ${backgroundColor}`}
+                    $overflow={"hidden"}
                   >
-                    <Text
-                      $fontFamily={"EB Garamond"}
-                      $fontSize={"1rem"}
-                      $fontWeight={"500"}
-                      $fontStyle={"italic"}
-                      $letterSpacing={"-1px"}
-                      $lineHeight={"45px"}
-                    >
-                      Aura
-                    </Text>
+                    <SVG $width="200px" $color={backgroundColor}>
+                      <Aura />
+                    </SVG>
                   </Box>
                 </Box>
               </motion.div>

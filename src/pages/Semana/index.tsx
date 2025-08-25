@@ -1,28 +1,31 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuraBG, AuraHeader, Box, Dropdown, Text } from "../../components";
+import { AuraBG, AuraHeader, AuraInfo, Box, Dropdown, Text } from "../../components";
+import {
+  getCoverArtFromSpotify,
+  getTopTracksWeekly,
+  type AuraTrack,
+} from "../../services/lastFMServices";
 import { checkMainColor } from "../../utils/color_functions/checkMainColor";
+import { extractVibrantColor } from "../../utils/color_functions/colorExtractor";
+import { getHarmoniousTextColor } from "../../utils/color_functions/getHarmoniousTextColor";
 import {
   getAngelNumberFromColor,
   type AngelNumberResult,
 } from "../../utils/data_library/angelNumberGenerator";
-import {
-  getTopTracksWeekly,
-  getCoverArtFromSpotify,
-  type AuraTrack,
-} from "../../services/lastFMServices";
-import { extractVibrantColor } from "../../utils/color_functions/colorExtractor";
-import { getHarmoniousTextColor } from "../../utils/color_functions/getHarmoniousTextColor";
-import { UserContext } from "../../context/userContext";
 
 const AuraSemanal: React.FC = () => {
-  const { userInfo } = useContext(UserContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [vibrantColors, setVibrantColors] = useState<string[]>([]);
   const [angelInfo, setAngelInfo] = useState<AngelNumberResult | null>(null);
   const [textColor, setTextColor] = useState<string>("#EFEFEF");
   const navigate = useNavigate();
+
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
+
+  const handleOpenInfo = () => setIsInfoOpen(true);
+  const handleCloseInfo = () => setIsInfoOpen(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -91,7 +94,7 @@ const AuraSemanal: React.FC = () => {
         title="Sua semana foi"
         textColor={textColor}
         onMenuClick={toggleMenu}
-        profileImageUrl={userInfo?.imageUrl}
+        onHelpClick={handleOpenInfo}
       />
       <Dropdown
         textColor={textColor}
@@ -99,6 +102,8 @@ const AuraSemanal: React.FC = () => {
         onClose={toggleMenu}
         currentScreen="Energia da semana"
       />
+
+      {isInfoOpen && <AuraInfo onClose={handleCloseInfo} textColor={textColor} />}
       <Box
         $width={"100%"}
         $height={"100%"}
