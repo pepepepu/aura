@@ -100,7 +100,7 @@ const SplashScreen: React.FC = () => {
             $letterSpacing={"-3px"}
             $lineHeight={"45px"}
           >
-            Aura
+            aura
           </Text>
           <Text
             $fontFamily={"EB Garamond"}
