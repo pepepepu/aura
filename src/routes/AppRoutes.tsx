@@ -7,8 +7,6 @@ import {
   AuraSemanal,
   PrivacyPolicy,
   TermsAndConditions,
-  Mapa,
-  Tarot,
 } from "../pages";
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -23,8 +21,6 @@ const AppRoutes = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/minhaAura" element={<MinhaAura />} />
         <Route path="/auraSemanal" element={<AuraSemanal />} />
-        <Route path="/constelacao" element={<Mapa />} />
-        <Route path="/tarot" element={<Tarot />} />
       </Route>
     </Routes>
   );

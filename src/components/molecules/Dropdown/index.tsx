@@ -67,16 +67,13 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
       { label: "Tocando agora", onClick: () => navigate("/dashboard") },
       { label: "Minha aura", onClick: () => navigate("/minhaAura") },
       { label: "Energia da semana", onClick: () => navigate("/auraSemanal") },
-      { label: "Constelação", onClick: () => navigate("/constelacao") },
-      { label: "Tarot", onClick: () => navigate("/tarot") },
-      // { label: "Synesthetic", onClick: () => {}, disabled: true },
       { label: "Sair", onClick: handleLogout },
     ],
-    [navigate]
+    [navigate],
   );
 
   const filteredOptions = allOptions.filter(
-    (option) => option.label !== currentScreen
+    (option) => option.label !== currentScreen,
   );
 
   return (
@@ -163,8 +160,8 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
                       option.disabled
                         ? "#dddcdc6e"
                         : textColor
-                        ? textColor
-                        : "#dddcdc"
+                          ? textColor
+                          : "#dddcdc"
                     }
                   >
                     {option.label}

@@ -55,7 +55,6 @@ const Text = styled.p<TextProps>`
   color: ${({ $color }) => $color || "#141414"};
   transition: ${({ $transition }) => $transition};
   text-decoration: ${({ $textDecoration }) => $textDecoration || "none"};
-  text-shadow: 4px 6px 8px #0000002d;
   word-wrap: break-word;
 
   /* Valores estáticos */
